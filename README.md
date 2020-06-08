@@ -1,4 +1,4 @@
-# ![fritz2 - the potato among the ui-libs](https://www.fritz2.dev/static/fritz2-logo-small.png)
+![fritz2](https://www.fritz2.dev/images/fritz2_logo_grey.png)
 
 # Examples
 This repo hosts ready-to-try examples to give you quick insight into how development of web-apps using fritz2 is like. 

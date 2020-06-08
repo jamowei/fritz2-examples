@@ -1,18 +1,22 @@
-plugins {
-    kotlin("js")
-}
+buildscript {
+    repositories {
+        mavenLocal() //FIXME: nicht einchecken
+        jcenter()
+    }
 
-kotlin {
-    target {
-        browser {
-        }
+    dependencies {
+        classpath(kotlin("gradle-plugin"))
+        classpath("io.fritz2:fritz2-gradle-plugin:0.5")
     }
 }
 
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    testImplementation(kotlin("test-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.3.4")
-    implementation(project(":core"))
+plugins {
+    kotlin("multiplatform") version("1.3.72")
 }
 
+apply(plugin = "io.fritz2.fritz2-gradle")
+
+repositories {
+    mavenLocal()
+    jcenter()
+}

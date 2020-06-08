@@ -1,17 +1,5 @@
-buildscript {
-    repositories {
-        mavenLocal() //FIXME: nicht einchecken
-        jcenter()
-    }
-
-    dependencies {
-        classpath(kotlin("gradle-plugin"))
-        classpath("io.fritz2:fritz2-gradle-plugin:0.5")
-    }
-}
-
 plugins {
-    kotlin("multiplatform") version("1.3.72")
+    kotlin("multiplatform")
 }
 
 apply(plugin = "io.fritz2.fritz2-gradle")
@@ -31,6 +19,7 @@ kotlin {
             val commonMain by getting {
                 dependencies {
                     implementation(kotlin("stdlib"))
+                    api("com.soywiz.korlibs.klock:klock:1.10.5")
                 }
             }
             val jvmMain by getting {

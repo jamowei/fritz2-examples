@@ -1,3 +1,9 @@
-**/build/kotlin
-**/build/processedResources
-**/build/reports
+**/build/
+**/gradlew
+**/gradlew.bat
+**/.gradle/
+**/.idea/
+**/gradle/
+**/src/generated/
+GeneratedOptics.kt
+/api/dokka/fritz2/
