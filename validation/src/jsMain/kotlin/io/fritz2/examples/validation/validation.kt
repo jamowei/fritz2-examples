@@ -8,7 +8,7 @@ import io.fritz2.dom.html.render
 import io.fritz2.dom.mount
 import io.fritz2.dom.states
 import io.fritz2.dom.values
-import io.fritz2.identification.createUUID
+import io.fritz2.identification.uniqueId
 import io.fritz2.validation.Validation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -82,7 +82,7 @@ fun activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Tag<
 @FlowPreview
 fun main() {
 
-    val personStore = object : RootStore<Person>(Person(createUUID())), Validation<Person, Message, String> {
+    val personStore = object : RootStore<Person>(Person(uniqueId())), Validation<Person, Message, String> {
         override val validator = PersonValidator
 
         val save = handleAndEmit<Unit, Person> { person ->
@@ -92,7 +92,7 @@ fun main() {
             if (validate(person, "add")) {
                 offer(person)
                 validator.cleanUp()
-                Person(createUUID())
+                Person(uniqueId())
             } else person
         }
     }

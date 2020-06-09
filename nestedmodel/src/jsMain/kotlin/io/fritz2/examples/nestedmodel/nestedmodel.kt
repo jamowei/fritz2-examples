@@ -7,7 +7,7 @@ import io.fritz2.dom.html.render
 import io.fritz2.dom.mount
 import io.fritz2.dom.states
 import io.fritz2.dom.values
-import io.fritz2.identification.createUUID
+import io.fritz2.identification.uniqueId
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.map
@@ -17,7 +17,7 @@ import org.w3c.dom.HTMLDivElement
 @FlowPreview
 fun main() {
 
-    val personStore = object : RootStore<Person>(Person(createUUID())) {
+    val personStore = object : RootStore<Person>(Person(uniqueId())) {
         val save = handleAndEmit<Unit, Person> { p ->
             offer(p)
             p
