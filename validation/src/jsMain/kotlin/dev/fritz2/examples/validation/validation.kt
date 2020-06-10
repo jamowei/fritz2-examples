@@ -21,6 +21,7 @@ import kotlin.dom.addClass
 import kotlin.dom.removeClass
 
 fun PersonValidator.cleanUp() {
+    console.log("running cleanup")
     // clean up all input elements
     val inputs = document.getElementsByClassName("form-control")
     for (i in 0..inputs.length) {
@@ -34,6 +35,8 @@ fun PersonValidator.cleanUp() {
         message?.removeClass(Status.Invalid.messageClass, Status.Valid.messageClass)
         message?.textContent = ""
     }
+    // activities
+    document.getElementById(".activities")?.removeClass(Status.Invalid.inputClass, Status.Valid.inputClass)
 }
 
 // helper method for creating form-groups for text input
@@ -86,8 +89,6 @@ fun main() {
         override val validator = PersonValidator
 
         val save = handleAndEmit<Unit, Person> { person ->
-            // cleanup validation
-            validator.cleanUp()
             // only update the list when new person is valid
             if (validate(person, "add")) {
                 offer(person)
@@ -108,7 +109,7 @@ fun main() {
 
     // extend with the Validation interface and provide a PersonValidator
     val listStore = object : RootStore<List<Person>>(emptyList()) {
-        val add: SimpleHandler<Person> = handle { list, person ->
+        val add = handle<Person> { list, person ->
             list + person
         }
     }
@@ -119,13 +120,19 @@ fun main() {
 
     // adding bootstrap css classes to the validated elements
     personStore.validator.msgs.onEach { msgs ->
-        // add messages to input groups
-        for (msg in msgs) {
-            val element = document.getElementById(msg.id)
-            element?.addClass(msg.status.inputClass)
-            val message = document.getElementById("${msg.id}-message")
-            message?.addClass(msg.status.messageClass)
-            message?.textContent = msg.text
+        // cleanup validation
+        PersonValidator.cleanUp()
+
+        // add messages to input groups only if there were errors
+        if(msgs.any { it.failed() }) {
+            for (msg in msgs) {
+                console.log(msg)
+                val element = document.getElementById(msg.id)
+                element?.addClass(msg.status.inputClass)
+                val message = document.getElementById("${msg.id}-message")
+                message?.addClass(msg.status.messageClass)
+                message?.textContent = msg.text
+            }
         }
     }.watch()
 
