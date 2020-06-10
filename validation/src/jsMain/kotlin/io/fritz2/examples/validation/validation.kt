@@ -200,16 +200,16 @@ fun main() {
                 }
                 tbody {
                     listStore.data.each().map { person ->
-                        val address = "${person.address.street} ${person.address.number}, " +
+                        val completeAddress = "${person.address.street} ${person.address.number}, " +
                                 "${person.address.postalCode} ${person.address.city}"
-                        val activities = person.activities.filter { it.like }.map { it.name }.joinToString()
+                        val selectedActivities = person.activities.filter { it.like }.map { it.name }.joinToString()
 
                         render {
                             tr {
                                 td { text(person.name) }
                                 td { text(person.birthday.format(DateFormat.FORMAT_DATE)) }
-                                td { text(address) }
-                                td { text(activities) }
+                                td { text(completeAddress) }
+                                td { text(selectedActivities) }
                             }
                         }
                     }.bind()
