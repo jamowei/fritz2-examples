@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
 }
 
-apply(plugin = "io.fritz2.fritz2-gradle")
+apply(plugin = "dev.fritz2.fritz2-gradle")
 
 repositories {
     mavenLocal()
