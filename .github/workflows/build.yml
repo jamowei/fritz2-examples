@@ -28,6 +28,14 @@ jobs:
           *gradle*
           **/src
           **/build.gradle.kts
+          **/build/kotlin/**
+          **/build/tmp/**
+          **/build/processedResources/**
+          **/build/generated/**
+          **/build/libs/**
+          **/build/reports/**
+          **/build/js/**
+          **/build/classes/**
           EOL
       - name: Push Examples
         if: success()
