@@ -6,7 +6,7 @@ This repo hosts ready-to-try examples to give you quick insight into how develop
 The source-code is included. To see the complete code of the examples you can take a look at the [fritz2-examples](https://github.com/jamowei/fritz2-examples/tree/master).
 
 Also take a look at our [documentation](https://docs.fritz2.dev/)
-and learn how to use fritz2 with your own projects.
+and learn how to use fritz2 in your own projects.
 
 The following examples are available (work in progress):
 * [gettingstarted](https://examples.fritz2.dev/gettingstarted/build/distributions/index.html) - shows the one- and two-way-databinding in fritz2.
