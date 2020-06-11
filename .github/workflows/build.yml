@@ -18,12 +18,22 @@ jobs:
         run: chmod +x gradlew
       - name: Webpack with Gradle
         run: ./gradlew jsBrowserProductionWebpack
+      - name: Create .gitignore file
+        run: |
+          rm .gitignore
+          cat > .gitignore <<EOL
+          .idea
+          .github
+          .gradle
+          *gradle*
+          **/src
+          **/build.gradle.kts
+          EOL
       - name: Push Examples
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
-          target_branch: gh-pages
           build_dir: .
-          fqdn: examples.fritz2.dev
+#          fqdn: examples.fritz2.dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
