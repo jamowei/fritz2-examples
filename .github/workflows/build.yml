@@ -39,9 +39,8 @@ jobs:
           EOL
       - name: Push Examples
         if: success()
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v2.0.1
         with:
           build_dir: .
-#          fqdn: examples.fritz2.dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
