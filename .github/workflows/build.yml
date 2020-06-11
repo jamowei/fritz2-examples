@@ -16,8 +16,6 @@ jobs:
           java-version: 12
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build and run Unit Tests
-        run: ./gradlew test
       - name: Webpack with Gradle
         run: ./gradlew jsBrowserProductionWebpack
       - name: Push Examples
