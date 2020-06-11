@@ -3,8 +3,6 @@ plugins {
 }
 
 repositories {
-    mavenLocal() //FIXME: remove
-    mavenCentral()
     jcenter()
 }
 
