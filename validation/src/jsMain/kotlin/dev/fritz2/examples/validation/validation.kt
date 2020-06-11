@@ -20,8 +20,8 @@ import kotlin.browser.document
 import kotlin.dom.addClass
 import kotlin.dom.removeClass
 
-fun PersonValidator.cleanUp() {
-    console.log("running cleanup")
+// resets all messages under input fields
+fun cleanUpValMessages() {
     // clean up all input elements
     val inputs = document.getElementsByClassName("form-control")
     for (i in 0..inputs.length) {
@@ -92,7 +92,7 @@ fun main() {
             // only update the list when new person is valid
             if (validate(person, "add")) {
                 offer(person)
-                validator.cleanUp()
+                cleanUpValMessages()
                 Person(uniqueId())
             } else person
         }
@@ -121,12 +121,11 @@ fun main() {
     // adding bootstrap css classes to the validated elements
     personStore.validator.msgs.onEach { msgs ->
         // cleanup validation
-        PersonValidator.cleanUp()
+        cleanUpValMessages()
 
         // add messages to input groups only if there were errors
         if(msgs.any { it.failed() }) {
             for (msg in msgs) {
-                console.log(msg)
                 val element = document.getElementById(msg.id)
                 element?.addClass(msg.status.inputClass)
                 val message = document.getElementById("${msg.id}-message")
