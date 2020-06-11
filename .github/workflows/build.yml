@@ -37,10 +37,8 @@ jobs:
           **/build/js/**
           **/build/classes/**
           EOL
-      - name: Push Examples
-        if: success()
-        uses: crazy-max/ghaction-github-pages@v2.0.1
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.6.1
         with:
-          build_dir: .
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
