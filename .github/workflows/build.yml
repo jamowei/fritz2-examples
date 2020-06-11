@@ -1,4 +1,4 @@
-name: examples
+name: build
 
 on:
   push:
@@ -14,8 +14,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 12
-      - name: Build model
-        run: ./gradlew :examples:nestedmodel:model:build
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: Build and run Unit Tests
         run: ./gradlew test
       - name: Webpack with Gradle
