@@ -8,7 +8,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.ShadowRoot
-import kotlin.browser.window
 
 
 @ExperimentalCoroutinesApi
@@ -76,10 +75,10 @@ class WeatherCard : WebComponent<HTMLDivElement>() {
 
 @JsModule("@mat3e-ux/stars")
 @JsNonModule
-abstract external class Stars : HTMLElement
+external object Stars
 
 @ExperimentalCoroutinesApi
 fun main() {
     registerWebComponent("weather-card", WeatherCard::class, "city")
-    window.customElements.define("m3-stars", Stars::class.js.unsafeCast<() -> dynamic>())
+    Stars // have to use the component somewhere to get the import executed
 }
