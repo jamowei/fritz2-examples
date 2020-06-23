@@ -45,3 +45,4 @@ jobs:
           keep_files: true
           allow_empty_commit: true
           enable_jekyll: true
+          cname: examples.fritz2.dev
