@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-      - 'master'
+      - '**'
 
 jobs:
   build:
@@ -16,30 +16,5 @@ jobs:
           java-version: 12
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Webpack with Gradle
-        run: ./gradlew jsBrowserProductionWebpack
-      - name: Create .gitignore file
-        run: |
-          rm .gitignore
-          cat > .gitignore <<EOL
-          .idea
-          .github
-          .gradle
-          *gradle*
-          **/src
-          **/build.gradle.kts
-          **/build/kotlin/**
-          **/build/tmp/**
-          **/build/processedResources/**
-          **/build/generated/**
-          **/build/libs/**
-          **/build/reports/**
-          **/build/js/**
-          **/build/classes/**
-          EOL
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3.6.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
-          keep_files: true
+      - name: Build with Gradle
+        run: ./gradlew build
