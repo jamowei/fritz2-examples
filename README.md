@@ -1,12 +1,13 @@
-![fritz2](https://www.fritz2.dev/images/fritz2_logo_grey.png)
-
+[![fritz2](https://www.fritz2.dev/images/fritz2_logo_grey.png)](https://www.fritz2.dev/)
 # Examples
+![build](https://github.com/jamowei/fritz2-examples/workflows/build/badge.svg)
+
 This repo hosts ready-to-try examples to give you quick insight into how development of web-apps using fritz2 is like. 
 
-The source-code is included. To see the complete code of the examples you can take a look at the [fritz2-examples](https://github.com/jamowei/fritz2-examples/tree/master).
+The source-code is included. To see the complete code of the examples you can take a look 
+at the [fritz2-examples](https://github.com/jamowei/fritz2-examples/tree/master).
 
-Also take a look at our [documentation](https://docs.fritz2.dev/)
-and learn how to use fritz2 in your own projects.
+If you want to learn more about fritz2 and how it's works, take a look at our [documentation](https://docs.fritz2.dev/).
 
 The following examples are available:
 * [gettingstarted](https://examples.fritz2.dev/gettingstarted/build/distributions/index.html) - shows the one- and two-way-databinding in fritz2.
