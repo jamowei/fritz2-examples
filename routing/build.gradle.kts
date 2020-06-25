@@ -9,23 +9,21 @@ repositories {
 }
 
 kotlin {
-    kotlin {
-        jvm()
-        js().browser()
+    jvm()
+    js().browser()
 
-        sourceSets {
-            val commonMain by getting {
-                dependencies {
-                    implementation(kotlin("stdlib"))
-                }
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib"))
             }
-            val jvmMain by getting {
-                dependencies {
-                }
+        }
+        val jvmMain by getting {
+            dependencies {
             }
-            val jsMain by getting {
-                dependencies {
-                }
+        }
+        val jsMain by getting {
+            dependencies {
             }
         }
     }
