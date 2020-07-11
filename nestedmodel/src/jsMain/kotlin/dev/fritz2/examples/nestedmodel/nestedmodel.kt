@@ -17,8 +17,8 @@ import org.w3c.dom.HTMLDivElement
 @FlowPreview
 fun main() {
 
-    val personStore = object : RootStore<Person>(Person(uniqueId())) {
-        val save = handleAndEmit<Unit, Person> { p ->
+    val personStore = object : RootStore<Person>(Person(), id = "person") {
+        val save = handleAndOffer<Person> { p ->
             offer(p)
             p
         }
@@ -33,7 +33,7 @@ fun main() {
     val city = address.sub(L.Address.city)
     val activities = personStore.sub(L.Person.activities)
 
-    val listStore = object : RootStore<List<Person>>(emptyList()) {
+    val listStore = object : RootStore<List<Person>>(emptyList(), id = "list") {
         val add: SimpleHandler<Person> = handle { list, person ->
             list + person
         }
@@ -43,9 +43,9 @@ fun main() {
     personStore.save handledBy listStore.add
 
     // helper method for creating form-groups from SubStores
-    fun <X, Y> HtmlElements.formGroup(
+    fun HtmlElements.formGroup(
         label: String,
-        subStore: SubStore<X, Y, String>,
+        subStore: Store<String>,
         inputType: String = "text",
         extraClass: String = ""
     ) {
@@ -98,7 +98,7 @@ fun main() {
             }
             div("form-row") {
                 div("form-group") {
-                    activities.eachStore().map { activity ->
+                    activities.each().map { activity ->
                         activityCheckbox(activity)
                     }.bind()
                 }
@@ -138,7 +138,7 @@ fun main() {
                     listStore.data.each().map { person ->
                         val fullAddress = "${person.address.street} ${person.address.number}, " +
                                 "${person.address.postalCode} ${person.address.city}"
-                        val selectedActivities = person.activities.filter { it.like }.map { it.name }.joinToString()
+                        val selectedActivities = person.activities.filter { it.like }.joinToString { it.name }
 
                         render {
                             tr {
