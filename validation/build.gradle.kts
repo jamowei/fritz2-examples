@@ -1,5 +1,5 @@
 plugins {
-    id("dev.fritz2.fritz2-gradle") version "0.5"
+    id("dev.fritz2.fritz2-gradle") version "0.6"
 }
 
 repositories {
@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation(project(":validation:model"))
+                api("com.soywiz.korlibs.klock:klock:1.10.5")
             }
         }
         val jvmMain by getting {

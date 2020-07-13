@@ -40,9 +40,9 @@ fun cleanUpValMessages() {
 }
 
 // helper method for creating form-groups for text input
-fun <X, Y> HtmlElements.stringInput(
+fun HtmlElements.stringInput(
     label: String,
-    subStore: SubStore<X, Y, String>,
+    subStore: Store<String>,
     inputType: String = "text",
     extraClass: String = ""
 ) {
@@ -85,15 +85,15 @@ fun activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Tag<
 @FlowPreview
 fun main() {
 
-    val personStore = object : RootStore<Person>(Person(uniqueId())), Validation<Person, Message, String> {
+    val personStore = object : RootStore<Person>(Person()), Validation<Person, Message, String> {
         override val validator = PersonValidator
 
-        val save = handleAndEmit<Unit, Person> { person ->
+        val save = handleAndOffer<Person> { person ->
             // only update the list when new person is valid
             if (validate(person, "add")) {
                 offer(person)
                 cleanUpValMessages()
-                Person(uniqueId())
+                Person()
             } else person
         }
     }
@@ -167,7 +167,7 @@ fun main() {
                     text("Activities")
                 }
                 div(id = activities.id) {
-                    activities.eachStore().map { activity ->
+                    activities.each().map { activity ->
                         activityCheckbox(activity)
                     }.bind()
                 }
@@ -208,7 +208,7 @@ fun main() {
                     listStore.data.each().map { person ->
                         val completeAddress = "${person.address.street} ${person.address.number}, " +
                                 "${person.address.postalCode} ${person.address.city}"
-                        val selectedActivities = person.activities.filter { it.like }.map { it.name }.joinToString()
+                        val selectedActivities = person.activities.filter { it.like }.joinToString { it.name }
 
                         render {
                             tr {

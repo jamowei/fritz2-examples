@@ -2,7 +2,7 @@ package dev.fritz2.examples.validation
 
 import com.soywiz.klock.Date
 import com.soywiz.klock.DateTime
-import dev.fritz2.identification.ModelIdRoot
+import dev.fritz2.identification.RootModelId
 import dev.fritz2.lenses.Lens
 import dev.fritz2.validation.ValidationMessage
 import dev.fritz2.validation.Validator
@@ -21,7 +21,7 @@ object PersonValidator : Validator<Person, Message, String>() {
     override fun validate(data: Person, metadata: String): List<Message> {
         // working with mutable list here is much more easier
         val msgs = mutableListOf<Message>()
-        val idStore = ModelIdRoot<Person>()
+        val idStore = RootModelId<Person>()
 
         // validate name
         if (data.name.trim().isBlank())
