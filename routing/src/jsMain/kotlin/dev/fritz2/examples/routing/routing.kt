@@ -88,7 +88,7 @@ fun main() {
                                 clicks.map {
                                     mapOf(
                                         "page" to Pages.change,
-                                        "debug" to false,
+                                        "debug" to false.toString(),
                                         "role" to Roles.anonymous
                                     )
                                 } handledBy router.navTo
@@ -126,7 +126,7 @@ fun main() {
                                         text("Extra parameter")
                                     }
                                     div("form-control") {
-                                        text(params["extra"].toString())
+                                        text(params["extra"] ?: "")
                                         attr("readonly", "true")
                                     }
                                 }
@@ -144,10 +144,10 @@ fun main() {
                                     div("form-check") {
                                         input("form-check-input", id = "debug") {
                                             type = const("checkbox")
-                                            checked = const(params["debug"].unsafeCast<Boolean>())
+                                            checked = const(params["debug"]?.toBoolean() ?: false)
 
                                             changes.states().map { checked ->
-                                                params.plus("debug" to checked)
+                                                params.plus("debug" to checked.toString())
                                             } handledBy router.navTo
                                         }
                                         label("form-check-label", `for` = "debug") {
