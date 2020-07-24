@@ -5,8 +5,8 @@ import dev.fritz2.lenses.Lenses
 
 @Lenses
 data class ToDo(
+    val id: String = uniqueId(),
     val text: String,
-    val uuid: String = uniqueId(),
     val completed: Boolean = false,
     val editing: Boolean = false
 )

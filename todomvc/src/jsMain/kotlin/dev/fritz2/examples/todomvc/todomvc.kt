@@ -32,8 +32,8 @@ fun main() {
             else toDos
         }
 
-        val remove = handle<String> { toDos, uuid ->
-            toDos.filterNot { it.uuid == uuid }
+        val remove = handle<String> { toDos, id ->
+            toDos.filterNot { it.id == id }
         }
 
         val toggleAll = handle<Boolean> { toDos, toggle ->
@@ -76,8 +76,8 @@ fun main() {
                     router.routes.map { route ->
                         filters[route]?.function?.invoke(all) ?: all
                     }
-                }.each(ToDo::uuid).map { toDo ->
-                    val toDoStore = toDos.sub(toDo, ToDo::uuid)
+                }.each(ToDo::id).map { toDo ->
+                    val toDoStore = toDos.sub(toDo, ToDo::id)
                     val textStore = toDoStore.sub(L.ToDo.text)
                     val completedStore = toDoStore.sub(L.ToDo.completed)
                     val editingStore = toDoStore.sub(L.ToDo.editing)
@@ -105,7 +105,7 @@ fun main() {
                                     dblclicks.map { true } handledBy editingStore.update
                                 }
                                 button("destroy") {
-                                    clicks.events.map { toDo.uuid } handledBy toDos.remove //flatMapLatest { toDoStore.data }
+                                    clicks.events.map { toDo.id } handledBy toDos.remove //flatMapLatest { toDoStore.data }
                                 }
                             }
                             input("edit") {
