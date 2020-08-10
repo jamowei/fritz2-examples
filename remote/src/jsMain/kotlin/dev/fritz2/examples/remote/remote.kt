@@ -6,8 +6,7 @@ import dev.fritz2.binding.handledBy
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.values
-import dev.fritz2.remote.body
-import dev.fritz2.remote.onErrorLog
+import dev.fritz2.remote.getBody
 import dev.fritz2.remote.remote
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -20,20 +19,15 @@ fun main() {
 
         val users = remote("https://reqres.in/api/users")
 
-        val loadAllUsers = apply<Unit, String> {
-            users.get()
-                .onErrorLog()
-                .body()
-        } andThen update
+        val loadAllUsers = handle {
+            users.get().getBody()
+        }
 
-        val loadUserById = apply { s: String ->
-            users.acceptJson()
-                .get(s)
-                .onErrorLog()
-                .body()
-        } andThen update
+        val loadUserById = handle { _, s: String ->
+            users.acceptJson().get(s).getBody()
+        }
 
-        val saveUserWithName = apply { s: String ->
+        val saveUserWithName = handle { _, s: String ->
             users.body("""
                     {
                         "name": "$s",
@@ -41,12 +35,8 @@ fun main() {
                     }
                 """.trimIndent())
                 .contentType("application/json; charset=utf-8")
-                .acceptJson()
-                .post()
-                .onErrorLog()
-                .body()
-        } andThen update
-
+                .acceptJson().post().getBody()
+        }
     }
 
     render {
