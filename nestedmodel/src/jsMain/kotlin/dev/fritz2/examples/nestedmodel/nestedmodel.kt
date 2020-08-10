@@ -7,7 +7,6 @@ import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
-import dev.fritz2.identification.uniqueId
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.map
@@ -135,18 +134,17 @@ fun main() {
                     th { text("Activities") }
                 }
                 tbody {
-                    listStore.data.each().map { person ->
+                    listStore.data.each().render { person ->
                         val fullAddress = "${person.address.street} ${person.address.number}, " +
                                 "${person.address.postalCode} ${person.address.city}"
                         val selectedActivities = person.activities.filter { it.like }.joinToString { it.name }
 
-                        render {
-                            tr {
-                                td { text(person.name) }
-                                td { text(person.birthday) }
-                                td { text(fullAddress) }
-                                td { text(selectedActivities) }
-                            }
+
+                        tr {
+                            td { text(person.name) }
+                            td { text(person.birthday) }
+                            td { text(fullAddress) }
+                            td { text(selectedActivities) }
                         }
                     }.bind()
                 }
