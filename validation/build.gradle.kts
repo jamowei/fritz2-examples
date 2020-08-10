@@ -3,6 +3,7 @@ plugins {
 }
 
 repositories {
+    maven("https://oss.jfrog.org/artifactory/jfrog-dependencies")
     jcenter()
 }
 
@@ -15,6 +16,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib"))
                 api("com.soywiz.korlibs.klock:klock:1.10.5")
+                implementation("dev.fritz2:core:0.7-SNAPSHOT")
             }
         }
         val jvmMain by getting {

@@ -2,7 +2,7 @@ package dev.fritz2.examples.validation
 
 import com.soywiz.klock.Date
 import com.soywiz.klock.DateTime
-import dev.fritz2.identification.RootModelId
+import dev.fritz2.identification.inspect
 import dev.fritz2.lenses.Lens
 import dev.fritz2.validation.ValidationMessage
 import dev.fritz2.validation.Validator
@@ -13,7 +13,7 @@ enum class Status(val inputClass: String, val messageClass: String) {
 }
 
 data class Message(val id: String, val status: Status, val text: String) : ValidationMessage {
-    override fun failed(): Boolean = status > Status.Valid
+    override fun isError(): Boolean = status > Status.Valid
 }
 
 object PersonValidator : Validator<Person, Message, String>() {
@@ -21,7 +21,7 @@ object PersonValidator : Validator<Person, Message, String>() {
     override fun validate(data: Person, metadata: String): List<Message> {
         // working with mutable list here is much more easier
         val msgs = mutableListOf<Message>()
-        val idStore = RootModelId<Person>()
+        val idStore = inspect(data)
 
         // validate name
         if (data.name.trim().isBlank())

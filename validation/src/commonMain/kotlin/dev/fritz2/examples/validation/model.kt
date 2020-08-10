@@ -1,8 +1,12 @@
 package dev.fritz2.examples.validation
 
-import com.soywiz.klock.*
-import dev.fritz2.format.Format
+import com.soywiz.klock.Date
+import com.soywiz.klock.DateFormat
+import com.soywiz.klock.format
+import com.soywiz.klock.parseDate
+import dev.fritz2.lenses.Lens
 import dev.fritz2.lenses.Lenses
+import dev.fritz2.lenses.format
 
 @Lenses
 data class Person(
@@ -34,9 +38,9 @@ data class Activity(
 )
 
 object Format {
-    val date = object : Format<Date> {
-        private val formatter: DateFormat = DateFormat("yyyy-MM-dd")
-        override fun parse(value: String): Date = formatter.parseDate(value)
-        override fun format(value: Date): String = formatter.format(value)
-    }
+    private val dateFormat: DateFormat = DateFormat("yyyy-MM-dd")
+    val dateLens: Lens<Date, String> = format(
+        { dateFormat.parseDate(it) },
+        { dateFormat.format(it) }
+    )
 }
