@@ -8,12 +8,10 @@ import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
-import dev.fritz2.identification.uniqueId
-import dev.fritz2.validation.Validation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.get
 import kotlin.browser.document
@@ -85,12 +83,12 @@ fun activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Tag<
 @FlowPreview
 fun main() {
 
-    val personStore = object : RootStore<Person>(Person()), Validation<Person, Message, String> {
-        override val validator = PersonValidator
+    val personStore = object : RootStore<Person>(Person()) {
+        val validator = PersonValidator
 
         val save = handleAndOffer<Person> { person ->
             // only update the list when new person is valid
-            if (validate(person, "add")) {
+            if (validator.isValid(person, "add")) {
                 offer(person)
                 cleanUpValMessages()
                 Person()
@@ -99,7 +97,7 @@ fun main() {
     }
 
     val name = personStore.sub(L.Person.name)
-    val birthday = personStore.sub(L.Person.birthday) using Format.date
+    val birthday = personStore.sub(L.Person.birthday + Format.dateLens)
     val address = personStore.sub(L.Person.address)
     val street = address.sub(L.Address.street)
     val number = address.sub(L.Address.number)
@@ -119,12 +117,12 @@ fun main() {
 
 
     // adding bootstrap css classes to the validated elements
-    personStore.validator.msgs.onEach { msgs ->
+    personStore.validator.isValid.combine(personStore.validator.msgs) { isValid, msgs ->
         // cleanup validation
         cleanUpValMessages()
 
         // add messages to input groups only if there were errors
-        if(msgs.any { it.failed() }) {
+        if(!isValid) {
             for (msg in msgs) {
                 val element = document.getElementById(msg.id)
                 element?.addClass(msg.status.inputClass)
@@ -205,18 +203,16 @@ fun main() {
                     th { text("Activities") }
                 }
                 tbody {
-                    listStore.data.each().map { person ->
+                    listStore.data.each().render { person ->
                         val completeAddress = "${person.address.street} ${person.address.number}, " +
                                 "${person.address.postalCode} ${person.address.city}"
                         val selectedActivities = person.activities.filter { it.like }.joinToString { it.name }
 
-                        render {
-                            tr {
-                                td { text(person.name) }
-                                td { text(person.birthday.format(DateFormat.FORMAT_DATE)) }
-                                td { text(completeAddress) }
-                                td { text(selectedActivities) }
-                            }
+                        tr {
+                            td { text(person.name) }
+                            td { text(person.birthday.format(DateFormat.FORMAT_DATE)) }
+                            td { text(completeAddress) }
+                            td { text(selectedActivities) }
                         }
                     }.bind()
                 }
