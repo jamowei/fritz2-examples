@@ -21,39 +21,41 @@ object PersonValidator : Validator<Person, Message, String>() {
     override fun validate(data: Person, metadata: String): List<Message> {
         // working with mutable list here is much more easier
         val msgs = mutableListOf<Message>()
-        val idStore = inspect(data)
+        val inspector = inspect(data)
 
         // validate name
-        if (data.name.trim().isBlank())
-            msgs.add(Message(idStore.sub(L.Person.name).id, Status.Invalid, "Please provide a name"))
+        val name = inspector.sub(L.Person.name)
+        if (name.data.trim().isBlank())
+            msgs.add(Message(name.id, Status.Invalid, "Please provide a name"))
         else
-            msgs.add(Message(idStore.sub(L.Person.name).id, Status.Valid, "Good name"))
+            msgs.add(Message(inspector.sub(L.Person.name).id, Status.Valid, "Good name"))
 
         // validate the birthday
+        val birthday = inspector.sub(L.Person.birthday)
         when {
-            data.birthday == Date(1900, 1, 1) -> {
-                msgs.add(Message(idStore.sub(L.Person.birthday).id, Status.Invalid, "Please provide a birthday"))
+            birthday.data == Date(1900, 1, 1) -> {
+                msgs.add(Message(birthday.id, Status.Invalid, "Please provide a birthday"))
             }
-            data.birthday.year < 1900 -> {
-                msgs.add(Message(idStore.sub(L.Person.birthday).id, Status.Invalid, "Its a bit to old"))
+            birthday.data.year < 1900 -> {
+                msgs.add(Message(birthday.id, Status.Invalid, "Its a bit to old"))
             }
-            data.birthday.year > DateTime.now().yearInt -> {
-                msgs.add(Message(idStore.sub(L.Person.birthday).id, Status.Invalid, "Cannot be in future"))
+            birthday.data.year > DateTime.now().yearInt -> {
+                msgs.add(Message(birthday.id, Status.Invalid, "Cannot be in future"))
             }
             else -> {
-                val age = DateTime.now().yearInt - data.birthday.year
-                msgs.add(Message(idStore.sub(L.Person.birthday).id, Status.Valid, "Age is $age"))
+                val age = DateTime.now().yearInt - birthday.data.year
+                msgs.add(Message(birthday.id, Status.Valid, "Age is $age"))
             }
         }
 
         // check address fields
-        val addressId = idStore.sub(L.Person.address)
+        val address = inspector.sub(L.Person.address)
         fun checkAddressField(name: String, lens: Lens<Address, String>) {
-            val value = lens.get(data.address)
-            if (value.trim().isBlank())
-                msgs.add(Message(addressId.sub(lens).id, Status.Invalid, "Please provide a $name"))
+            val field = address.sub(lens)
+            if (field.data.trim().isBlank())
+                msgs.add(Message(field.id, Status.Invalid, "Please provide a $name"))
             else
-                msgs.add(Message(addressId.sub(lens).id, Status.Valid, "Ok"))
+                msgs.add(Message(field.id, Status.Valid, "Ok"))
         }
         checkAddressField("street", L.Address.street)
         checkAddressField("house number", L.Address.number)
@@ -61,10 +63,11 @@ object PersonValidator : Validator<Person, Message, String>() {
         checkAddressField("city", L.Address.city)
 
         // check activities
-        if (data.activities.none { it.like })
+        val activities = inspector.sub(L.Person.activities)
+        if (activities.data.none { it.like })
             msgs.add(
                 Message(
-                    idStore.sub(L.Person.activities).id,
+                    activities.id,
                     Status.Invalid,
                     "Please provide at least one activity"
                 )
@@ -72,9 +75,9 @@ object PersonValidator : Validator<Person, Message, String>() {
         else
             msgs.add(
                 Message(
-                    idStore.sub(L.Person.activities).id,
+                    activities.id,
                     Status.Valid,
-                    "You choose ${data.activities.count { it.like }} activities"
+                    "You choose ${activities.data.count { it.like }} activities"
                 )
             )
 
