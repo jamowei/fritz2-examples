@@ -43,7 +43,10 @@ object PersonValidator : Validator<Person, Message, String>() {
                 msgs.add(Message(birthday.id, Status.Invalid, "Cannot be in future"))
             }
             else -> {
-                val age = DateTime.now().yearInt - birthday.data.year
+                val age = DateTime.now().let {
+                    val years = it.yearInt - birthday.data.year
+                    if(birthday.data.dayOfYear >= it.dayOfYear) years - 1 else years
+                }
                 msgs.add(Message(birthday.id, Status.Valid, "Age is $age"))
             }
         }
