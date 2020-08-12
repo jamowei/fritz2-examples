@@ -1,5 +1,6 @@
 plugins {
     id("dev.fritz2.fritz2-gradle")
+    kotlin("plugin.serialization")
 }
 
 repositories {
@@ -16,15 +17,17 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib"))
                 implementation("dev.fritz2:core:0.7-SNAPSHOT")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.20.0")
             }
         }
         val jvmMain by getting {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
             }
         }
         val jsMain by getting {
             dependencies {
-                implementation(npm("@mat3e-ux/stars"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:0.20.0")
             }
         }
     }

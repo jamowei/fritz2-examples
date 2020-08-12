@@ -18,6 +18,142 @@ import kotlin.browser.document
 import kotlin.dom.addClass
 import kotlin.dom.removeClass
 
+object PersonStore : RootStore<Person>(Person()) {
+    val validator = PersonValidator()
+
+    val addOrUpdate = handle<Person> { old, new ->
+        if (validator.isValid(new, "add")) new else old
+    }
+
+    val save = handleAndOffer<Person> { person ->
+        // only update the list when new person is valid
+        if (validator.isValid(person, "add")) {
+            offer(person)
+            cleanUpValMessages()
+            Person()
+        } else person
+    }
+}
+
+object PersonListStore : RootStore<List<Person>>(emptyList()) {
+    val add = handle<Person> { list, person ->
+        list + person
+    }
+}
+
+/*
+ * Details-View
+ */
+@ExperimentalCoroutinesApi
+fun HtmlElements.details() {
+    val name = PersonStore.sub(L.Person.name)
+    val birthday = PersonStore.sub(L.Person.birthday + Format.dateLens)
+    val address = PersonStore.sub(L.Person.address)
+    val street = address.sub(L.Address.street)
+    val number = address.sub(L.Address.number)
+    val postalCode = address.sub(L.Address.postalCode)
+    val city = address.sub(L.Address.city)
+    val activities = PersonStore.sub(L.Person.activities)
+
+    div("col-12") {
+        div("card") {
+            h5("card-header") { +"Person Details" }
+            div("card-body") {
+                div {
+                    stringInput("Name", name)
+
+                    //birthday
+                    div("form-group") {
+                        label(`for` = birthday.id) {
+                            text("Birthday")
+                        }
+                        input("form-control", id = birthday.id) {
+                            value = birthday.data
+                            type = const("date")
+
+                            changes.values() handledBy birthday.update
+                        }
+                        div("message", id = "${birthday.id}-message") { }
+                    }
+
+                    div("form-row") {
+                        stringInput("Street", street, extraClass = "col-md-6")
+                        stringInput("House Number", number, extraClass = "col-md-6")
+                    }
+                    div("form-row") {
+                        stringInput("Postal Code", postalCode, extraClass = "col-md-6")
+                        stringInput("City", city, extraClass = "col-md-6")
+                    }
+                    div("form-group") {
+                        label(`for` = activities.id) {
+                            text("Activities")
+                        }
+                        div(id = activities.id) {
+                            activities.each().map { activity ->
+                                activityCheckbox(activity)
+                            }.bind()
+                        }
+                        div("message", id = "${activities.id}-message") { }
+                    }
+                }
+            }
+            div("card-footer") {
+                button("btn btn-primary") {
+                    text("Add")
+                    clicks handledBy PersonStore.save
+                }
+
+                button("btn btn-secondary mx-2") {
+                    text("Show data")
+                    attr("data-toggle", "collapse")
+                    attr("data-target", "#showData")
+                }
+                div("collapse mt-2", id = "showData") {
+                    div("card card-body") {
+                        pre {
+                            code {
+                                PersonStore.data.map { JSON.stringify(it, space = 2) }.bind()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fun HtmlElements.table() {
+    div("col-12") {
+        div("card") {
+            h5("card-header") { +"List of Persons" }
+            div("card-body") {
+                table("table") {
+                    thead("thead-dark") {
+                        th { text("Name") }
+                        th { text("Birthday") }
+                        th { text("Address") }
+                        th { text("Activities") }
+                    }
+                    tbody {
+                        PersonListStore.data.each().render { person ->
+                            val completeAddress = "${person.address.street} ${person.address.number}, " +
+                                    "${person.address.postalCode} ${person.address.city}"
+                            val selectedActivities = person.activities.filter { it.like }.joinToString { it.name }
+
+                            tr {
+                                td { text(person.name) }
+                                td { text(person.birthday.format(DateFormat.FORMAT_DATE)) }
+                                td { text(completeAddress) }
+                                td { text(selectedActivities) }
+                            }
+                        }.bind()
+                    }
+                }
+            }
+        }
+    }
+}
+
 // resets all messages under input fields
 fun cleanUpValMessages() {
     // clean up all input elements
@@ -83,45 +219,23 @@ fun activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Tag<
 @FlowPreview
 fun main() {
 
-    val personStore = object : RootStore<Person>(Person()) {
-        val validator = PersonValidator()
-
-         val addOrUpdate = handle<Person> { old, new ->
-             if (validator.isValid(new, "add")) new else old
-         }
-
-        val save = handleAndOffer<Person> { person ->
-            // only update the list when new person is valid
-            if (validator.isValid(person, "add")) {
-                offer(person)
-                cleanUpValMessages()
-                Person()
-            } else person
+    render {
+        section {
+            div("row") {
+                details()
+            }
+            div("row mt-2") {
+                table()
+            }
         }
-    }
-
-    val name = personStore.sub(L.Person.name)
-    val birthday = personStore.sub(L.Person.birthday + Format.dateLens)
-    val address = personStore.sub(L.Person.address)
-    val street = address.sub(L.Address.street)
-    val number = address.sub(L.Address.number)
-    val postalCode = address.sub(L.Address.postalCode)
-    val city = address.sub(L.Address.city)
-    val activities = personStore.sub(L.Person.activities)
-
-    // extend with the Validation interface and provide a PersonValidator
-    val listStore = object : RootStore<List<Person>>(emptyList()) {
-        val add = handle<Person> { list, person ->
-            list + person
-        }
-    }
+    }.mount("target")
 
     //connect the two stores
-    personStore.save handledBy listStore.add
+    PersonStore.save handledBy PersonListStore.add
 
 
     // adding bootstrap css classes to the validated elements
-    personStore.validator.isValid.combine(personStore.validator.msgs) { isValid, msgs ->
+    PersonStore.validator.isValid.combine(PersonStore.validator.msgs) { isValid, msgs ->
         // cleanup validation
         cleanUpValMessages()
 
@@ -136,91 +250,4 @@ fun main() {
             }
         }
     }.watch()
-
-    render {
-        div {
-            h4 { text("Person") }
-            stringInput("Name", name)
-
-            //birthday
-            div("form-group") {
-                label(`for` = birthday.id) {
-                    text("Birthday")
-                }
-                input("form-control", id = birthday.id) {
-                    value = birthday.data
-                    type = const("date")
-
-                    changes.values() handledBy birthday.update
-                }
-                div("message", id = "${birthday.id}-message") { }
-            }
-
-            div("form-row") {
-                stringInput("Street", street, extraClass = "col-md-6")
-                stringInput("House Number", number, extraClass = "col-md-6")
-            }
-            div("form-row") {
-                stringInput("Postal Code", postalCode, extraClass = "col-md-6")
-                stringInput("City", city, extraClass = "col-md-6")
-            }
-            div("form-group") {
-                label(`for` = activities.id) {
-                    text("Activities")
-                }
-                div(id = activities.id) {
-                    activities.each().map { activity ->
-                        activityCheckbox(activity)
-                    }.bind()
-                }
-                div("message", id = "${activities.id}-message") { }
-            }
-            div("form-group my-4") {
-                button("btn btn-primary") {
-                    text("Add")
-                    clicks handledBy personStore.save
-                }
-
-                button("btn btn-secondary mx-2") {
-                    text("Show data")
-                    attr("data-toggle", "collapse")
-                    attr("data-target", "#showData")
-                }
-                div("collapse", id = "showData") {
-                    div("card card-body") {
-                        pre {
-                            code {
-                                personStore.data.map { JSON.stringify(it, space = 2) }.bind()
-                            }
-                        }
-                    }
-                }
-            }
-
-            hr("my-4") { }
-
-            table("table") {
-                thead("thead-dark") {
-                    th { text("Name") }
-                    th { text("Birthday") }
-                    th { text("Address") }
-                    th { text("Activities") }
-                }
-                tbody {
-                    listStore.data.each().render { person ->
-                        val completeAddress = "${person.address.street} ${person.address.number}, " +
-                                "${person.address.postalCode} ${person.address.city}"
-                        val selectedActivities = person.activities.filter { it.like }.joinToString { it.name }
-
-                        tr {
-                            td { text(person.name) }
-                            td { text(person.birthday.format(DateFormat.FORMAT_DATE)) }
-                            td { text(completeAddress) }
-                            td { text(selectedActivities) }
-                        }
-                    }.bind()
-                }
-            }
-        }
-    }.mount("target")
 }

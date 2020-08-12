@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Validation</title>
+    <title>Repositories</title>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -10,20 +10,13 @@
     <link rel="stylesheet" type="text/css" href="https://www.fritz2.dev/static/github-embed.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js"></script>
     <script src="https://www.fritz2.dev/static/github-embed.min.js"></script>
-    <style>
-        .is-invalid .form-check {
-            color: #dc3545;
-        }
-        .is-valid .form-check {
-            color: #28a745;
-        }
-    </style>
 </head>
 <body>
 <div class="container">
     <div class="jumbotron">
-        <h1 class="display-4">Validation</h1>
-        <p class="lead">This example demonstrate the usage of validation in fritz2.</p>
+        <h1 class="display-4">Repositories</h1>
+        <p class="lead">This example shows the use of some services fritz2 offers. It uses localstorage repository,
+            history service and tracking service.</p>
         <hr class="my-4"/>
         <div class="card">
             <div id="target" class="card-body"></div>
@@ -40,7 +33,7 @@
             created with &#10084; by <a href="https://github.com/jwstegemann/fritz2">jwstegemann & jamowei</a></small>
     </footer>
 </div>
-<script src="validation.js"></script>
+<script src="repositories.js"></script>
 <script>
     githubEmbed('#code', {
         "owner": "jamowei",
@@ -48,22 +41,17 @@
         "ref": "master",
         "embed": [
             {
-                "path": "validation/src/jsMain/kotlin/dev/fritz2/examples/validation/validation.kt",
+                "path": "repositories/src/jsMain/kotlin/dev/fritz2/examples/repositories/repositories.kt",
                 "type": "kotlin",
-                "label": "validation.kt",
+                "label": "repositories.kt"
             },
             {
-                "path": "validation/src/commonMain/kotlin/dev/fritz2/examples/validation/model.kt",
+                "path": "repositories/src/commonMain/kotlin/dev/fritz2/examples/repositories/model.kt",
                 "type": "kotlin",
                 "label": "model.kt"
             },
             {
-                "path": "validation/src/commonMain/kotlin/dev/fritz2/examples/validation/validator.kt",
-                "type": "kotlin",
-                "label": "validator.kt"
-            },
-            {
-                "path": "validation/src/jsMain/resources/index.html",
+                "path": "repositories/src/jsMain/resources/index.html",
                 "type": "html",
                 "label": "index.html"
             }
