@@ -16,7 +16,7 @@ data class Message(val id: String, val status: Status, val text: String) : Valid
     override fun isError(): Boolean = status > Status.Valid
 }
 
-object PersonValidator : Validator<Person, Message, String>() {
+class PersonValidator : Validator<Person, Message, String>() {
 
     override fun validate(data: Person, metadata: String): List<Message> {
         // working with mutable list here is much more easier
