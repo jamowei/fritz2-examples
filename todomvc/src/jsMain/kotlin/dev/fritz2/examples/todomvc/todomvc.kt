@@ -8,6 +8,9 @@ import dev.fritz2.dom.html.render
 import dev.fritz2.dom.key
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
+import dev.fritz2.repositories.Resource
+import dev.fritz2.repositories.localstorage.localStorageEntity
+import dev.fritz2.repositories.localstorage.localStorageQuery
 import dev.fritz2.routing.router
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -21,19 +24,28 @@ val filters = mapOf(
     "/completed" to Filter("Completed") { toDos -> toDos.filter { it.completed } }
 )
 
+val persistencePrefix = "todos-"
+
+val toDoResource = Resource(ToDo::id, ToDoSerializer, ToDo(text = ""))
+
 @ExperimentalCoroutinesApi
 @FlowPreview
 fun main() {
     val router = router("/")
 
     val toDos = object : RootStore<List<ToDo>>(emptyList()) {
+
+        val localStorageEntity = localStorageEntity(toDoResource, "todos-")
+        val localStorageQuery = localStorageQuery<ToDo, String, Unit>(toDoResource, "todos-")
+
         val add = handle<String> { toDos, text ->
-            if (text.isNotEmpty()) toDos + ToDo(text = text)
+            if (text.isNotEmpty())
+                toDos + localStorageEntity.saveOrUpdate(ToDo(text = text))
             else toDos
         }
 
         val remove = handle<String> { toDos, id ->
-            toDos.filterNot { it.id == id }
+            localStorageQuery.delete(toDos, id)
         }
 
         val toggleAll = handle<Boolean> { toDos, toggle ->
@@ -53,9 +65,8 @@ fun main() {
             h1 { text("todos") }
             input("new-todo") {
                 placeholder = const("What needs to be done?")
-                autofocus = const(true)
 
-                changes.values().onEach { domNode.value = "" } handledBy toDos.add
+                changes.values().map { domNode.value = ""; it.trim() } handledBy toDos.add
             }
         }
     }
@@ -73,57 +84,55 @@ fun main() {
             }
             ul("todo-list") {
                 toDos.data.flatMapLatest { all ->
-                    router.routes.map { route ->
+                    router.map { route ->
                         filters[route]?.function?.invoke(all) ?: all
                     }
-                }.each(ToDo::id).map { toDo ->
+                }.each(ToDo::id).render { toDo ->
                     val toDoStore = toDos.sub(toDo, ToDo::id)
                     val textStore = toDoStore.sub(L.ToDo.text)
                     val completedStore = toDoStore.sub(L.ToDo.completed)
-                    val editingStore = toDoStore.sub(L.ToDo.editing)
+                    val editingStore = storeOf(false)
 
-                    render {
-                        li {
-                            attr("data-id", toDoStore.id)
-                            //TODO: better flatmap over editing and completed
-                            classMap = toDoStore.data.map {
-                                mapOf(
-                                    "completed" to it.completed,
-                                    "editing" to it.editing
-                                )
+                    li {
+                        attr("data-id", toDoStore.id)
+                        //TODO: better flatmap over editing and completed
+                        classMap = toDoStore.data.combine(editingStore.data) { toDo, isEditing ->
+                            mapOf(
+                                "completed" to toDo.completed,
+                                "editing" to isEditing
+                            )
+                        }
+                        div("view") {
+                            input("toggle") {
+                                type = const("checkbox")
+                                checked = completedStore.data
+
+                                changes.states() handledBy completedStore.update
                             }
-                            div("view") {
-                                input("toggle") {
-                                    type = const("checkbox")
-                                    checked = completedStore.data
+                            label {
+                                textStore.data.bind()
 
-                                    changes.states() handledBy completedStore.update
-                                }
-                                label {
-                                    textStore.data.bind()
-
-                                    dblclicks.map { true } handledBy editingStore.update
-                                }
-                                button("destroy") {
-                                    clicks.events.map { toDo.id } handledBy toDos.remove //flatMapLatest { toDoStore.data }
-                                }
+                                dblclicks.map { true } handledBy editingStore.update
                             }
-                            input("edit") {
-                                value = textStore.data
-                                changes.values() handledBy textStore.update
-
-                                editingStore.data.map { isEditing ->
-                                    if (isEditing) domNode.apply {
-                                        focus()
-                                        select()
-                                    }
-                                    isEditing.toString()
-                                }.watch()
-                                merge(
-                                    blurs.map { false },
-                                    keyups.key().filter { it.isKey(Keys.Enter) }.map { false }
-                                ) handledBy editingStore.update
+                            button("destroy") {
+                                clicks.events.map { toDo.id } handledBy toDos.remove
                             }
+                        }
+                        input("edit") {
+                            value = textStore.data
+                            changes.values() handledBy textStore.update
+
+                            editingStore.data.map { isEditing ->
+                                if (isEditing) domNode.apply {
+                                    focus()
+                                    select()
+                                }
+                                isEditing.toString()
+                            }.watch()
+                            merge(
+                                blurs.map { false },
+                                keyups.key().filter { it.isKey(Keys.Enter) }.map { false }
+                            ) handledBy editingStore.update
                         }
                     }
                 }.bind()
@@ -134,7 +143,7 @@ fun main() {
     fun HtmlElements.filter(text: String, route: String) {
         li {
             a {
-                className = router.routes.map { if (it == route) "selected" else "" }
+                className = router.map { if (it == route) "selected" else "" }
                 href = const("#$route")
                 text(text)
             }
@@ -143,6 +152,11 @@ fun main() {
 
     val appFooter = render {
         footer("footer") {
+            className = toDos.count.map {
+                if (it == 0) "hidden"
+                else ""
+            }
+
             span("todo-count") {
                 strong {
                     toDos.count.map {
