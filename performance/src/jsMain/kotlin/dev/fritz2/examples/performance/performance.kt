@@ -1,6 +1,7 @@
 package dev.fritz2.examples.performance
 
 import dev.fritz2.binding.RootStore
+import dev.fritz2.binding.handledBy
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,13 +18,14 @@ fun main() {
 
     val store = object : RootStore<Int>(0) {
 
-        val start = apply {
+        val start = handle { model ->
             flow {
                 for (i in 1..maxIterations) {
                     emit(i)
                 }
-            }
-        } andThen update
+            } handledBy update
+            model
+        }
 
         val dummyHandler = handle { model ->
             model
@@ -33,12 +35,10 @@ fun main() {
     render {
         div("form-group") {
 
-            store.data.map {
-                render {
-                    p {
-                        +"number of updates: $it"
-                        clicks handledBy store.dummyHandler //register dummy handler
-                    }
+            store.data.render {
+                p {
+                    +"number of updates: $it"
+                    clicks handledBy store.dummyHandler //register dummy handler
                 }
             }.bind(preserveOrder = true)
 
@@ -51,7 +51,7 @@ fun main() {
                 }
             }
 
-            hr {  }
+            hr { }
 
             button("btn btn-primary") {
                 text("start updates")
