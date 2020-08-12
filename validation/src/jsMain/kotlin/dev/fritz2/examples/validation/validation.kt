@@ -84,11 +84,13 @@ fun activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Tag<
 fun main() {
 
     val personStore = object : RootStore<Person>(Person()) {
-        val validator = PersonValidator
+         val addOrUpdate = handle<Person> { old, new ->
+             if (PersonValidator.isValid(new, "add")) new else old
+         }
 
         val save = handleAndOffer<Person> { person ->
             // only update the list when new person is valid
-            if (validator.isValid(person, "add")) {
+            if (PersonValidator.isValid(person, "add")) {
                 offer(person)
                 cleanUpValMessages()
                 Person()
@@ -117,7 +119,7 @@ fun main() {
 
 
     // adding bootstrap css classes to the validated elements
-    personStore.validator.isValid.combine(personStore.validator.msgs) { isValid, msgs ->
+    PersonValidator.isValid.combine(PersonValidator.msgs) { isValid, msgs ->
         // cleanup validation
         cleanUpValMessages()
 
