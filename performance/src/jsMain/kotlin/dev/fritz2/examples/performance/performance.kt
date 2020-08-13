@@ -1,12 +1,16 @@
 package dev.fritz2.examples.performance
 
 import dev.fritz2.binding.RootStore
+import dev.fritz2.binding.const
 import dev.fritz2.binding.handledBy
+import dev.fritz2.binding.storeOf
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
+import dev.fritz2.dom.values
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.sample
 
@@ -14,17 +18,14 @@ import kotlinx.coroutines.flow.sample
 @FlowPreview
 fun main() {
 
-    val maxIterations = 100000
+    val startStore = object : RootStore<Int>(1000, "start") {
 
-    val store = object : RootStore<Int>(0) {
-
-        val start = handle { model ->
-            flow {
-                for (i in 1..maxIterations) {
-                    emit(i)
-                }
-            } handledBy update
-            model
+        val start = handleAndOffer<Int> { maxCount ->
+            for (i in 0..maxCount) {
+                delay(1)
+                offer(i)
+            }
+            maxCount
         }
 
         val dummyHandler = handle { model ->
@@ -32,31 +33,58 @@ fun main() {
         }
     }
 
+    val countStore = storeOf(0)
+
+    startStore.start handledBy countStore.update
+
+    val isFinished = startStore.data
+        .combine(countStore.data) { max, current ->
+            max == current
+        }
+
     render {
         div("form-group") {
 
-            store.data.render {
+            div("form-group") {
+                label(`for` = startStore.id) { +"Max iterations" }
+                input("form-control", id = startStore.id) {
+                    type = const("number")
+                    value = startStore.data.map { it.toString() }
+
+                    changes.values().map { it.toInt() } handledBy startStore.update
+                }
+            }
+
+            countStore.data.render {
                 p {
                     +"number of updates: $it"
-                    clicks handledBy store.dummyHandler //register dummy handler
+                    clicks handledBy startStore.dummyHandler //register dummy handler
                 }
             }.bind(preserveOrder = true)
 
             div("progress") {
                 div("progress-bar") {
                     attr("role", "progressbar")
-                    style = store.data.sample(1000).map {
-                        "width: ${(it.toDouble() / maxIterations) * 100}%;"
+                    style = countStore.data.sample(1000).combine(startStore.data) { count, maxIterations ->
+                        "width: ${(count.toDouble() / maxIterations) * 100}%;"
                     }
                 }
             }
 
             hr { }
 
-            button("btn btn-primary") {
-                text("start updates")
-                clicks handledBy store.start
+            button("btn btn-primary mr-2") {
+                +"Start"
+                className = isFinished.map { if(it) ".d-none" else "" }
+
+                clicks handledBy startStore.start
             }
+            button("btn btn-secondary") {
+                +"Reset"
+
+                clicks.map { 0 } handledBy countStore.update
+            }
+
         }
     }.mount("target")
 
