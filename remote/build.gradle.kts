@@ -3,7 +3,6 @@ plugins {
 }
 
 repositories {
-    maven("https://oss.jfrog.org/artifactory/jfrog-dependencies")
     jcenter()
 }
 
@@ -15,7 +14,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation("dev.fritz2:core:0.7-SNAPSHOT")
             }
         }
         val jvmMain by getting {
