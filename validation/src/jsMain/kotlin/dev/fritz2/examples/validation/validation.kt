@@ -2,7 +2,7 @@ package dev.fritz2.examples.validation
 
 import com.soywiz.klock.DateFormat
 import dev.fritz2.binding.*
-import dev.fritz2.dom.Tag
+import dev.fritz2.dom.html.Div
 import dev.fritz2.dom.html.HtmlElements
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
@@ -12,7 +12,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.get
 import kotlin.browser.document
 import kotlin.dom.addClass
@@ -20,10 +19,6 @@ import kotlin.dom.removeClass
 
 object PersonStore : RootStore<Person>(Person()) {
     val validator = PersonValidator()
-
-    val addOrUpdate = handle<Person> { old, new ->
-        if (validator.isValid(new, "add")) new else old
-    }
 
     val save = handleAndOffer<Person> { person ->
         // only update the list when new person is valid
@@ -89,7 +84,7 @@ fun HtmlElements.details() {
                             text("Activities")
                         }
                         div(id = activities.id) {
-                            activities.each().map { activity ->
+                            activities.each().render { activity ->
                                 activityCheckbox(activity)
                             }.bind()
                         }
@@ -196,21 +191,19 @@ fun HtmlElements.stringInput(
 }
 
 // helper method for creating checkboxes for activities
-fun activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Tag<HTMLDivElement> {
+fun HtmlElements.activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Div {
     val name = activity.sub(L.Activity.name)
     val like = activity.sub(L.Activity.like)
 
-    return render {
-        div("form-check form-check-inline") {
-            input("form-check-input", id = activity.id) {
-                type = const("checkbox")
-                checked = like.data
+    return div("form-check form-check-inline") {
+        input("form-check-input", id = activity.id) {
+            type = const("checkbox")
+            checked = like.data
 
-                changes.states() handledBy like.update
-            }
-            label("form-check-label", `for` = activity.id) {
-                name.data.bind()
-            }
+            changes.states() handledBy like.update
+        }
+        label("form-check-label", `for` = activity.id) {
+            name.data.bind()
         }
     }
 }
