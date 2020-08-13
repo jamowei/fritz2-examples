@@ -66,8 +66,7 @@ object EntityStore : RootStore<Person>(personResource.emptyEntity) {
     val trigger = merge(saveOrUpdate, delete)
 
     val undo = handle {
-        val result = history.back()
-        result
+        history.back()
     }
 
     val isSaved = data.map { it._id != personResource.emptyEntity._id }
@@ -155,8 +154,8 @@ fun HtmlElements.details() {
             div("card-body") {
                 div {
                     formGroup("name", EntityStore.sub(L.Person.name))
-                    formGroup("age", EntityStore.sub(L.Person.age + numberFormat))
-                    formGroup("salary", EntityStore.sub(L.Person.salary + numberFormat))
+                    formGroup("age", EntityStore.sub(L.Person.age + numberFormat), inputType = "number")
+                    formGroup("salary", EntityStore.sub(L.Person.salary + numberFormat), inputType = "number")
                 }
             }
             div("card-footer") {
@@ -209,6 +208,7 @@ fun HtmlElements.details() {
 fun HtmlElements.formGroup(
     label: String,
     store: Store<String>,
+    inputType: String = "text",
     cssClassName: Flow<String> = const(""),
     handleChanges: Input.(Store<String>) -> Unit = {
         changes.values() handledBy store.update
