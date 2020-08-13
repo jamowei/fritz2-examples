@@ -9,10 +9,10 @@ If you want to learn more about fritz2 and how it works, take a look at our [doc
 The following examples are available:
 * [gettingstarted](https://examples.fritz2.dev/gettingstarted/build/distributions/index.html) - one- and two-way-databinding in fritz2
 * [nestedmodel](https://examples.fritz2.dev/nestedmodel/build/distributions/index.html) - how to handle complex models in fritz2
-* [remote](https://examples.fritz2.dev/remote/build/distributions/index.html) - the use of remote extension in fritz2
-* [repositories](https://examples.fritz2.dev/repositories/build/distributions/index.html) - the use of repositories extensions in fritz2
-* [routing](https://examples.fritz2.dev/routing/build/distributions/index.html) - shows routing extensions in fritz2
-* [validation](https://examples.fritz2.dev/validation/build/distributions/index.html) - validation extension in fritz2
+* [remote](https://examples.fritz2.dev/remote/build/distributions/index.html) - the use of remote service in fritz2
+* [repositories](https://examples.fritz2.dev/repositories/build/distributions/index.html) - the use of repositories service in fritz2
+* [routing](https://examples.fritz2.dev/routing/build/distributions/index.html) - shows routing service in fritz2
+* [validation](https://examples.fritz2.dev/validation/build/distributions/index.html) - validation service in fritz2
 * [todomvc](https://examples.fritz2.dev/todomvc/build/distributions/index.html) - implementing the [TodoMVC](http://todomvc.com/) specification using fritz2
 * [webcomponent](https://examples.fritz2.dev/webcomponent/build/distributions/index.html) - implementing a [WebComponent](https://www.webcomponents.org/) using fritz2
 
