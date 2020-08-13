@@ -28,7 +28,14 @@ class PersonValidator : Validator<Person, Message, String>() {
         if (name.data.trim().isBlank())
             msgs.add(Message(name.id, Status.Invalid, "Please provide a name"))
         else
-            msgs.add(Message(inspector.sub(L.Person.name).id, Status.Valid, "Good name"))
+            msgs.add(Message(name.id, Status.Valid, "Good name"))
+
+        val salary = inspector.sub(L.Person.salary)
+        if(salary.data < 1) {
+            msgs.add(Message(salary.id, Status.Invalid, "Please provide a salary"))
+        } else {
+            msgs.add(Message(salary.id, Status.Valid, "Not bad"))
+        }
 
         // validate the birthday
         val birthday = inspector.sub(L.Person.birthday)

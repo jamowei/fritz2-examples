@@ -42,7 +42,8 @@ object PersonListStore : RootStore<List<Person>>(emptyList()) {
 @ExperimentalCoroutinesApi
 fun HtmlElements.details() {
     val name = PersonStore.sub(L.Person.name)
-    val birthday = PersonStore.sub(L.Person.birthday + Format.dateLens)
+    val salary = PersonStore.sub(L.Person.salary + Formats.currency)
+    val birthday = PersonStore.sub(L.Person.birthday + Formats.date)
     val address = PersonStore.sub(L.Person.address)
     val street = address.sub(L.Address.street)
     val number = address.sub(L.Address.number)
@@ -55,7 +56,28 @@ fun HtmlElements.details() {
             h5("card-header") { +"Person Details" }
             div("card-body") {
                 div {
-                    stringInput("Name", name)
+                    formInput("Name", name)
+
+                    //salary
+                    div("form-group") {
+                        label(`for` = salary.id) {
+                            text("Salary")
+                        }
+                        div("input-group") {
+                            div("input-group-prepend") {
+                                div("input-group-text") { +"$" }
+                            }
+                            input("form-control", id = salary.id) {
+                                value = salary.data
+                                type = const("number")
+                                step = const("10")
+                                min = const("0")
+
+                                changes.values() handledBy salary.update
+                            }
+                        }
+                        div("message", id = "${salary.id}-message") { }
+                    }
 
                     //birthday
                     div("form-group") {
@@ -72,12 +94,12 @@ fun HtmlElements.details() {
                     }
 
                     div("form-row") {
-                        stringInput("Street", street, extraClass = "col-md-6")
-                        stringInput("House Number", number, extraClass = "col-md-6")
+                        formInput("Street", street, extraClass = "col-md-6")
+                        formInput("House Number", number, extraClass = "col-md-6")
                     }
                     div("form-row") {
-                        stringInput("Postal Code", postalCode, extraClass = "col-md-6")
-                        stringInput("City", city, extraClass = "col-md-6")
+                        formInput("Postal Code", postalCode, inputType = "number", extraClass = "col-md-6")
+                        formInput("City", city, extraClass = "col-md-6")
                     }
                     div("form-group") {
                         label(`for` = activities.id) {
@@ -169,7 +191,7 @@ fun cleanUpValMessages() {
 }
 
 // helper method for creating form-groups for text input
-fun HtmlElements.stringInput(
+fun HtmlElements.formInput(
     label: String,
     subStore: Store<String>,
     inputType: String = "text",

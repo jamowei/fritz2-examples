@@ -11,6 +11,7 @@ import dev.fritz2.lenses.format
 @Lenses
 data class Person(
     val name: String = "",
+    val salary: Double = 1000.0,
     val birthday: Date = Date(1900, 1, 1),
     val address: Address = Address(),
     val activities: List<Activity> = listOf(
@@ -37,10 +38,14 @@ data class Activity(
     val like: Boolean = false
 )
 
-object Format {
+object Formats {
     private val dateFormat: DateFormat = DateFormat("yyyy-MM-dd")
-    val dateLens: Lens<Date, String> = format(
+    val date: Lens<Date, String> = format(
         { dateFormat.parseDate(it) },
         { dateFormat.format(it) }
+    )
+    val currency: Lens<Double, String> = format(
+        { it.toDouble() },
+        { it.toString() }
     )
 }
