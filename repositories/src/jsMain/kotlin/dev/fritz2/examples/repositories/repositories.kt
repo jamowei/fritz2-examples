@@ -69,6 +69,8 @@ object EntityStore : RootStore<Person>(personResource.emptyEntity) {
         val result = history.back()
         result
     }
+
+    val isSaved = data.map { it._id != personResource.emptyEntity._id }
 }
 
 @UnstableDefault
@@ -143,8 +145,7 @@ fun HtmlElements.table() {
 @UnstableDefault
 @ExperimentalCoroutinesApi
 fun HtmlElements.details() {
-    val visibleWhenSaved =
-        EntityStore.data.map { it._id.isNotEmpty() }.distinctUntilChanged().map { if (it) "" else "d-none" }
+    val visibleWhenSaved = EntityStore.isSaved.map { if (it) "" else "d-none" }
 
     div("col-12") {
         div("card") {
@@ -165,8 +166,8 @@ fun HtmlElements.details() {
                             it?.let { "spinner-border spinner-border-sm mr-2" }.orEmpty()
                         }
                     }
+                    EntityStore.isSaved.map { if(it) "Save" else "Add" }.bind()
 
-                    +"Save"
                     clicks handledBy EntityStore.saveOrUpdate
                 }
                 button("btn btn-danger ml-2") {
