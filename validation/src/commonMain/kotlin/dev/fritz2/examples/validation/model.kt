@@ -11,7 +11,7 @@ import dev.fritz2.lenses.format
 @Lenses
 data class Person(
     val name: String = "",
-    val salary: Double = 1000.0,
+    val salary: Double = 0.0,
     val birthday: Date = Date(1900, 1, 1),
     val address: Address = Address(),
     val activities: List<Activity> = listOf(

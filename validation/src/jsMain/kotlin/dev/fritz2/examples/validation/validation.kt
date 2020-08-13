@@ -36,10 +36,6 @@ object PersonListStore : RootStore<List<Person>>(emptyList()) {
     }
 }
 
-/*
- * Details-View
- */
-@ExperimentalCoroutinesApi
 fun HtmlElements.details() {
     val name = PersonStore.sub(L.Person.name)
     val salary = PersonStore.sub(L.Person.salary + Formats.currency)
@@ -75,8 +71,8 @@ fun HtmlElements.details() {
 
                                 changes.values() handledBy salary.update
                             }
+                            div("message", id = "${salary.id}-message") { }
                         }
-                        div("message", id = "${salary.id}-message") { }
                     }
 
                     //birthday
@@ -98,7 +94,7 @@ fun HtmlElements.details() {
                         formInput("House Number", number, extraClass = "col-md-6")
                     }
                     div("form-row") {
-                        formInput("Postal Code", postalCode, inputType = "number", extraClass = "col-md-6")
+                        formInput("Postal Code", postalCode, extraClass = "col-md-6")
                         formInput("City", city, extraClass = "col-md-6")
                     }
                     div("form-group") {
