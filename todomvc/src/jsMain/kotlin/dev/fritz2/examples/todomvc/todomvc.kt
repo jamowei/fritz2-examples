@@ -57,6 +57,7 @@ fun main() {
         }
 
         val count = data.map { todos -> todos.count { !it.completed } }.distinctUntilChanged()
+        val empty = data.map { it.isEmpty() }.distinctUntilChanged()
         val allChecked = data.map { todos -> todos.isNotEmpty() && todos.all { it.completed } }.distinctUntilChanged()
     }
 
@@ -152,10 +153,7 @@ fun main() {
 
     val appFooter = render {
         footer("footer") {
-            className = toDos.count.map {
-                if (it == 0) "hidden"
-                else ""
-            }
+            className = toDos.empty.map { if (it) "hidden" else "" }
 
             span("todo-count") {
                 strong {
