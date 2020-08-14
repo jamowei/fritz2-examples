@@ -111,7 +111,6 @@ fun HtmlElements.table() {
                     }
                     tbody {
                         QueryStore.data.each().render { p ->
-                            console.log("id " + p._id)
                             tr {
                                 td { +"...${p._id.takeLast(5)}" }
                                 td { +p.name }
