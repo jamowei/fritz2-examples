@@ -22,7 +22,7 @@ kotlin {
         }
         val jsMain by getting {
             dependencies {
-                implementation(npm("@mat3e-ux/stars"))
+                implementation(npm("@mat3e-ux/stars", "0.2.5"))
             }
         }
     }

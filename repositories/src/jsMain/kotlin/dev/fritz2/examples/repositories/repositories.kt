@@ -17,11 +17,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
-import kotlinx.serialization.UnstableDefault
 
 val numberFormat = format({ it.toInt() }, { it.toString() })
 
-@UnstableDefault
 val personResource = Resource(
     Person::_id,
     PersonSerializer,
@@ -30,7 +28,6 @@ val personResource = Resource(
 
 const val personPrefix = "dev.fritz2.examples.person"
 
-@UnstableDefault
 @ExperimentalCoroutinesApi
 object EntityStore : RootStore<Person>(personResource.emptyEntity) {
 
@@ -72,7 +69,6 @@ object EntityStore : RootStore<Person>(personResource.emptyEntity) {
     val isSaved = data.map { it._id != personResource.emptyEntity._id }
 }
 
-@UnstableDefault
 @ExperimentalStdlibApi
 @ExperimentalCoroutinesApi
 object QueryStore : RootStore<List<Person>>(emptyList()) {
@@ -91,7 +87,6 @@ object QueryStore : RootStore<List<Person>>(emptyList()) {
 /*
  * List-View
  */
-@UnstableDefault
 @ExperimentalCoroutinesApi
 @ExperimentalStdlibApi
 fun HtmlElements.table() {
@@ -140,7 +135,6 @@ fun HtmlElements.table() {
 /*
  * Details-View
  */
-@UnstableDefault
 @ExperimentalCoroutinesApi
 fun HtmlElements.details() {
     val visibleWhenSaved = EntityStore.isSaved.map { if (it) "" else "d-none" }
@@ -226,7 +220,6 @@ fun HtmlElements.formGroup(
     }
 }
 
-@UnstableDefault
 @ExperimentalStdlibApi
 @ExperimentalCoroutinesApi
 @FlowPreview
