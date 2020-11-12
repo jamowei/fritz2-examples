@@ -1,7 +1,7 @@
 package dev.fritz2.examples.webcomponent
 
 import dev.fritz2.dom.Tag
-import dev.fritz2.dom.html.render
+import dev.fritz2.dom.html.renderElement
 import dev.fritz2.webcomponents.WebComponent
 import dev.fritz2.webcomponents.registerWebComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,22 +21,22 @@ class WeatherCard : WebComponent<HTMLDivElement>() {
 
         // add you Stores, etc. here
 
-        return render {
+        return renderElement {
             div("weather-card") {
-                h2 { city.bind() }
+                h2 { city.asText() }
                 custom("m3-stars") {
                     attr("max", "5")
                     attr("current", "3.5")
                 }
                 h3 {
-                    text("Cloudy")
+                    +"Cloudy"
                     span {
-                        text("Wind 10km/h ")
-                        span("dot") { text("•") }
-                        text(" Precip 0%")
+                        +"Wind 10km/h "
+                        span("dot") { +"•" }
+                        +" Precip 0%"
                     }
                 }
-                h1 { text("23°") }
+                h1 { +"23°" }
                 div("sky") {
                     div("sun") { }
                     div("cloud") {
@@ -47,25 +47,25 @@ class WeatherCard : WebComponent<HTMLDivElement>() {
                 }
                 table {
                     tr {
-                        td { text("TUE") }
-                        td { text("WED") }
-                        td { text("THU") }
-                        td { text("FRI") }
-                        td { text("SAT") }
+                        td { +"TUE" }
+                        td { +"WED" }
+                        td { +"THU" }
+                        td { +"FRI" }
+                        td { +"SAT" }
                     }
                     tr {
-                        td { text("30°") }
-                        td { text("34°") }
-                        td { text("36°") }
-                        td { text("34°") }
-                        td { text("37°") }
+                        td { +"30°" }
+                        td { +"34°" }
+                        td { +"36°" }
+                        td { +"34°" }
+                        td { +"37°" }
                     }
                     tr {
-                        td { text("17°") }
-                        td { text("22°") }
-                        td { text("19°") }
-                        td { text("23°") }
-                        td { text("19°") }
+                        td { +"17°" }
+                        td { +"22°" }
+                        td { +"19°" }
+                        td { +"23°" }
+                        td { +"19°" }
                     }
                 }
             }

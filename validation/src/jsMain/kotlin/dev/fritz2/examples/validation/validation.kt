@@ -3,27 +3,27 @@ package dev.fritz2.examples.validation
 import com.soywiz.klock.DateFormat
 import dev.fritz2.binding.*
 import dev.fritz2.dom.html.Div
-import dev.fritz2.dom.html.HtmlElements
+import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
+import kotlinx.browser.document
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
+import kotlinx.dom.addClass
+import kotlinx.dom.removeClass
 import org.w3c.dom.get
-import kotlin.browser.document
-import kotlin.dom.addClass
-import kotlin.dom.removeClass
 
 object PersonStore : RootStore<Person>(Person()) {
     val validator = PersonValidator()
 
-    val save = handleAndOffer<Person> { person ->
+    val save = handleAndEmit<Person> { person ->
         // only update the list when new person is valid
         if (validator.isValid(person, "add")) {
-            offer(person)
+            emit(person)
             cleanUpValMessages()
             Person()
         } else person
@@ -34,9 +34,14 @@ object PersonListStore : RootStore<List<Person>>(emptyList()) {
     val add = handle<Person> { list, person ->
         list + person
     }
+
+    init {
+        //connect the two stores
+        PersonStore.save handledBy add
+    }
 }
 
-fun HtmlElements.details() {
+fun RenderContext.details() {
     val name = PersonStore.sub(L.Person.name)
     val salary = PersonStore.sub(L.Person.salary + Formats.currency)
     val birthday = PersonStore.sub(L.Person.birthday + Formats.date)
@@ -56,18 +61,19 @@ fun HtmlElements.details() {
 
                     //salary
                     div("form-group") {
-                        label(`for` = salary.id) {
-                            text("Salary")
+                        label {
+                            `for`(salary.id)
+                            +"Salary"
                         }
                         div("input-group") {
                             div("input-group-prepend") {
                                 div("input-group-text") { +"$" }
                             }
                             input("form-control", id = salary.id) {
-                                value = salary.data
-                                type = const("number")
-                                step = const("10")
-                                min = const("0")
+                                value(salary.data)
+                                type("number")
+                                step("10")
+                                min("0")
 
                                 changes.values() handledBy salary.update
                             }
@@ -77,12 +83,13 @@ fun HtmlElements.details() {
 
                     //birthday
                     div("form-group") {
-                        label(`for` = birthday.id) {
-                            text("Birthday")
+                        label {
+                            `for`(birthday.id)
+                            +"Birthday"
                         }
                         input("form-control", id = birthday.id) {
-                            value = birthday.data
-                            type = const("date")
+                            value(birthday.data)
+                            type("date")
 
                             changes.values() handledBy birthday.update
                         }
@@ -98,13 +105,14 @@ fun HtmlElements.details() {
                         formInput("City", city, extraClass = "col-md-6")
                     }
                     div("form-group") {
-                        label(`for` = activities.id) {
-                            text("Activities")
+                        label {
+                            `for`(activities.id)
+                            +"Activities"
                         }
                         div(id = activities.id) {
-                            activities.each().render { activity ->
+                            activities.renderEach { activity ->
                                 activityCheckbox(activity)
-                            }.bind()
+                            }
                         }
                         div("message", id = "${activities.id}-message") { }
                     }
@@ -112,12 +120,12 @@ fun HtmlElements.details() {
             }
             div("card-footer") {
                 button("btn btn-primary") {
-                    text("Add")
+                    +"Add"
                     clicks handledBy PersonStore.save
                 }
 
                 button("btn btn-secondary mx-2") {
-                    text("Show data")
+                    +"Show data"
                     attr("data-toggle", "collapse")
                     attr("data-target", "#showData")
                 }
@@ -125,7 +133,7 @@ fun HtmlElements.details() {
                     div("card card-body") {
                         pre {
                             code {
-                                PersonStore.data.map { JSON.stringify(it, space = 2) }.bind()
+                                PersonStore.data.map { JSON.stringify(it, space = 2) }.asText()
                             }
                         }
                     }
@@ -135,31 +143,31 @@ fun HtmlElements.details() {
     }
 }
 
-fun HtmlElements.table() {
+fun RenderContext.table() {
     div("col-12") {
         div("card") {
             h5("card-header") { +"List of Persons" }
             div("card-body") {
                 table("table") {
                     thead("thead-dark") {
-                        th { text("Name") }
-                        th { text("Birthday") }
-                        th { text("Address") }
-                        th { text("Activities") }
+                        th { +"Name" }
+                        th { +"Birthday" }
+                        th { +"Address" }
+                        th { +"Activities" }
                     }
                     tbody {
-                        PersonListStore.data.each().render { person ->
+                        PersonListStore.data.renderEach { person ->
                             val completeAddress = "${person.address.street} ${person.address.number}, " +
                                     "${person.address.postalCode} ${person.address.city}"
                             val selectedActivities = person.activities.filter { it.like }.joinToString { it.name }
 
                             tr {
-                                td { text(person.name) }
-                                td { text(person.birthday.format(DateFormat.FORMAT_DATE)) }
-                                td { text(completeAddress) }
-                                td { text(selectedActivities) }
+                                td { +person.name }
+                                td { +person.birthday.format(DateFormat.FORMAT_DATE) }
+                                td { +completeAddress }
+                                td { +selectedActivities }
                             }
-                        }.bind()
+                        }
                     }
                 }
             }
@@ -187,20 +195,21 @@ fun cleanUpValMessages() {
 }
 
 // helper method for creating form-groups for text input
-fun HtmlElements.formInput(
+fun RenderContext.formInput(
     label: String,
     subStore: Store<String>,
     inputType: String = "text",
     extraClass: String = ""
 ) {
     div("form-group $extraClass") {
-        label(`for` = subStore.id) {
-            text(label)
+        label {
+            `for`(subStore.id)
+            +label
         }
         input("form-control", id = subStore.id) {
-            placeholder = const(label)
-            value = subStore.data
-            type = const(inputType)
+            placeholder(label)
+            value(subStore.data)
+            type(inputType)
 
             changes.values() handledBy subStore.update
         }
@@ -209,19 +218,20 @@ fun HtmlElements.formInput(
 }
 
 // helper method for creating checkboxes for activities
-fun HtmlElements.activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Div {
+fun RenderContext.activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Div {
     val name = activity.sub(L.Activity.name)
     val like = activity.sub(L.Activity.like)
 
     return div("form-check form-check-inline") {
         input("form-check-input", id = activity.id) {
-            type = const("checkbox")
-            checked = like.data
+            type("checkbox")
+            checked(like.data)
 
             changes.states() handledBy like.update
         }
-        label("form-check-label", `for` = activity.id) {
-            name.data.bind()
+        label("form-check-label") {
+            `for`(activity.id)
+            name.data.asText()
         }
     }
 }
@@ -240,9 +250,6 @@ fun main() {
             }
         }
     }.mount("target")
-
-    //connect the two stores
-    PersonStore.save handledBy PersonListStore.add
 
 
     // adding bootstrap css classes to the validated elements

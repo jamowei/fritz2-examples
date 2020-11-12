@@ -2,8 +2,8 @@ package dev.fritz2.examples.todomvc
 
 import dev.fritz2.binding.*
 import dev.fritz2.dom.append
-import dev.fritz2.dom.html.HtmlElements
 import dev.fritz2.dom.html.Keys
+import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.key
 import dev.fritz2.dom.states
@@ -40,7 +40,7 @@ fun main() {
 
         val add = handle<String> { toDos, text ->
             if (text.isNotEmpty())
-                toDos + localStorageEntity.saveOrUpdate(ToDo(text = text))
+                toDos + localStorageEntity.addOrUpdate(ToDo(text = text))
             else toDos
         }
 
@@ -63,9 +63,9 @@ fun main() {
 
     val inputHeader = render {
         header {
-            h1 { text("todos") }
+            h1 { +"todos" }
             input("new-todo") {
-                placeholder = const("What needs to be done?")
+                placeholder("What needs to be done?")
 
                 changes.values().map { domNode.value = ""; it.trim() } handledBy toDos.add
             }
@@ -75,20 +75,21 @@ fun main() {
     val mainSection = render {
         section("main") {
             input("toggle-all", id = "toggle-all") {
-                type = const("checkbox")
-                checked = toDos.allChecked
+                type("checkbox")
+                checked(toDos.allChecked)
 
                 changes.states() handledBy toDos.toggleAll
             }
-            label(`for` = "toggle-all") {
-                text("Mark all as complete")
+            label {
+                `for`("toggle-all")
+                +"Mark all as complete"
             }
             ul("todo-list") {
                 toDos.data.flatMapLatest { all ->
                     router.map { route ->
                         filters[route]?.function?.invoke(all) ?: all
                     }
-                }.each(ToDo::id).render { toDo ->
+                }.renderEach(ToDo::id){ toDo ->
                     val toDoStore = toDos.sub(toDo, ToDo::id)
                     val textStore = toDoStore.sub(L.ToDo.text)
                     val completedStore = toDoStore.sub(L.ToDo.completed)
@@ -96,22 +97,21 @@ fun main() {
 
                     li {
                         attr("data-id", toDoStore.id)
-                        //TODO: better flatmap over editing and completed
-                        classMap = toDoStore.data.combine(editingStore.data) { toDo, isEditing ->
+                        classMap(toDoStore.data.combine(editingStore.data) { toDo, isEditing ->
                             mapOf(
                                 "completed" to toDo.completed,
                                 "editing" to isEditing
                             )
-                        }
+                        })
                         div("view") {
                             input("toggle") {
-                                type = const("checkbox")
-                                checked = completedStore.data
+                                type("checkbox")
+                                checked(completedStore.data)
 
                                 changes.states() handledBy completedStore.update
                             }
                             label {
-                                textStore.data.bind()
+                                textStore.data.asText()
 
                                 dblclicks.map { true } handledBy editingStore.update
                             }
@@ -120,7 +120,7 @@ fun main() {
                             }
                         }
                         input("edit") {
-                            value = textStore.data
+                            value(textStore.data)
                             changes.values() handledBy textStore.update
 
                             editingStore.data.map { isEditing ->
@@ -136,30 +136,30 @@ fun main() {
                             ) handledBy editingStore.update
                         }
                     }
-                }.bind()
+                }
             }
         }
     }
 
-    fun HtmlElements.filter(text: String, route: String) {
+    fun RenderContext.filter(text: String, route: String) {
         li {
             a {
-                className = router.map { if (it == route) "selected" else "" }
-                href = const("#$route")
-                text(text)
+                className(router.map { if (it == route) "selected" else "" })
+                href("#$route")
+                +text
             }
         }
     }
 
     val appFooter = render {
         footer("footer") {
-            className = toDos.empty.map { if (it) "hidden" else "" }
+            className(toDos.empty.map { if (it) "hidden" else "" })
 
             span("todo-count") {
                 strong {
                     toDos.count.map {
                         "$it item${if (it != 1) "s" else ""} left"
-                    }.bind()
+                    }
                 }
             }
 
@@ -167,7 +167,7 @@ fun main() {
                 filters.forEach { filter(it.value.text, it.key) }
             }
             button("clear-completed") {
-                text("Clear completed")
+                +"Clear completed"
 
                 clicks handledBy toDos.clearCompleted
             }
