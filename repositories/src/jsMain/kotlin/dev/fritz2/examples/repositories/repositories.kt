@@ -161,7 +161,7 @@ fun RenderContext.details() {
                 button("btn btn-success") {
                     span {
                         className(EntityStore.running.map {
-                            it?.let { "spinner-border spinner-border-sm mr-2" }.orEmpty()
+                            if(it) "spinner-border spinner-border-sm mr-2" else ""
                         })
                     }
                     EntityStore.isSaved.map { if(it) "Save" else "Add" }.asText()
