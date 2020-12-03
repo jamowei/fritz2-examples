@@ -18,7 +18,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-                implementation("dev.fritz2:core:0.8-SNAPSHOT")
+                implementation("dev.fritz2:core:0.8")
             }
         }
         val jvmMain by getting {

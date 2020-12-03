@@ -14,7 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation("dev.fritz2:core:0.8-SNAPSHOT")
+                implementation("dev.fritz2:core:0.8")
             }
         }
         val jvmMain by getting {

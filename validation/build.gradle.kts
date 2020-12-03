@@ -15,7 +15,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib"))
                 api("com.soywiz.korlibs.klock:klock:1.10.5")
-                implementation("dev.fritz2:core:0.8-SNAPSHOT")
+                implementation("dev.fritz2:core:0.8")
             }
         }
         val jvmMain by getting {
