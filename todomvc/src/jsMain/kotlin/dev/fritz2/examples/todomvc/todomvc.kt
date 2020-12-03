@@ -61,7 +61,7 @@ object ToDosStore : RootStore<List<ToDo>>(emptyList()) {
 fun RenderContext.filter(text: String, route: String) {
     li {
         a {
-            className(router.map { if (it == route) "selected" else "" })
+            className(router.data.map { if (it == route) "selected" else "" })
             href("#$route")
             +text
         }
@@ -97,7 +97,7 @@ fun main() {
             }
             ul("todo-list") {
                 ToDosStore.data.flatMapLatest { all ->
-                    router.map { route ->
+                    router.data.map { route ->
                         filters[route]?.function?.invoke(all) ?: all
                     }
                 }.renderEach(ToDo::id){ toDo ->

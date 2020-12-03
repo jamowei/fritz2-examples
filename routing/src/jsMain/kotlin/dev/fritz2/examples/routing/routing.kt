@@ -45,7 +45,7 @@ fun main() {
                 div("collapse navbar-collapse", id = "navbarContent") {
                     ul("navbar-nav mr-auto") {
                         li("btn nav-item") {
-                            className(router.map {
+                            className(router.data.map {
                                 if (it.containsValue(Pages.home)) "active" else ""
                             })
 
@@ -60,7 +60,7 @@ fun main() {
                             }
                         }
                         li("btn nav-item") {
-                            className(router.map {
+                            className(router.data.map {
                                 if (it.containsValue(Pages.show)) "active" else ""
                             })
 
@@ -76,7 +76,7 @@ fun main() {
                             }
                         }
                         li("btn nav-item") {
-                            className(router.map {
+                            className(router.data.map {
                                 if (it.containsValue(Pages.change)) "active" else ""
                             })
 
