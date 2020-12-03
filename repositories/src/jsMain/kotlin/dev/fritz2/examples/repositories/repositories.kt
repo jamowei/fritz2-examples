@@ -1,8 +1,10 @@
 package dev.fritz2.examples.repositories
 
-import dev.fritz2.binding.*
-import dev.fritz2.dom.html.HtmlElements
+import dev.fritz2.binding.RootStore
+import dev.fritz2.binding.Store
+import dev.fritz2.binding.invoke
 import dev.fritz2.dom.html.Input
+import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.values
@@ -16,7 +18,10 @@ import dev.fritz2.tracking.tracker
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 
 val numberFormat = format({ it.toInt() }, { it.toString() })
 
@@ -41,18 +46,18 @@ object EntityStore : RootStore<Person>(personResource.emptyEntity) {
         localStorage.load(person, id)
     }
 
-    val saveOrUpdate = handleAndOffer<Unit> { person ->
+    val saveOrUpdate = handleAndEmit<Unit> { person ->
         running.track("myTransaction") {
             delay(1500)
             val personWithId =
                 if (person._id == personResource.emptyEntity._id) person.copy(_id = uniqueId()) else person
-            localStorage.saveOrUpdate(personWithId).also { offer(Unit) }
+            localStorage.addOrUpdate(personWithId).also { emit(Unit) }
         }
     }
 
-    val delete = handleAndOffer<Unit> { person ->
+    val delete = handleAndEmit<Unit> { person ->
         history.reset()
-        localStorage.delete(person).also { offer(Unit) }
+        localStorage.delete(person).also { emit(Unit) }
     }
 
     val reset = handle {
@@ -79,7 +84,8 @@ object QueryStore : RootStore<List<Person>>(emptyList()) {
     val delete = handle<String>(execute = localStorage::delete)
 
     init {
-        action() handledBy query
+        EntityStore.trigger handledBy query
+        query()
     }
 }
 
@@ -89,7 +95,7 @@ object QueryStore : RootStore<List<Person>>(emptyList()) {
  */
 @ExperimentalCoroutinesApi
 @ExperimentalStdlibApi
-fun HtmlElements.table() {
+fun RenderContext.table() {
     div("col-12") {
         div("card") {
             h5("card-header") { +"List of Persons" }
@@ -105,7 +111,7 @@ fun HtmlElements.table() {
                         }
                     }
                     tbody {
-                        QueryStore.data.each().render { p ->
+                        QueryStore.data.renderEach { p ->
                             tr {
                                 td { +"...${p._id.takeLast(5)}" }
                                 td { +p.name }
@@ -117,13 +123,13 @@ fun HtmlElements.table() {
                                         clicks.map { p._id } handledBy EntityStore.load
                                     }
                                     button("btn btn-danger ml-2") {
-                                        className = EntityStore.data.map { if (it._id == p._id) "d-none" else "" }
+                                        className(EntityStore.data.map { if (it._id == p._id) "d-none" else "" })
                                         +"Delete"
                                         clicks.map { p._id } handledBy QueryStore.delete
                                     }
                                 }
                             }
-                        }.bind()
+                        }
                     }
                 }
             }
@@ -136,13 +142,13 @@ fun HtmlElements.table() {
  * Details-View
  */
 @ExperimentalCoroutinesApi
-fun HtmlElements.details() {
+fun RenderContext.details() {
     val visibleWhenSaved = EntityStore.isSaved.map { if (it) "" else "d-none" }
 
     div("col-12") {
         div("card") {
             h5("card-header") { EntityStore.data.map {
-                "Persons Details (...${it._id.takeLast(5)})" }.bind()
+                "Persons Details (...${it._id.takeLast(5)})" }.asText()
             }
             div("card-body") {
                 div {
@@ -154,33 +160,33 @@ fun HtmlElements.details() {
             div("card-footer") {
                 button("btn btn-success") {
                     span {
-                        className = EntityStore.running.map {
-                            it?.let { "spinner-border spinner-border-sm mr-2" }.orEmpty()
-                        }
+                        className(EntityStore.running.map {
+                            if(it) "spinner-border spinner-border-sm mr-2" else ""
+                        })
                     }
-                    EntityStore.isSaved.map { if(it) "Save" else "Add" }.bind()
+                    EntityStore.isSaved.map { if(it) "Save" else "Add" }.asText()
 
                     clicks handledBy EntityStore.saveOrUpdate
                 }
                 button("btn btn-danger ml-2") {
-                    className = visibleWhenSaved
+                    className(visibleWhenSaved)
                     +"Delete"
                     clicks handledBy EntityStore.delete
                 }
                 button("btn btn-warning ml-2") {
-                    className = EntityStore.history.combine(EntityStore.data) { history, value ->
+                    className(EntityStore.history.combine(EntityStore.data) { history, value ->
                         history.isNotEmpty() && history.first() != value
-                    }.map { if (it) "" else "d-none" }
+                    }.map { if (it) "" else "d-none" })
                     +"Undo"
                     clicks handledBy EntityStore.undo
                 }
                 button("btn btn-info ml-2") {
-                    className = visibleWhenSaved
+                    className(visibleWhenSaved)
                     +"Close"
                     clicks handledBy EntityStore.reset
                 }
                 button("btn btn-secondary mx-2") {
-                    text("Show data")
+                    +"Show data"
                     attr("data-toggle", "collapse")
                     attr("data-target", "#showData")
                 }
@@ -188,7 +194,7 @@ fun HtmlElements.details() {
                     div("card card-body") {
                         pre {
                             code {
-                                EntityStore.data.map { JSON.stringify(it, space = 2) }.bind()
+                                EntityStore.data.map { JSON.stringify(it, space = 2) }.asText()
                             }
                         }
                     }
@@ -198,23 +204,25 @@ fun HtmlElements.details() {
     }
 }
 
-fun HtmlElements.formGroup(
+fun RenderContext.formGroup(
     label: String,
     store: Store<String>,
     inputType: String = "text",
-    cssClassName: Flow<String> = const(""),
+    cssClassName: Flow<String>? = null,
     handleChanges: Input.(Store<String>) -> Unit = {
         changes.values() handledBy store.update
     }
 ) {
     div("form-group") {
-        className = cssClassName
+        cssClassName?.apply { className(this) }
 
-        label(`for` = store.id) {
+        label {
+            `for`(store.id)
             +label
         }
         input("form-control", id = store.id) {
-            value = store.data
+            type(inputType)
+            value(store.data)
             handleChanges(store)
         }
     }
@@ -234,6 +242,4 @@ fun main() {
             }
         }
     }.mount("target")
-
-    EntityStore.trigger handledBy QueryStore.query
 }

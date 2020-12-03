@@ -4,7 +4,6 @@ plugins {
 }
 
 repositories {
-    maven("https://oss.jfrog.org/artifactory/jfrog-dependencies")
     jcenter()
 }
 
@@ -12,13 +11,14 @@ kotlin {
     jvm()
     js().browser()
 
-    val serializationVersion = "1.0.0-RC"
+    val serializationVersion = "1.0.1"
 
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+                implementation("dev.fritz2:core:0.8")
             }
         }
         val jvmMain by getting {

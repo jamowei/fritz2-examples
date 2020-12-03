@@ -1,9 +1,6 @@
 package dev.fritz2.examples.performance
 
 import dev.fritz2.binding.RootStore
-import dev.fritz2.binding.const
-import dev.fritz2.binding.handledBy
-import dev.fritz2.binding.storeOf
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.values
@@ -20,10 +17,10 @@ fun main() {
 
     val startStore = object : RootStore<Int>(1000, "start") {
 
-        val start = handleAndOffer<Int> { maxCount ->
+        val start = handleAndEmit<Int> { maxCount ->
             for (i in 0..maxCount) {
                 delay(1)
-                offer(i)
+                emit(i)
             }
             maxCount
         }
@@ -33,9 +30,11 @@ fun main() {
         }
     }
 
-    val countStore = storeOf(0)
-
-    startStore.start handledBy countStore.update
+    val countStore = object : RootStore<Int>(0) {
+        init {
+            startStore.start handledBy update
+        }
+    }
 
     val isFinished = startStore.data
         .combine(countStore.data) { max, current ->
@@ -46,10 +45,13 @@ fun main() {
         div("form-group") {
 
             div("form-group") {
-                label(`for` = startStore.id) { +"Max iterations" }
+                label {
+                    `for`(startStore.id)
+                    +"Max iterations"
+                }
                 input("form-control", id = startStore.id) {
-                    type = const("number")
-                    value = startStore.data.map { it.toString() }
+                    type("number")
+                    value(startStore.data.asString())
 
                     changes.values().map { it.toInt() } handledBy startStore.update
                 }
@@ -60,14 +62,16 @@ fun main() {
                     +"number of updates: $it"
                     clicks handledBy startStore.dummyHandler //register dummy handler
                 }
-            }.bind(preserveOrder = true)
+            }
 
             div("progress") {
                 div("progress-bar") {
                     attr("role", "progressbar")
-                    style = countStore.data.sample(1000).combine(startStore.data) { count, maxIterations ->
+                    inlineStyle(countStore.data
+                        .sample(1000)
+                        .combine(startStore.data) { count, maxIterations ->
                         "width: ${(count.toDouble() / maxIterations) * 100}%;"
-                    }
+                    })
                 }
             }
 
@@ -75,7 +79,7 @@ fun main() {
 
             button("btn btn-primary mr-2") {
                 +"Start"
-                className = isFinished.map { if(it) ".d-none" else "" }
+                className(isFinished.map { if(it) ".d-none" else "" })
 
                 clicks handledBy startStore.start
             }

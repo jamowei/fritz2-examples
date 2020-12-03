@@ -1,10 +1,11 @@
 plugins {
-    id("dev.fritz2.fritz2-gradle") version "0.7.1" apply false
-    kotlin("plugin.serialization") version "1.4.0" apply false
+    id("dev.fritz2.fritz2-gradle") version "0.8" apply false
+    kotlin("plugin.serialization") version "1.4.10" apply false
 }
 
-subprojects {
+allprojects {
     repositories {
-        mavenLocal()
+        jcenter()
+        maven("https://dl.bintray.com/jwstegemann/fritz2")
     }
 }

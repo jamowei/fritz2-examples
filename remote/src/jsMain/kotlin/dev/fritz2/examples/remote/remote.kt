@@ -1,13 +1,11 @@
 package dev.fritz2.examples.remote
 
 import dev.fritz2.binding.RootStore
-import dev.fritz2.binding.const
-import dev.fritz2.binding.handledBy
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.values
 import dev.fritz2.remote.getBody
-import dev.fritz2.remote.remote
+import dev.fritz2.remote.http
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
@@ -17,7 +15,7 @@ fun main() {
 
     val userStore = object : RootStore<String>("") {
 
-        val users = remote("https://reqres.in/api/users")
+        val users = http("https://reqres.in/api/users")
 
         val loadAllUsers = handle {
             users.get().getBody()
@@ -43,10 +41,10 @@ fun main() {
         div {
             div("form-group") {
                 label("load-user") {
-                    text("Load user by id")
+                    +"Load user by id"
                 }
                 input("form-control", id = "load-user") {
-                    placeholder = const("Enter user id")
+                    placeholder("Enter user id")
                     changes.values() handledBy userStore.loadUserById
                 }
             }
@@ -55,10 +53,10 @@ fun main() {
 
             div("form-group") {
                 label("save-user") {
-                    text("Save user")
+                    +"Save user"
                 }
                 input("form-control", id = "save-user") {
-                    placeholder = const("Enter new user name")
+                    placeholder("Enter new user name")
                     changes.values() handledBy userStore.saveUserWithName
                 }
             }
@@ -67,17 +65,17 @@ fun main() {
 
             div("form-group") {
                 button("btn btn-primary") {
-                    text("Load all users")
+                    +"Load all users"
                     clicks handledBy userStore.loadAllUsers
                 }
             }
             div("card card-body") {
                 h6("card-title") {
-                    text("User store data")
+                    +"User store data"
                 }
                 pre("text-wrap") {
                     code {
-                        userStore.data.bind()
+                        userStore.data.asText()
                     }
                 }
             }

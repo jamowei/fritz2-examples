@@ -1,7 +1,5 @@
 package dev.fritz2.examples.routing
 
-import dev.fritz2.binding.const
-import dev.fritz2.binding.handledBy
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.mount
 import dev.fritz2.dom.selectedText
@@ -34,8 +32,8 @@ fun main() {
         div {
             nav("navbar navbar-expand-lg navbar-light bg-light") {
                 a("navbar-brand") {
-                    text("Routing")
-                    href = const("/")
+                    +"Routing"
+                    href("/")
                 }
                 button("navbar-toggler") {
                     attr("data-toggle", "collapse")
@@ -47,49 +45,49 @@ fun main() {
                 div("collapse navbar-collapse", id = "navbarContent") {
                     ul("navbar-nav mr-auto") {
                         li("btn nav-item") {
-                            className = router.map {
-                                if(it.containsValue(Pages.home)) "active" else ""
-                            }
+                            className(router.data.map {
+                                if (it.containsValue(Pages.home)) "active" else ""
+                            })
 
                             a("nav-link") {
-                                text(Pages.home)
+                                +Pages.home
 
                                 clicks.map {
                                     mapOf(
-                                        "page" to Pages.home
+                                            "page" to Pages.home
                                     )
                                 } handledBy router.navTo
                             }
                         }
                         li("btn nav-item") {
-                            className = router.map {
-                                if(it.containsValue(Pages.show)) "active" else ""
-                            }
+                            className(router.data.map {
+                                if (it.containsValue(Pages.show)) "active" else ""
+                            })
 
                             a("nav-link") {
-                                text(Pages.show)
+                                +Pages.show
 
                                 clicks.map {
                                     mapOf(
-                                        "page" to Pages.show,
-                                        "extra" to "extra text"
+                                            "page" to Pages.show,
+                                            "extra" to "extra text"
                                     )
                                 } handledBy router.navTo
                             }
                         }
                         li("btn nav-item") {
-                            className = router.map {
-                                if(it.containsValue(Pages.change)) "active" else ""
-                            }
+                            className(router.data.map {
+                                if (it.containsValue(Pages.change)) "active" else ""
+                            })
 
                             a("nav-link") {
-                                text(Pages.change)
+                                +Pages.change
 
                                 clicks.map {
                                     mapOf(
-                                        "page" to Pages.change,
-                                        "debug" to false.toString(),
-                                        "role" to Roles.anonymous
+                                            "page" to Pages.change,
+                                            "debug" to false.toString(),
+                                            "role" to Roles.anonymous
                                     )
                                 } handledBy router.navTo
                             }
@@ -98,79 +96,75 @@ fun main() {
                 }
             }
             div("card") {
-                router.select("page") { (page, params) ->
+                router.select("page").renderElement { (page, params) ->
                     when (page) {
-                        Pages.home -> render {
+                        Pages.home ->
                             div("card-body") {
                                 h5("card-title") {
-                                    text(Pages.home)
+                                    +Pages.home
                                 }
                                 p("card-text") {
-                                    text(
-                                        """
-                                        |Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                                    +"""|Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
                                         |sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
                                         |sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
                                         |Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.""".trimMargin()
-                                    )
                                 }
                             }
-                        }
-                        Pages.show -> render {
+                        Pages.show ->
                             div("card-body") {
                                 h5("card-title") {
-                                    text(Pages.show)
+                                    +Pages.show
                                 }
                                 div("form-group") {
                                     label {
-                                        text("Extra parameter")
+                                        +"Extra parameter"
                                     }
                                     div("form-control") {
-                                        text(params["extra"] ?: "")
+                                        +(params["extra"] ?: "")
                                         attr("readonly", "true")
                                     }
                                 }
                             }
-                        }
-                        Pages.change -> render {
+                        Pages.change ->
                             div("card-body") {
                                 h5("card-title") {
-                                    text(Pages.change)
+                                    +Pages.change
                                 }
                                 div("form-group") {
                                     label {
-                                        text("Debug")
+                                        +"Debug"
                                     }
                                     div("form-check") {
                                         input("form-check-input", id = "debug") {
-                                            type = const("checkbox")
-                                            checked = const(params["debug"]?.toBoolean() ?: false)
+                                            type("checkbox")
+                                            checked(params["debug"]?.toBoolean() ?: false)
 
                                             changes.states().map { checked ->
                                                 params.plus("debug" to checked.toString())
                                             } handledBy router.navTo
                                         }
-                                        label("form-check-label", `for` = "debug") {
-                                            text("enable debug flag")
+                                        label("form-check-label") {
+                                            `for`("debug")
+                                            +"enable debug flag"
                                         }
                                     }
                                 }
                                 div("form-group") {
                                     label {
-                                        text("Role")
+                                        +"Role"
                                     }
                                     select("form-control") {
                                         option {
-                                            text(Roles.anonymous)
-                                            selected = const(params["role"] == Roles.anonymous)
+                                            +Roles.anonymous
+                                            selected(params["role"] == Roles.anonymous)
                                         }
                                         option {
-                                            text(Roles.user)
-                                            selected = const(params["role"] == Roles.user)
+                                            +Roles.user
+                                            selected(params["role"] == Roles.user)
                                         }
                                         option {
-                                            text(Roles.admin)
-                                            selected = const(params["role"] == Roles.admin)
+                                            +Roles.admin
+                                            selected(params["role"] == Roles.admin)
                                         }
 
                                         changes.selectedText().map { text ->
@@ -179,19 +173,17 @@ fun main() {
                                     }
                                 }
                             }
-                        }
-                        else -> render {
+                        else ->
                             div("card-body") {
                                 h5("card-title") {
-                                    text("Page not found")
+                                    +"Page not found"
                                 }
                                 p("card-text") {
-                                    text("""¯\_(ツ)_/¯""")
+                                    +"""¯\_(ツ)_/¯"""
                                 }
                             }
-                        }
                     }
-                }.bind()
+                }
             }
         }
     }.mount("target")
