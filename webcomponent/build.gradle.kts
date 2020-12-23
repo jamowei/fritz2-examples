@@ -1,14 +1,13 @@
 plugins {
+    kotlin("multiplatform")
     id("dev.fritz2.fritz2-gradle")
 }
 
 repositories {
-    mavenLocal()
-//    jcenter()
+    jcenter()
 }
 
 kotlin {
-    jvm()
     js().browser()
 
     sourceSets {
@@ -16,10 +15,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib"))
                 implementation("dev.fritz2:core:0.8")
-            }
-        }
-        val jvmMain by getting {
-            dependencies {
             }
         }
         val jsMain by getting {

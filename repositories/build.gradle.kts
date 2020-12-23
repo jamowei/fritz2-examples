@@ -1,4 +1,5 @@
 plugins {
+    kotlin("multiplatform")
     id("dev.fritz2.fritz2-gradle")
     kotlin("plugin.serialization")
 }
