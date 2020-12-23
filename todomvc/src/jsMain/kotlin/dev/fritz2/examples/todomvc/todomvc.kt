@@ -33,8 +33,7 @@ object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
     private val query = localStorageQuery<ToDo, String, Unit>(toDoResource, persistencePrefix)
 
     val save = handle<ToDo> { toDos, new ->
-        if (new.text.isNotBlank())
-            query.addOrUpdate(toDos, new)
+        if (new.text.isNotBlank()) query.addOrUpdate(toDos, new)
         else toDos
     }
 
@@ -61,20 +60,6 @@ object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
 
     init {
         handle(execute = query::query)()
-    }
-}
-
-@ExperimentalStdlibApi
-class ToDoStore(toDo: ToDo): RootStore<ToDo>(toDo) {
-    private val entity = localStorageEntity(toDoResource, persistencePrefix)
-
-    private val save = handle { old, new: ToDo ->
-        if (new.text.isNotBlank()) ToDoListStore.save(new)
-        old
-    }
-
-    init {
-        syncBy(save)
     }
 }
 
@@ -120,7 +105,8 @@ fun main() {
                 ToDoListStore.data.combine(router.data) { all, route ->
                     filters[route]?.function?.invoke(all) ?: all
                 }.renderEach(ToDo::id){ toDo ->
-                    val toDoStore = ToDoStore(toDo)
+                    val toDoStore = storeOf(toDo)
+                    toDoStore.syncBy(ToDoListStore.save)
                     val textStore = toDoStore.sub(L.ToDo.text)
                     val completedStore = toDoStore.sub(L.ToDo.completed)
 
