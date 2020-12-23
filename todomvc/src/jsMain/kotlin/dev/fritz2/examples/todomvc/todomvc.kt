@@ -13,49 +13,69 @@ import dev.fritz2.repositories.localstorage.localStorageEntity
 import dev.fritz2.repositories.localstorage.localStorageQuery
 import dev.fritz2.routing.router
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
 data class Filter(val text: String, val function: (List<ToDo>) -> List<ToDo>)
 
 val filters = mapOf(
-    "/" to Filter("All") { it },
-    "/active" to Filter("Active") { toDos -> toDos.filter { !it.completed } },
-    "/completed" to Filter("Completed") { toDos -> toDos.filter { it.completed } }
+    "all" to Filter("All") { it },
+    "active" to Filter("Active") { toDos -> toDos.filter { !it.completed } },
+    "completed" to Filter("Completed") { toDos -> toDos.filter { it.completed } }
 )
 
-val persistencePrefix = "todos-"
-
+const val persistencePrefix = "todos-"
 val toDoResource = Resource(ToDo::id, ToDoSerializer, ToDo(text = ""))
+val router = router("all")
 
-val router = router("/")
+@ExperimentalStdlibApi
+object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
 
-object ToDosStore : RootStore<List<ToDo>>(emptyList()) {
+    private val query = localStorageQuery<ToDo, String, Unit>(toDoResource, persistencePrefix)
 
-    val localStorageEntity = localStorageEntity(toDoResource, "todos-")
-    val localStorageQuery = localStorageQuery<ToDo, String, Unit>(toDoResource, "todos-")
-
-    val add = handle<String> { toDos, text ->
-        if (text.isNotEmpty())
-            toDos + localStorageEntity.addOrUpdate(ToDo(text = text))
+    val save = handle<ToDo> { toDos, new ->
+        if (new.text.isNotBlank())
+            query.addOrUpdate(toDos, new)
         else toDos
     }
 
     val remove = handle<String> { toDos, id ->
-        localStorageQuery.delete(toDos, id)
+        query.delete(toDos, id)
     }
 
-    val toggleAll = handle<Boolean> { toDos, toggle ->
-        toDos.map { it.copy(completed = toggle) }
+    val toggleAll = handle { toDos, toggle: Boolean ->
+        query.updateMany(toDos, toDos.mapNotNull {
+            if(it.completed != toggle) it.copy(completed = toggle) else null
+        })
     }
 
     val clearCompleted = handle { toDos ->
-        toDos.filterNot { it.completed }
+        toDos.filter(ToDo::completed).let { completed ->
+            console.info("delete: ${completed.joinToString()}")
+            query.delete(toDos, completed.map(ToDo::id))
+        }
     }
 
     val count = data.map { todos -> todos.count { !it.completed } }.distinctUntilChanged()
     val empty = data.map { it.isEmpty() }.distinctUntilChanged()
     val allChecked = data.map { todos -> todos.isNotEmpty() && todos.all { it.completed } }.distinctUntilChanged()
+
+    init {
+        handle(execute = query::query)()
+    }
+}
+
+@ExperimentalStdlibApi
+class ToDoStore(toDo: ToDo): RootStore<ToDo>(toDo) {
+    private val entity = localStorageEntity(toDoResource, persistencePrefix)
+
+    private val save = handle { old, new: ToDo ->
+        if (new.text.isNotBlank()) ToDoListStore.save(new)
+        old
+    }
+
+    init {
+        syncBy(save)
+    }
 }
 
 fun RenderContext.filter(text: String, route: String) {
@@ -68,8 +88,8 @@ fun RenderContext.filter(text: String, route: String) {
     }
 }
 
+@ExperimentalStdlibApi
 @ExperimentalCoroutinesApi
-@FlowPreview
 fun main() {
 
     val inputHeader = render {
@@ -77,8 +97,9 @@ fun main() {
             h1 { +"todos" }
             input("new-todo") {
                 placeholder("What needs to be done?")
+                autofocus(true)
 
-                changes.values().map { domNode.value = ""; it.trim() } handledBy ToDosStore.add
+                changes.values().map { domNode.value = ""; ToDo(text = it.trim()) } handledBy ToDoListStore.save
             }
         }
     }
@@ -87,23 +108,22 @@ fun main() {
         section("main") {
             input("toggle-all", id = "toggle-all") {
                 type("checkbox")
-                checked(ToDosStore.allChecked)
+                checked(ToDoListStore.allChecked)
 
-                changes.states() handledBy ToDosStore.toggleAll
+                changes.states() handledBy ToDoListStore.toggleAll
             }
             label {
                 `for`("toggle-all")
                 +"Mark all as complete"
             }
             ul("todo-list") {
-                ToDosStore.data.flatMapLatest { all ->
-                    router.data.map { route ->
-                        filters[route]?.function?.invoke(all) ?: all
-                    }
+                ToDoListStore.data.combine(router.data) { all, route ->
+                    filters[route]?.function?.invoke(all) ?: all
                 }.renderEach(ToDo::id){ toDo ->
-                    val toDoStore = ToDosStore.sub(toDo, ToDo::id)
+                    val toDoStore = ToDoStore(toDo)
                     val textStore = toDoStore.sub(L.ToDo.text)
                     val completedStore = toDoStore.sub(L.ToDo.completed)
+
                     val editingStore = storeOf(false)
 
                     li {
@@ -127,19 +147,18 @@ fun main() {
                                 dblclicks.map { true } handledBy editingStore.update
                             }
                             button("destroy") {
-                                clicks.events.map { toDo.id } handledBy ToDosStore.remove
+                                clicks.events.map { toDo.id } handledBy ToDoListStore.remove
                             }
                         }
                         input("edit") {
                             value(textStore.data)
                             changes.values() handledBy textStore.update
 
-                            editingStore.data.map { isEditing ->
-                                if (isEditing) domNode.apply {
-                                    focus()
-                                    select()
+                            editingStore.data.onEach { isEditing ->
+                                if (isEditing) {
+                                    domNode.focus()
+                                    domNode.select()
                                 }
-                                isEditing.toString()
                             }.watch()
                             merge(
                                 blurs.map { false },
@@ -154,11 +173,11 @@ fun main() {
 
     val appFooter = render {
         footer("footer") {
-            className(ToDosStore.empty.map { if (it) "hidden" else "" })
+            className(ToDoListStore.empty.map { if (it) "hidden" else "" })
 
             span("todo-count") {
                 strong {
-                    ToDosStore.count.map {
+                    ToDoListStore.count.map {
                         "$it item${if (it != 1) "s" else ""} left"
                     }
                 }
@@ -170,7 +189,7 @@ fun main() {
             button("clear-completed") {
                 +"Clear completed"
 
-                clicks handledBy ToDosStore.clearCompleted
+                clicks handledBy ToDoListStore.clearCompleted
             }
         }
     }
