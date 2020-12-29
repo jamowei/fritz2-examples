@@ -19,10 +19,10 @@ The following examples are available:
 ### Running locally
 To run our examples locally, clone this repository and then execute
 ```
-fritz2-examples> ./gradlew <example-folder-name>:jsRun
+fritz2-examples> ./gradlew <example-folder-name>:jsBrowserRun
 ``` 
-You can add the `--continuous` flag to enable the automatic re-compiling of 
-your changes and reloading your browser page.
+You can add the `-t` flag to enable the automatic re-compiling of 
+your changes and reloading your browser.
 
 ### Create your own project
 For an easy start into fritz2, check out our 
