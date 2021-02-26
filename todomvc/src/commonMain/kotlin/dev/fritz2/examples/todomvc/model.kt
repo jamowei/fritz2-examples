@@ -1,8 +1,9 @@
 package dev.fritz2.examples.todomvc
 
 import dev.fritz2.identification.uniqueId
+import dev.fritz2.lenses.IdProvider
 import dev.fritz2.lenses.Lenses
-import dev.fritz2.serialization.Serializer
+import dev.fritz2.resource.Resource
 
 @Lenses
 data class ToDo(
@@ -11,23 +12,24 @@ data class ToDo(
     val completed: Boolean = false
 )
 
-object ToDoSerializer : Serializer<ToDo, String> {
-    override fun read(msg: String): ToDo {
-        val split = msg.split(';')
+object ToDoResource : Resource<ToDo, String> {
+    override val idProvider: IdProvider<ToDo, String> = ToDo::id
+
+    override fun deserialize(source: String): ToDo {
+        val split = source.split(';')
         return ToDo(split[0], split[1], split[2].toBoolean())
     }
 
-    override fun readList(msg: String): List<ToDo> {
+    override fun deserializeList(msg: String): List<ToDo> {
         val split = msg.split("|")
-        return split.map { read(it) }
+        return split.map { deserialize(it) }
     }
 
-    override fun write(item: ToDo): String {
+    override fun serialize(item: ToDo): String {
         return "${item.id};${item.text};${item.completed}"
     }
 
-    override fun writeList(items: List<ToDo>): String {
-        return items.joinToString("|") { write(it) }
+    override fun serializeList(items: List<ToDo>): String {
+        return items.joinToString("|") { serialize(it) }
     }
-
 }

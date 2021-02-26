@@ -7,7 +7,6 @@ import dev.fritz2.binding.SubStore
 import dev.fritz2.dom.html.Div
 import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.dom.html.render
-import dev.fritz2.dom.mount
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,7 +22,7 @@ object PersonStore : RootStore<Person>(Person(), id = "person") {
 }
 
 object PersonListStore : RootStore<List<Person>>(emptyList(), id = "list") {
-    val add: SimpleHandler<Person> = handle { list, person ->
+    private val add: SimpleHandler<Person> = handle { list, person ->
         list + person
     }
 
@@ -171,7 +170,7 @@ fun RenderContext.activityCheckbox(activity: SubStore<Person, List<Activity>, Ac
 @FlowPreview
 fun main() {
 
-    render {
+    render("#target") {
         section {
             div("row") {
                 details()
@@ -180,5 +179,5 @@ fun main() {
                 table()
             }
         }
-    }.mount("target")
+    }
 }
