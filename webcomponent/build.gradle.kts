@@ -4,7 +4,7 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
+    mavenCentral()
     jcenter()
 }
 
@@ -14,7 +14,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
                 implementation("dev.fritz2:core:0.9-SNAPSHOT")
             }
         }
