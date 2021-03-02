@@ -11,9 +11,11 @@ repositories {
 
 kotlin {
     jvm()
-    js().browser()
+    js(IR) {
+        browser()
+    }.binaries.executable()
 
-    val serializationVersion = "1.0.1"
+    val serializationVersion = "1.1.0"
 
     sourceSets {
         val commonMain by getting {

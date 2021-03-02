@@ -6,7 +6,7 @@ plugins {
 
 allprojects {
     repositories {
-        mavenLocal() //FIXME: remove before release
+        maven("https://oss.jfrog.org/artifactory/jfrog-dependencies") //FIXME: remove before release
         mavenCentral()
         jcenter()
         maven("https://dl.bintray.com/jwstegemann/fritz2")
