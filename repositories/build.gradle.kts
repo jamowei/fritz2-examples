@@ -20,7 +20,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("dev.fritz2:core:0.9-SNAPSHOT")
+                implementation("dev.fritz2:core:0.9")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
         }
