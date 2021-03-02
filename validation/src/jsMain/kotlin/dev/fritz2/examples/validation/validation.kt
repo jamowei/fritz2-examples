@@ -1,6 +1,5 @@
 package dev.fritz2.examples.validation
 
-import com.soywiz.klock.DateFormat
 import dev.fritz2.binding.*
 import dev.fritz2.dom.html.Div
 import dev.fritz2.dom.html.RenderContext
@@ -162,7 +161,7 @@ fun RenderContext.table() {
 
                             tr {
                                 td { +person.name }
-                                td { +person.birthday.format(DateFormat.FORMAT_DATE) }
+                                td { +person.birthday.toString() }
                                 td { +completeAddress }
                                 td { +selectedActivities }
                             }
@@ -252,7 +251,7 @@ fun main() {
 
 
     // adding bootstrap css classes to the validated elements
-    PersonStore.validator.isValid.combine(PersonStore.validator.msgs) { isValid, msgs ->
+    PersonStore.validator.isValid.combine(PersonStore.validator.data) { isValid, msgs ->
         // cleanup validation
         cleanUpValMessages()
 
