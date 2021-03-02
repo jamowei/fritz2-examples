@@ -20,8 +20,8 @@ object ToDoResource : Resource<ToDo, String> {
         return ToDo(split[0], split[1], split[2].toBoolean())
     }
 
-    override fun deserializeList(msg: String): List<ToDo> {
-        val split = msg.split("|")
+    override fun deserializeList(source: String): List<ToDo> {
+        val split = source.split("|")
         return split.map { deserialize(it) }
     }
 
