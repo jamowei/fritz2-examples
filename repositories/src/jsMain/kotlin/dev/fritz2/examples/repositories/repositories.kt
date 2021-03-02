@@ -70,7 +70,7 @@ object EntityStore : RootStore<Person>(Person()) {
 object QueryStore : RootStore<List<Person>>(emptyList()) {
     private val localStorage = localStorageQuery<Person, String, Unit>(PersonResource, personPrefix)
 
-    val query = handle { localStorage.query(Unit) }
+    private val query = handle { localStorage.query(Unit) }
     val delete = handle<String> { list, id ->
         localStorage.delete(list, id)
     }
@@ -152,7 +152,7 @@ fun RenderContext.details() {
             div("card-footer") {
                 button("btn btn-success") {
                     span {
-                        className(EntityStore.running.map {
+                        className(EntityStore.running.data.map {
                             if(it) "spinner-border spinner-border-sm mr-2" else ""
                         })
                     }
@@ -166,7 +166,7 @@ fun RenderContext.details() {
                     clicks handledBy EntityStore.delete
                 }
                 button("btn btn-warning ml-2") {
-                    className(EntityStore.history.combine(EntityStore.data) { history, value ->
+                    className(EntityStore.history.data.combine(EntityStore.data) { history, value ->
                         history.isNotEmpty() && history.first() != value
                     }.map { if (it) "" else "d-none" })
                     +"Undo"
