@@ -1,23 +1,13 @@
 package dev.fritz2.examples.gettingstarted
 
-import dev.fritz2.binding.RootStore
+import dev.fritz2.binding.storeOf
 import dev.fritz2.dom.html.render
-import dev.fritz2.dom.mount
 import dev.fritz2.dom.values
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 fun main() {
+    val store = storeOf("")
 
-    val store = object : RootStore<String>("", id = "model") {
-        val addADot = handle { model ->
-            "$model."
-        }
-    }
-
-    val gettingstarted = render {
+    render("#target") {
         div {
             div("form-group") {
                 label {
@@ -27,7 +17,6 @@ fun main() {
                 input("form-control", id = store.id) {
                     placeholder("Add some input")
                     value(store.data)
-
                     changes.values() handledBy store.update
                 }
             }
@@ -43,11 +32,9 @@ fun main() {
             div("form-group") {
                 button("btn btn-primary") {
                     +"Add a dot"
-                    clicks handledBy store.addADot
+                    clicks handledBy store.handle { "$it." }
                 }
             }
         }
     }
-
-    gettingstarted.mount("target")
 }

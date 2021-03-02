@@ -1,11 +1,9 @@
 package dev.fritz2.examples.validation
 
-import com.soywiz.klock.DateFormat
 import dev.fritz2.binding.*
 import dev.fritz2.dom.html.Div
 import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.dom.html.render
-import dev.fritz2.dom.mount
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
 import kotlinx.browser.document
@@ -31,7 +29,7 @@ object PersonStore : RootStore<Person>(Person()) {
 }
 
 object PersonListStore : RootStore<List<Person>>(emptyList()) {
-    val add = handle<Person> { list, person ->
+    private val add = handle<Person> { list, person ->
         list + person
     }
 
@@ -163,7 +161,7 @@ fun RenderContext.table() {
 
                             tr {
                                 td { +person.name }
-                                td { +person.birthday.format(DateFormat.FORMAT_DATE) }
+                                td { +person.birthday.toString() }
                                 td { +completeAddress }
                                 td { +selectedActivities }
                             }
@@ -240,7 +238,7 @@ fun RenderContext.activityCheckbox(activity: SubStore<Person, List<Activity>, Ac
 @FlowPreview
 fun main() {
 
-    render {
+    render("#target") {
         section {
             div("row") {
                 details()
@@ -249,11 +247,11 @@ fun main() {
                 table()
             }
         }
-    }.mount("target")
+    }
 
 
     // adding bootstrap css classes to the validated elements
-    PersonStore.validator.isValid.combine(PersonStore.validator.msgs) { isValid, msgs ->
+    PersonStore.validator.isValid.combine(PersonStore.validator.data) { isValid, msgs ->
         // cleanup validation
         cleanUpValMessages()
 

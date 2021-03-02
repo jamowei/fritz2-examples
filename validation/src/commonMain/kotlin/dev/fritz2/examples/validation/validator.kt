@@ -1,11 +1,10 @@
 package dev.fritz2.examples.validation
 
-import com.soywiz.klock.Date
-import com.soywiz.klock.DateTime
 import dev.fritz2.identification.inspect
 import dev.fritz2.lenses.Lens
 import dev.fritz2.validation.ValidationMessage
 import dev.fritz2.validation.Validator
+import kotlinx.datetime.*
 
 enum class Status(val inputClass: String, val messageClass: String) {
     Valid("is-valid", "valid-feedback"),
@@ -39,19 +38,20 @@ class PersonValidator : Validator<Person, Message, String>() {
 
         // validate the birthday
         val birthday = inspector.sub(L.Person.birthday)
+        val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
         when {
-            birthday.data == Date(1900, 1, 1) -> {
+            birthday.data == LocalDate(1900, 1, 1) -> {
                 msgs.add(Message(birthday.id, Status.Invalid, "Please provide a birthday"))
             }
             birthday.data.year < 1900 -> {
                 msgs.add(Message(birthday.id, Status.Invalid, "Its a bit to old"))
             }
-            birthday.data.year > DateTime.now().yearInt -> {
+            birthday.data.year > today.year -> {
                 msgs.add(Message(birthday.id, Status.Invalid, "Cannot be in future"))
             }
             else -> {
-                val age = DateTime.now().let {
-                    val years = it.yearInt - birthday.data.year
+                val age = today.let {
+                    val years = it.year - birthday.data.year
                     if(birthday.data.dayOfYear >= it.dayOfYear) years - 1 else years
                 }
                 msgs.add(Message(birthday.id, Status.Valid, "Age is $age"))

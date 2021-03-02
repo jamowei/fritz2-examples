@@ -1,25 +1,27 @@
 plugins {
     kotlin("multiplatform")
-    id("dev.fritz2.fritz2-gradle")
     kotlin("plugin.serialization")
+    id("dev.fritz2.fritz2-gradle")
 }
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
 kotlin {
     jvm()
-    js().browser()
+    js(IR) {
+        browser()
+    }.binaries.executable()
 
-    val serializationVersion = "1.0.1"
+    val serializationVersion = "1.1.0"
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
+                implementation("dev.fritz2:core:0.9")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-                implementation("dev.fritz2:core:0.8")
             }
         }
         val jvmMain by getting {

@@ -4,18 +4,20 @@ plugins {
 }
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
 kotlin {
     jvm()
-    js().browser()
+    js(IR) {
+        browser()
+    }.binaries.executable()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
-                implementation("dev.fritz2:core:0.8")
+                implementation("dev.fritz2:core:0.9")
             }
         }
         val jvmMain by getting {

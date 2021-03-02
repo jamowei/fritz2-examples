@@ -2,7 +2,6 @@ package dev.fritz2.examples.performance
 
 import dev.fritz2.binding.RootStore
 import dev.fritz2.dom.html.render
-import dev.fritz2.dom.mount
 import dev.fritz2.dom.values
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -41,7 +40,7 @@ fun main() {
             max == current
         }
 
-    render {
+    render("#target") {
         div("form-group") {
 
             div("form-group") {
@@ -90,6 +89,5 @@ fun main() {
             }
 
         }
-    }.mount("target")
-
+    }
 }

@@ -4,19 +4,22 @@ plugins {
 }
 
 repositories {
+    mavenCentral()
     jcenter()
+    maven("https://kotlin.bintray.com/kotlinx/")
 }
 
 kotlin {
     jvm()
-    js().browser()
+    js(IR) {
+        browser()
+    }.binaries.executable()
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
-                api("com.soywiz.korlibs.klock:klock:1.10.5")
-                implementation("dev.fritz2:core:0.8")
+                implementation("dev.fritz2:core:0.9")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
             }
         }
         val jvmMain by getting {

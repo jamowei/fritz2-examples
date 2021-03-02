@@ -2,7 +2,6 @@ package dev.fritz2.examples.remote
 
 import dev.fritz2.binding.RootStore
 import dev.fritz2.dom.html.render
-import dev.fritz2.dom.mount
 import dev.fritz2.dom.values
 import dev.fritz2.remote.getBody
 import dev.fritz2.remote.http
@@ -37,7 +36,7 @@ fun main() {
         }
     }
 
-    render {
+    render("#target") {
         div {
             div("form-group") {
                 label("load-user") {
@@ -80,5 +79,5 @@ fun main() {
                 }
             }
         }
-    }.mount("target")
+    }
 }

@@ -1,15 +1,12 @@
 package dev.fritz2.examples.todomvc
 
 import dev.fritz2.binding.*
-import dev.fritz2.dom.append
 import dev.fritz2.dom.html.Keys
 import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.key
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
-import dev.fritz2.repositories.Resource
-import dev.fritz2.repositories.localstorage.localStorageEntity
 import dev.fritz2.repositories.localstorage.localStorageQuery
 import dev.fritz2.routing.router
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,25 +21,27 @@ val filters = mapOf(
 )
 
 const val persistencePrefix = "todos-"
-val toDoResource = Resource(ToDo::id, ToDoSerializer, ToDo(text = ""))
+//val toDoResource = Resource(ToDo::id, ToDoSerializer, ToDo(text = ""))
 val router = router("all")
 
 @ExperimentalStdlibApi
 object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
 
-    private val query = localStorageQuery<ToDo, String, Unit>(toDoResource, persistencePrefix)
+    private val localStorage = localStorageQuery<ToDo, String, Unit>(ToDoResource, persistencePrefix)
+
+    private val query = handle { localStorage.query(Unit) }
 
     val save = handle<ToDo> { toDos, new ->
-        if (new.text.isNotBlank()) query.addOrUpdate(toDos, new)
+        if (new.text.isNotBlank()) localStorage.addOrUpdate(toDos, new)
         else toDos
     }
 
     val remove = handle<String> { toDos, id ->
-        query.delete(toDos, id)
+        localStorage.delete(toDos, id)
     }
 
     val toggleAll = handle { toDos, toggle: Boolean ->
-        query.updateMany(toDos, toDos.mapNotNull {
+        localStorage.updateMany(toDos, toDos.mapNotNull {
             if(it.completed != toggle) it.copy(completed = toggle) else null
         })
     }
@@ -50,7 +49,7 @@ object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
     val clearCompleted = handle { toDos ->
         toDos.filter(ToDo::completed).let { completed ->
             console.info("delete: ${completed.joinToString()}")
-            query.delete(toDos, completed.map(ToDo::id))
+            localStorage.delete(toDos, completed.map(ToDo::id))
         }
     }
 
@@ -59,7 +58,7 @@ object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
     val allChecked = data.map { todos -> todos.isNotEmpty() && todos.all { it.completed } }.distinctUntilChanged()
 
     init {
-        handle(execute = query::query)()
+        query()
     }
 }
 
@@ -77,7 +76,7 @@ fun RenderContext.filter(text: String, route: String) {
 @ExperimentalCoroutinesApi
 fun main() {
 
-    val inputHeader = render {
+    fun RenderContext.inputHeader() {
         header {
             h1 { +"todos" }
             input("new-todo") {
@@ -89,7 +88,7 @@ fun main() {
         }
     }
 
-    val mainSection = render {
+    fun RenderContext.mainSection() {
         section("main") {
             input("toggle-all", id = "toggle-all") {
                 type("checkbox")
@@ -157,7 +156,7 @@ fun main() {
         }
     }
 
-    val appFooter = render {
+    fun RenderContext.appFooter() {
         footer("footer") {
             className(ToDoListStore.empty.map { if (it) "hidden" else "" })
 
@@ -180,5 +179,9 @@ fun main() {
         }
     }
 
-    append("todoapp", inputHeader, mainSection, appFooter)
+    render("#todoapp") {
+        inputHeader()
+        mainSection()
+        appFooter()
+    }
 }

@@ -1,7 +1,6 @@
 package dev.fritz2.examples.routing
 
 import dev.fritz2.dom.html.render
-import dev.fritz2.dom.mount
 import dev.fritz2.dom.selectedText
 import dev.fritz2.dom.states
 import dev.fritz2.routing.router
@@ -28,7 +27,7 @@ fun main() {
 
     val router = router(mapOf("page" to Pages.home))
 
-    render {
+    render("#target") {
         div {
             nav("navbar navbar-expand-lg navbar-light bg-light") {
                 a("navbar-brand") {
@@ -186,5 +185,5 @@ fun main() {
                 }
             }
         }
-    }.mount("target")
+    }
 }
