@@ -1,18 +1,16 @@
 package dev.fritz2.examples.validation
 
-import com.soywiz.klock.Date
-import com.soywiz.klock.DateFormat
-import com.soywiz.klock.format
-import com.soywiz.klock.parseDate
 import dev.fritz2.lenses.Lens
 import dev.fritz2.lenses.Lenses
 import dev.fritz2.lenses.format
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.toLocalDate
 
 @Lenses
 data class Person(
     val name: String = "",
     val salary: Double = 0.0,
-    val birthday: Date = Date(1900, 1, 1),
+    val birthday: LocalDate = LocalDate(1900, 1, 1),
     val address: Address = Address(),
     val activities: List<Activity> = listOf(
         Activity("walking"),
@@ -39,10 +37,9 @@ data class Activity(
 )
 
 object Formats {
-    private val dateFormat: DateFormat = DateFormat("yyyy-MM-dd")
-    val date: Lens<Date, String> = format(
-        { dateFormat.parseDate(it) },
-        { dateFormat.format(it) }
+    val date: Lens<LocalDate, String> = format(
+        { it.toLocalDate() },
+        { it.toString() }
     )
     val currency: Lens<Double, String> = format(
         { it.toDouble() },
