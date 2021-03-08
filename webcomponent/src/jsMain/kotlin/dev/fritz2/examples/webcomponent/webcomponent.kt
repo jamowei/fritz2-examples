@@ -11,7 +11,7 @@ import org.w3c.dom.ShadowRoot
 
 
 @ExperimentalCoroutinesApi
-class WeatherCard : WebComponent<HTMLDivElement>() {
+object WeatherCard : WebComponent<HTMLDivElement>() {
 
     private val city = attributeChanges("city")
 
@@ -77,6 +77,6 @@ external object Stars
 
 @ExperimentalCoroutinesApi
 fun main() {
-    registerWebComponent("weather-card", WeatherCard::class, "city")
+    registerWebComponent("weather-card", WeatherCard, "city")
     Stars // have to use the component somewhere to get the import executed
 }
