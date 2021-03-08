@@ -4,14 +4,9 @@ import dev.fritz2.binding.RootStore
 import dev.fritz2.components.*
 import dev.fritz2.components.validation.Severity
 import dev.fritz2.dom.html.render
-import dev.fritz2.styling.name
-import dev.fritz2.styling.staticStyle
-import dev.fritz2.styling.style
 import dev.fritz2.styling.theme.IconDefinition
 import dev.fritz2.styling.theme.Theme
-import dev.fritz2.styling.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 
 class GameStore(private val engine: Engine, initialState: GameState) : RootStore<GameState>(initialState) {
@@ -20,24 +15,18 @@ class GameStore(private val engine: Engine, initialState: GameState) : RootStore
     }
 }
 
-@ExperimentalCoroutinesApi
-fun iconForPlayer(symbol: String): IconDefinition =
-    if (symbol == "X") {
-        Theme().icons.close
-    } else {
-        IconDefinition(
-            displayName = "circle",
-            viewBox = "-3 -3 30 30",
-            svg = """
-                <path fill-rule="evenodd" clip-rule="evenodd" 
-                d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 
-                16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 
-                2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z" 
-                fill="currentColor"/>
-                """.trimIndent()
-        )
-    }
+val circleIcon = IconDefinition(
+    displayName = "circle",
+    viewBox = "-3 -3 30 30",
+    svg = """<path fill-rule="evenodd" clip-rule="evenodd" 
+             d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 
+             16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 
+             2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z" 
+             fill="currentColor"/>""".trimIndent()
+)
 
+@ExperimentalCoroutinesApi
+fun iconForPlayer(symbol: String): IconDefinition = if (symbol == "X") Theme().icons.close else circleIcon
 
 @ExperimentalCoroutinesApi
 fun main() {
@@ -88,7 +77,6 @@ fun main() {
                     } handledBy gameStore.update
                     gameStore.data.render {
                         if (it.hasEnded()) {
-                            // use ``asAlert`` after https://github.com/jwstegemann/fritz2/issues/292 is solved
                             alert({
                                 width { full }
                                 radius { small }
