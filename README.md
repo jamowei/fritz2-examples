@@ -15,6 +15,7 @@ The following examples are available:
 * [validation](https://examples.fritz2.dev/validation/build/distributions/index.html) - validation service in fritz2
 * [todomvc](https://examples.fritz2.dev/todomvc/build/distributions/index.html) - implementing the [TodoMVC](http://todomvc.com/) specification using fritz2
 * [webcomponent](https://examples.fritz2.dev/webcomponent/build/distributions/index.html) - implementing a [WebComponent](https://www.webcomponents.org/) using fritz2
+* [tictactoe](https://examples.fritz2.dev/webcomponent/build/distributions/tictactoe.html) -  demonstrates the combination of UI, logic and state with fritz2's components and styling facilities
 
 ### Running locally
 To run our examples locally, clone this repository and then execute
