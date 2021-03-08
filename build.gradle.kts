@@ -7,7 +7,6 @@ plugins {
 allprojects {
     repositories {
         mavenCentral()
-        jcenter()
-        maven("https://dl.bintray.com/jwstegemann/fritz2")
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     }
 }
