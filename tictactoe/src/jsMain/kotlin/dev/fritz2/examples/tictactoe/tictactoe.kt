@@ -46,7 +46,7 @@ fun main() {
                         width { full }
                         columns { repeat(3) { "1fr" } }
                         gap { tiny }
-                        background { color { lighterGray } }
+                        background { color { gray300 } }
                     }) {
                         gameStore.data.map { it.field }.renderEach { cell ->
                             box({
