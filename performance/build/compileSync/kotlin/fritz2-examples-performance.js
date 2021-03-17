@@ -367,8 +367,8 @@
   $collect_2_2_2COROUTINE$15.prototype.constructor = $collect_2_2_2COROUTINE$15;
   $collect_2_2_2COROUTINE$25.prototype = Object.create(CoroutineImpl_0.prototype);
   $collect_2_2_2COROUTINE$25.prototype.constructor = $collect_2_2_2COROUTINE$25;
-  $collect_2_2_2_3COROUTINE$27.prototype = Object.create(CoroutineImpl_0.prototype);
-  $collect_2_2_2_3COROUTINE$27.prototype.constructor = $collect_2_2_2_3COROUTINE$27;
+  $collect_2_2_2COROUTINE$27.prototype = Object.create(CoroutineImpl_0.prototype);
+  $collect_2_2_2COROUTINE$27.prototype.constructor = $collect_2_2_2COROUTINE$27;
   _no_name_provided__165.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__165.prototype.constructor = _no_name_provided__165;
   _no_name_provided__166.prototype = Object.create(CoroutineImpl_0.prototype);
@@ -2001,11 +2001,11 @@
   function _get_lastIndex__0(_this_) {
     return charSequenceLength(_this_) - 1 | 0;
   }
-  function lines(_this_) {
-    return toList(lineSequence(_this_));
-  }
   function isNotBlank(_this_) {
     return !isBlank(_this_);
+  }
+  function lines(_this_) {
+    return toList(lineSequence(_this_));
   }
   function lineSequence(_this_) {
     var tmp = ['\r\n', '\n', '\r'];
@@ -4505,12 +4505,12 @@
     }
     return tmp;
   }
-  function regionMatches(_this_, thisOffset, other, otherOffset, length, ignoreCase) {
-    return regionMatchesImpl(_this_, thisOffset, other, otherOffset, length, ignoreCase);
-  }
   function matches(_this_, regex) {
     var result = _this_.match(regex);
     return !(result == null) ? !(result.length === 0) : false;
+  }
+  function regionMatches(_this_, thisOffset, other, otherOffset, length, ignoreCase) {
+    return regionMatchesImpl(_this_, thisOffset, other, otherOffset, length, ignoreCase);
   }
   function addSuppressed(_this_, exception) {
     if (!(_this_ === exception)) {
@@ -21146,27 +21146,27 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__1_7_3_3_4($collector, this$0) {
+  function _no_name_provided__1_7_3_3_3($collector, this$0) {
     this._$collector_8 = $collector;
     this._this$0_107 = this$0;
   }
-  _no_name_provided__1_7_3_3_4.prototype.emit_2_8_4_4_5 = function (value, $cont) {
-    return this._$collector_8.emit_18('' + this._this$0_107._baseClass + ' ' + value, $cont);
+  _no_name_provided__1_7_3_3_3.prototype.emit_2_8_4_4_4 = function (value, $cont) {
+    return this._$collector_8.emit_18(setClassName(this._this$0_107, value), $cont);
   };
-  _no_name_provided__1_7_3_3_4.prototype.emit_18 = function (value, $cont) {
-    return this.emit_2_8_4_4_5((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
+  _no_name_provided__1_7_3_3_3.prototype.emit_18 = function (value, $cont) {
+    return this.emit_2_8_4_4_4((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
   };
-  _no_name_provided__1_7_3_3_4.$metadata$ = {
-    simpleName: '<no name provided>_1_7_3_3_4',
+  _no_name_provided__1_7_3_3_3.$metadata$ = {
+    simpleName: '<no name provided>_1_7_3_3',
     kind: 'class',
     interfaces: [FlowCollector]
   };
-  function $collect_2_2_2_3COROUTINE$27(_this_, collector, resultContinuation) {
+  function $collect_2_2_2COROUTINE$27(_this_, collector, resultContinuation) {
     CoroutineImpl_0.call(this, resultContinuation);
     this.__this__30 = _this_;
     this._collector_13 = collector;
   }
-  $collect_2_2_2_3COROUTINE$27.prototype.doResume_57 = function () {
+  $collect_2_2_2COROUTINE$27.prototype.doResume_57 = function () {
     var suspendResult = this._result;
     $sm: do
       try {
@@ -21175,7 +21175,7 @@
           case 0:
             this._exceptionState = 2;
             this._state_1 = 1;
-            suspendResult = this.__this__30._$value.collect_23(new _no_name_provided__1_7_3_3_4(this._collector_13, this.__this__30._this$0_110), this);
+            suspendResult = this.__this__30._$value.collect_23(new _no_name_provided__1_7_3_3_3(this._collector_13, this.__this__30._this$0_110), this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -21196,8 +21196,8 @@
       }
      while (true);
   };
-  $collect_2_2_2_3COROUTINE$27.$metadata$ = {
-    simpleName: '$collect_2_2_2_3COROUTINE$27',
+  $collect_2_2_2COROUTINE$27.$metadata$ = {
+    simpleName: '$collect_2_2_2COROUTINE$27',
     kind: 'class',
     interfaces: []
   };
@@ -21210,8 +21210,10 @@
       var tmp0_also_0 = window.document.createElement(tagName);
       if (!(id == null))
         tmp0_also_0.id = id;
-      if (!(baseClass == null))
+      if (!(baseClass == null ? true : isBlank(baseClass)))
         tmp0_also_0.className = baseClass;
+      else {
+      }
       var tmp1_unsafeCast_0 = tmp0_also_0;
       domNode = tmp1_unsafeCast_0;
     }Tag.call($this, tagName, id, baseClass, job, domNode);
@@ -21233,6 +21235,22 @@
     if (Companion_instance_9 == null)
       new Companion_10();
     return Companion_instance_9;
+  }
+  function setClassName($this, className) {
+    var tmp;
+    var tmp0_isNullOrBlank_0 = $this._baseClass;
+    if (tmp0_isNullOrBlank_0 == null ? true : isBlank(tmp0_isNullOrBlank_0)) {
+      tmp = className;
+    } else {
+      if (!isBlank(className)) {
+        tmp = '' + $this._baseClass + ' ' + className;
+      } else {
+        {
+          tmp = $this._baseClass;
+        }
+      }
+    }
+    return tmp;
   }
   function _no_name_provided__1_1_1_1($this_render, $newJob, this$0, $content) {
     this._$this_render = $this_render;
@@ -21314,21 +21332,21 @@
     interfaces: [],
     suspendArity: 2
   };
-  function _no_name_provided__1_1_1_2_0($value, this$0) {
+  function _no_name_provided__1_1_1_3($value, this$0) {
     this._$value = $value;
     this._this$0_110 = this$0;
   }
-  _no_name_provided__1_1_1_2_0.prototype.collect_2_2_2_3 = function (collector, $cont) {
-    var tmp = new $collect_2_2_2_3COROUTINE$27(this, collector, $cont);
+  _no_name_provided__1_1_1_3.prototype.collect_2_2_2_5 = function (collector, $cont) {
+    var tmp = new $collect_2_2_2COROUTINE$27(this, collector, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_57();
   };
-  _no_name_provided__1_1_1_2_0.prototype.collect_23 = function (collector, $cont) {
-    return this.collect_2_2_2_3(collector, $cont);
+  _no_name_provided__1_1_1_3.prototype.collect_23 = function (collector, $cont) {
+    return this.collect_2_2_2_5(collector, $cont);
   };
-  _no_name_provided__1_1_1_2_0.$metadata$ = {
-    simpleName: '<no name provided>_1_1_1_2',
+  _no_name_provided__1_1_1_3.$metadata$ = {
+    simpleName: '<no name provided>_1_1_1',
     kind: 'class',
     interfaces: [Flow]
   };
@@ -21374,15 +21392,7 @@
     mountSingle(tmp, value, _no_name_provided_$factory_155(this, name, null));
   };
   Tag.prototype.className_1 = function (value) {
-    var tmp0_safe_receiver = this._baseClass;
-    var tmp;
-    if (tmp0_safe_receiver == null) {
-      tmp = null;
-    } else {
-      tmp = new _no_name_provided__1_1_1_2_0(value, this);
-    }
-    var tmp1_elvis_lhs = tmp;
-    this.attr_14('class', tmp1_elvis_lhs == null ? value : tmp1_elvis_lhs);
+    this.attr_14('class', new _no_name_provided__1_1_1_3(value, this));
   };
   Tag.prototype.inlineStyle_0 = function (value) {
     this.attr_14('style', value);
@@ -21592,16 +21602,16 @@
     interfaces: [],
     suspendArity: 2
   };
-  function _no_name_provided__1_7_3_3_3($collector) {
+  function _no_name_provided__1_7_3_3_4($collector) {
     this._$collector_9 = $collector;
   }
-  _no_name_provided__1_7_3_3_3.prototype.emit_2_8_4_4_3 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_4.prototype.emit_2_8_4_4_4 = function (value, $cont) {
     return this._$collector_9.emit_18(toInt(value), $cont);
   };
-  _no_name_provided__1_7_3_3_3.prototype.emit_18 = function (value, $cont) {
-    return this.emit_2_8_4_4_3((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
+  _no_name_provided__1_7_3_3_4.prototype.emit_18 = function (value, $cont) {
+    return this.emit_2_8_4_4_4((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
   };
-  _no_name_provided__1_7_3_3_3.$metadata$ = {
+  _no_name_provided__1_7_3_3_4.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',
     kind: 'class',
     interfaces: [FlowCollector]
@@ -21620,7 +21630,7 @@
           case 0:
             this._exceptionState = 2;
             this._state_1 = 1;
-            suspendResult = this.__this__31._$tmp0_map_0_1.collect_23(new _no_name_provided__1_7_3_3_3(this._collector_14), this);
+            suspendResult = this.__this__31._$tmp0_map_0_1.collect_23(new _no_name_provided__1_7_3_3_4(this._collector_14), this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -21646,19 +21656,19 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__1_1_1_3($tmp0_map_0) {
+  function _no_name_provided__1_1_1_4($tmp0_map_0) {
     this._$tmp0_map_0_1 = $tmp0_map_0;
   }
-  _no_name_provided__1_1_1_3.prototype.collect_2_2_2_4 = function (collector, $cont) {
+  _no_name_provided__1_1_1_4.prototype.collect_2_2_2_4 = function (collector, $cont) {
     var tmp = new $collect_2_2_2COROUTINE$0(this, collector, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_57();
   };
-  _no_name_provided__1_1_1_3.prototype.collect_23 = function (collector, $cont) {
+  _no_name_provided__1_1_1_4.prototype.collect_23 = function (collector, $cont) {
     return this.collect_2_2_2_4(collector, $cont);
   };
-  _no_name_provided__1_1_1_3.$metadata$ = {
+  _no_name_provided__1_1_1_4.$metadata$ = {
     simpleName: '<no name provided>_1_1_1',
     kind: 'class',
     interfaces: [Flow]
@@ -21686,7 +21696,7 @@
     $this$input.type_0('number');
     $this$input.value_1($this$input.asString_0(this._$startStore_1._get_data__1()));
     var tmp0_map_0 = values($this$input._get_changes__7());
-    $this$input.handledBy_5(new _no_name_provided__1_1_1_3(tmp0_map_0), this._$startStore_1._get_update__1());
+    $this$input.handledBy_5(new _no_name_provided__1_1_1_4(tmp0_map_0), this._$startStore_1._get_update__1());
   };
   _no_name_provided__172.prototype.invoke_279 = function (p1) {
     this.invoke_256(p1 instanceof Input ? p1 : THROW_CCE());
@@ -21773,11 +21783,11 @@
   function _no_name_provided__1_7_3_3_5($collector) {
     this._$collector_10 = $collector;
   }
-  _no_name_provided__1_7_3_3_5.prototype.emit_2_8_4_4_4 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_5.prototype.emit_2_8_4_4_5 = function (value, $cont) {
     return this._$collector_10.emit_18(value ? '.d-none' : '', $cont);
   };
   _no_name_provided__1_7_3_3_5.prototype.emit_18 = function (value, $cont) {
-    return this.emit_2_8_4_4_4((!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_5((!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_5.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',
@@ -21824,19 +21834,19 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__1_1_1_4($isFinished) {
+  function _no_name_provided__1_1_1_5($isFinished) {
     this._$isFinished = $isFinished;
   }
-  _no_name_provided__1_1_1_4.prototype.collect_2_2_2_5 = function (collector, $cont) {
+  _no_name_provided__1_1_1_5.prototype.collect_2_2_2_5 = function (collector, $cont) {
     var tmp = new $collect_2_2_2COROUTINE$1(this, collector, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_57();
   };
-  _no_name_provided__1_1_1_4.prototype.collect_23 = function (collector, $cont) {
+  _no_name_provided__1_1_1_5.prototype.collect_23 = function (collector, $cont) {
     return this.collect_2_2_2_5(collector, $cont);
   };
-  _no_name_provided__1_1_1_4.$metadata$ = {
+  _no_name_provided__1_1_1_5.$metadata$ = {
     simpleName: '<no name provided>_1_1_1',
     kind: 'class',
     interfaces: [Flow]
@@ -21895,19 +21905,19 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__1_1_1_2_1($tmp0_map_0_1) {
+  function _no_name_provided__1_1_1_2_0($tmp0_map_0_1) {
     this._$tmp0_map_0_1_0 = $tmp0_map_0_1;
   }
-  _no_name_provided__1_1_1_2_1.prototype.collect_2_2_2_3_0 = function (collector, $cont) {
+  _no_name_provided__1_1_1_2_0.prototype.collect_2_2_2_3_0 = function (collector, $cont) {
     var tmp = new $collect_2_2_2_3COROUTINE$2(this, collector, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_57();
   };
-  _no_name_provided__1_1_1_2_1.prototype.collect_23 = function (collector, $cont) {
+  _no_name_provided__1_1_1_2_0.prototype.collect_23 = function (collector, $cont) {
     return this.collect_2_2_2_3_0(collector, $cont);
   };
-  _no_name_provided__1_1_1_2_1.$metadata$ = {
+  _no_name_provided__1_1_1_2_0.$metadata$ = {
     simpleName: '<no name provided>_1_1_1_2',
     kind: 'class',
     interfaces: [Flow]
@@ -21982,7 +21992,7 @@
   _no_name_provided__180.prototype.invoke_274 = function ($this$button) {
     $this$button.unaryPlus_2('Start');
     Unit_getInstance();
-    $this$button.className_1(new _no_name_provided__1_1_1_4(this._$isFinished_0));
+    $this$button.className_1(new _no_name_provided__1_1_1_5(this._$isFinished_0));
     $this$button.handledBy_4($this$button._get_clicks__7(), this._$startStore_7._start);
   };
   _no_name_provided__180.prototype.invoke_279 = function (p1) {
@@ -22001,7 +22011,7 @@
     Unit_getInstance();
     var tmp0_map_0 = $this$button._get_clicks__7();
     var tmp0_map_0_1 = tmp0_map_0._events;
-    $this$button.handledBy_5(new _no_name_provided__1_1_1_2_1(tmp0_map_0_1), this._$countStore_1._get_update__1());
+    $this$button.handledBy_5(new _no_name_provided__1_1_1_2_0(tmp0_map_0_1), this._$countStore_1._get_update__1());
   };
   _no_name_provided__181.prototype.invoke_279 = function (p1) {
     this.invoke_274(p1 instanceof Button ? p1 : THROW_CCE());

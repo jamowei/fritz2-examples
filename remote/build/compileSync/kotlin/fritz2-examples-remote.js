@@ -17316,8 +17316,10 @@
       var tmp0_also_0 = window.document.createElement(tagName);
       if (!(id == null))
         tmp0_also_0.id = id;
-      if (!(baseClass == null))
+      if (!(baseClass == null ? true : isBlank(baseClass)))
         tmp0_also_0.className = baseClass;
+      else {
+      }
       var tmp1_unsafeCast_0 = tmp0_also_0;
       domNode = tmp1_unsafeCast_0;
     }Tag.call($this, tagName, id, baseClass, job, domNode);

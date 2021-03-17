@@ -295,8 +295,8 @@
   _no_name_provided__134.prototype.constructor = _no_name_provided__134;
   $collect_2_2_2COROUTINE$17.prototype = Object.create(CoroutineImpl_0.prototype);
   $collect_2_2_2COROUTINE$17.prototype.constructor = $collect_2_2_2COROUTINE$17;
-  $collect_2_2_2_3COROUTINE$28.prototype = Object.create(CoroutineImpl_0.prototype);
-  $collect_2_2_2_3COROUTINE$28.prototype.constructor = $collect_2_2_2_3COROUTINE$28;
+  $collect_2_2_2COROUTINE$28.prototype = Object.create(CoroutineImpl_0.prototype);
+  $collect_2_2_2COROUTINE$28.prototype.constructor = $collect_2_2_2COROUTINE$28;
   _no_name_provided__135.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__135.prototype.constructor = _no_name_provided__135;
   MultipleRootElementsException.prototype = Object.create(Exception.prototype);
@@ -17225,27 +17225,27 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__1_7_3_3_4($collector, this$0) {
+  function _no_name_provided__1_7_3_3_2($collector, this$0) {
     this._$collector_6 = $collector;
     this._this$0_93 = this$0;
   }
-  _no_name_provided__1_7_3_3_4.prototype.emit_2_8_4_4_5 = function (value, $cont) {
-    return this._$collector_6.emit_19('' + this._this$0_93._baseClass + ' ' + value, $cont);
+  _no_name_provided__1_7_3_3_2.prototype.emit_2_8_4_4_9 = function (value, $cont) {
+    return this._$collector_6.emit_19(setClassName(this._this$0_93, value), $cont);
   };
-  _no_name_provided__1_7_3_3_4.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_5((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
+  _no_name_provided__1_7_3_3_2.prototype.emit_19 = function (value, $cont) {
+    return this.emit_2_8_4_4_9((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
   };
-  _no_name_provided__1_7_3_3_4.$metadata$ = {
-    simpleName: '<no name provided>_1_7_3_3_4',
+  _no_name_provided__1_7_3_3_2.$metadata$ = {
+    simpleName: '<no name provided>_1_7_3_3',
     kind: 'class',
     interfaces: [FlowCollector]
   };
-  function $collect_2_2_2_3COROUTINE$28(_this_, collector, resultContinuation) {
+  function $collect_2_2_2COROUTINE$28(_this_, collector, resultContinuation) {
     CoroutineImpl_0.call(this, resultContinuation);
     this.__this__17 = _this_;
     this._collector_9 = collector;
   }
-  $collect_2_2_2_3COROUTINE$28.prototype.doResume_38 = function () {
+  $collect_2_2_2COROUTINE$28.prototype.doResume_38 = function () {
     var suspendResult = this._result;
     $sm: do
       try {
@@ -17254,7 +17254,7 @@
           case 0:
             this._exceptionState = 2;
             this._state_1 = 1;
-            suspendResult = this.__this__17._$value.collect_22(new _no_name_provided__1_7_3_3_4(this._collector_9, this.__this__17._this$0_96), this);
+            suspendResult = this.__this__17._$value.collect_22(new _no_name_provided__1_7_3_3_2(this._collector_9, this.__this__17._this$0_96), this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -17275,8 +17275,8 @@
       }
      while (true);
   };
-  $collect_2_2_2_3COROUTINE$28.$metadata$ = {
-    simpleName: '$collect_2_2_2_3COROUTINE$28',
+  $collect_2_2_2COROUTINE$28.$metadata$ = {
+    simpleName: '$collect_2_2_2COROUTINE$28',
     kind: 'class',
     interfaces: []
   };
@@ -17289,8 +17289,10 @@
       var tmp0_also_0 = window.document.createElement(tagName);
       if (!(id == null))
         tmp0_also_0.id = id;
-      if (!(baseClass == null))
+      if (!(baseClass == null ? true : isBlank(baseClass)))
         tmp0_also_0.className = baseClass;
+      else {
+      }
       var tmp1_unsafeCast_0 = tmp0_also_0;
       domNode = tmp1_unsafeCast_0;
     }Tag.call($this, tagName, id, baseClass, job, domNode);
@@ -17312,6 +17314,22 @@
     if (Companion_instance_9 == null)
       new Companion_10();
     return Companion_instance_9;
+  }
+  function setClassName($this, className) {
+    var tmp;
+    var tmp0_isNullOrBlank_0 = $this._baseClass;
+    if (tmp0_isNullOrBlank_0 == null ? true : isBlank(tmp0_isNullOrBlank_0)) {
+      tmp = className;
+    } else {
+      if (!isBlank(className)) {
+        tmp = '' + $this._baseClass + ' ' + className;
+      } else {
+        {
+          tmp = $this._baseClass;
+        }
+      }
+    }
+    return tmp;
   }
   function _no_name_provided__1_1_1_1($this_renderElement, $newJob, this$0, $content) {
     this._$this_renderElement = $this_renderElement;
@@ -17380,17 +17398,17 @@
     this._$value = $value;
     this._this$0_96 = this$0;
   }
-  _no_name_provided__1_1_1_2.prototype.collect_2_2_2_3 = function (collector, $cont) {
-    var tmp = new $collect_2_2_2_3COROUTINE$28(this, collector, $cont);
+  _no_name_provided__1_1_1_2.prototype.collect_2_2_2_6 = function (collector, $cont) {
+    var tmp = new $collect_2_2_2COROUTINE$28(this, collector, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_38();
   };
   _no_name_provided__1_1_1_2.prototype.collect_22 = function (collector, $cont) {
-    return this.collect_2_2_2_3(collector, $cont);
+    return this.collect_2_2_2_6(collector, $cont);
   };
   _no_name_provided__1_1_1_2.$metadata$ = {
-    simpleName: '<no name provided>_1_1_1_2',
+    simpleName: '<no name provided>_1_1_1',
     kind: 'class',
     interfaces: [Flow]
   };
@@ -17438,15 +17456,7 @@
     mountSingle(tmp, value, _no_name_provided_$factory_127(this, name, null));
   };
   Tag.prototype.className_1 = function (value) {
-    var tmp0_safe_receiver = this._baseClass;
-    var tmp;
-    if (tmp0_safe_receiver == null) {
-      tmp = null;
-    } else {
-      tmp = new _no_name_provided__1_1_1_2(value, this);
-    }
-    var tmp1_elvis_lhs = tmp;
-    this.attr_28('class', tmp1_elvis_lhs == null ? value : tmp1_elvis_lhs);
+    this.attr_28('class', new _no_name_provided__1_1_1_2(value, this));
   };
   Tag.$metadata$ = {
     simpleName: 'Tag',
@@ -17658,17 +17668,17 @@
     kind: 'class',
     interfaces: [Route]
   };
-  function _no_name_provided__1_7_3_3_2($collector, $key) {
+  function _no_name_provided__1_7_3_3_3($collector, $key) {
     this._$collector_7 = $collector;
     this._$key = $key;
   }
-  _no_name_provided__1_7_3_3_2.prototype.emit_2_8_4_4_6 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_3.prototype.emit_2_8_4_4_7 = function (value, $cont) {
     return this._$collector_7.emit_19(to(value.get_22(this._$key), value), $cont);
   };
-  _no_name_provided__1_7_3_3_2.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_6((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
+  _no_name_provided__1_7_3_3_3.prototype.emit_19 = function (value, $cont) {
+    return this.emit_2_8_4_4_7((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
   };
-  _no_name_provided__1_7_3_3_2.$metadata$ = {
+  _no_name_provided__1_7_3_3_3.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',
     kind: 'class',
     interfaces: [FlowCollector]
@@ -17687,7 +17697,7 @@
           case 0:
             this._exceptionState = 2;
             this._state_1 = 1;
-            suspendResult = this.__this__18._$tmp0_map_0_1.collect_22(new _no_name_provided__1_7_3_3_2(this._collector_10, this.__this__18._$key_0), this);
+            suspendResult = this.__this__18._$tmp0_map_0_1.collect_22(new _no_name_provided__1_7_3_3_3(this._collector_10, this.__this__18._$key_0), this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -17717,14 +17727,14 @@
     this._$tmp0_map_0_1 = $tmp0_map_0;
     this._$key_0 = $key;
   }
-  _no_name_provided__1_1_1_3.prototype.collect_2_2_2_2 = function (collector, $cont) {
+  _no_name_provided__1_1_1_3.prototype.collect_2_2_2_3 = function (collector, $cont) {
     var tmp = new $collect_2_2_2COROUTINE$35(this, collector, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_38();
   };
   _no_name_provided__1_1_1_3.prototype.collect_22 = function (collector, $cont) {
-    return this.collect_2_2_2_2(collector, $cont);
+    return this.collect_2_2_2_3(collector, $cont);
   };
   _no_name_provided__1_1_1_3.$metadata$ = {
     simpleName: '<no name provided>_1_1_1',
@@ -17770,16 +17780,16 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__1_7_3_3_3($collector) {
+  function _no_name_provided__1_7_3_3_4($collector) {
     this._$collector_8 = $collector;
   }
-  _no_name_provided__1_7_3_3_3.prototype.emit_2_8_4_4_6 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_4.prototype.emit_2_8_4_4_7 = function (value, $cont) {
     return this._$collector_8.emit_19(value.containsValue_5('Home') ? 'active' : '', $cont);
   };
-  _no_name_provided__1_7_3_3_3.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_6((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
+  _no_name_provided__1_7_3_3_4.prototype.emit_19 = function (value, $cont) {
+    return this.emit_2_8_4_4_7((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
   };
-  _no_name_provided__1_7_3_3_3.$metadata$ = {
+  _no_name_provided__1_7_3_3_4.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',
     kind: 'class',
     interfaces: [FlowCollector]
@@ -17798,7 +17808,7 @@
           case 0:
             this._exceptionState = 2;
             this._state_1 = 1;
-            suspendResult = this.__this__19._$tmp0_map_0_2.collect_22(new _no_name_provided__1_7_3_3_3(this._collector_11), this);
+            suspendResult = this.__this__19._$tmp0_map_0_2.collect_22(new _no_name_provided__1_7_3_3_4(this._collector_11), this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -17827,11 +17837,11 @@
   function _no_name_provided__1_7_3_3_4_0($collector) {
     this._$collector_9 = $collector;
   }
-  _no_name_provided__1_7_3_3_4_0.prototype.emit_2_8_4_4_5_2 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_4_0.prototype.emit_2_8_4_4_5_1 = function (value, $cont) {
     return this._$collector_9.emit_19(mapOf_0(to('page', 'Home')), $cont);
   };
   _no_name_provided__1_7_3_3_4_0.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_5_2(value instanceof Event ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_5_1(value instanceof Event ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_4_0.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3_4',
@@ -17933,11 +17943,11 @@
   function _no_name_provided__1_7_3_3_5($collector) {
     this._$collector_10 = $collector;
   }
-  _no_name_provided__1_7_3_3_5.prototype.emit_2_8_4_4_6 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_5.prototype.emit_2_8_4_4_7 = function (value, $cont) {
     return this._$collector_10.emit_19(value.containsValue_5('Show') ? 'active' : '', $cont);
   };
   _no_name_provided__1_7_3_3_5.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_6((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_7((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_5.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',
@@ -17987,11 +17997,11 @@
   function _no_name_provided__1_7_3_3_4_1($collector) {
     this._$collector_11 = $collector;
   }
-  _no_name_provided__1_7_3_3_4_1.prototype.emit_2_8_4_4_5_2 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_4_1.prototype.emit_2_8_4_4_5_1 = function (value, $cont) {
     return this._$collector_11.emit_19(mapOf([to('page', 'Show'), to('extra', 'extra text')]), $cont);
   };
   _no_name_provided__1_7_3_3_4_1.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_5_2(value instanceof Event ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_5_1(value instanceof Event ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_4_1.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3_4',
@@ -18093,11 +18103,11 @@
   function _no_name_provided__1_7_3_3_6($collector) {
     this._$collector_12 = $collector;
   }
-  _no_name_provided__1_7_3_3_6.prototype.emit_2_8_4_4_6 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_6.prototype.emit_2_8_4_4_7 = function (value, $cont) {
     return this._$collector_12.emit_19(value.containsValue_5('Change') ? 'active' : '', $cont);
   };
   _no_name_provided__1_7_3_3_6.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_6((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_7((!(value == null) ? isInterface(value, Map_0) : false) ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_6.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',
@@ -18147,11 +18157,11 @@
   function _no_name_provided__1_7_3_3_4_2($collector) {
     this._$collector_13 = $collector;
   }
-  _no_name_provided__1_7_3_3_4_2.prototype.emit_2_8_4_4_5_2 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_4_2.prototype.emit_2_8_4_4_5_1 = function (value, $cont) {
     return this._$collector_13.emit_19(mapOf([to('page', 'Change'), to('debug', 'false'), to('role', 'anonymous')]), $cont);
   };
   _no_name_provided__1_7_3_3_4_2.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_5_2(value instanceof Event ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_5_1(value instanceof Event ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_4_2.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3_4',
@@ -18460,11 +18470,11 @@
     this._$collector_14 = $collector;
     this._$params_1 = $params;
   }
-  _no_name_provided__1_7_3_3_7.prototype.emit_2_8_4_4_7 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_7.prototype.emit_2_8_4_4_8 = function (value, $cont) {
     return this._$collector_14.emit_19(plus(this._$params_1, to('debug', value.toString())), $cont);
   };
   _no_name_provided__1_7_3_3_7.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_7((!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_8((!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_7.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',
@@ -18601,11 +18611,11 @@
     this._$collector_15 = $collector;
     this._$params_5 = $params;
   }
-  _no_name_provided__1_7_3_3_8.prototype.emit_2_8_4_4_8 = function (value, $cont) {
+  _no_name_provided__1_7_3_3_8.prototype.emit_2_8_4_4_9 = function (value, $cont) {
     return this._$collector_15.emit_19(plus(this._$params_5, to('role', value)), $cont);
   };
   _no_name_provided__1_7_3_3_8.prototype.emit_19 = function (value, $cont) {
-    return this.emit_2_8_4_4_8((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
+    return this.emit_2_8_4_4_9((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), $cont);
   };
   _no_name_provided__1_7_3_3_8.$metadata$ = {
     simpleName: '<no name provided>_1_7_3_3',

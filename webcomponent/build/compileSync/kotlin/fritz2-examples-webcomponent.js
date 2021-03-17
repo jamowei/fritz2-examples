@@ -1642,11 +1642,11 @@
   function _get_lastIndex__0(_this_) {
     return charSequenceLength(_this_) - 1 | 0;
   }
-  function lines(_this_) {
-    return toList(lineSequence(_this_));
-  }
   function isNotBlank(_this_) {
     return !isBlank(_this_);
+  }
+  function lines(_this_) {
+    return toList(lineSequence(_this_));
   }
   function lineSequence(_this_) {
     var tmp = ['\r\n', '\n', '\r'];
@@ -4096,12 +4096,12 @@
     }
     return tmp;
   }
-  function regionMatches(_this_, thisOffset, other, otherOffset, length, ignoreCase) {
-    return regionMatchesImpl(_this_, thisOffset, other, otherOffset, length, ignoreCase);
-  }
   function matches(_this_, regex) {
     var result = _this_.match(regex);
     return !(result == null) ? !(result.length === 0) : false;
+  }
+  function regionMatches(_this_, thisOffset, other, otherOffset, length, ignoreCase) {
+    return regionMatchesImpl(_this_, thisOffset, other, otherOffset, length, ignoreCase);
   }
   function addSuppressed(_this_, exception) {
     if (!(_this_ === exception)) {
@@ -14916,8 +14916,10 @@
       var tmp0_also_0 = window.document.createElement(tagName);
       if (!(id == null))
         tmp0_also_0.id = id;
-      if (!(baseClass == null))
+      if (!(baseClass == null ? true : isBlank(baseClass)))
         tmp0_also_0.className = baseClass;
+      else {
+      }
       var tmp1_unsafeCast_0 = tmp0_also_0;
       domNode = tmp1_unsafeCast_0;
     }Tag.call($this, tagName, id, baseClass, job, domNode);

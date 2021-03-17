@@ -2509,11 +2509,11 @@
      while (false);
     return toString_1(tmp$ret$0);
   }
-  function lines(_this_) {
-    return toList_0(lineSequence(_this_));
-  }
   function isNotBlank(_this_) {
     return !isBlank(_this_);
+  }
+  function lines(_this_) {
+    return toList_0(lineSequence(_this_));
   }
   function lineSequence(_this_) {
     var tmp = ['\r\n', '\n', '\r'];
@@ -22404,8 +22404,10 @@
       var tmp0_also_0 = window.document.createElement(tagName);
       if (!(id == null))
         tmp0_also_0.id = id;
-      if (!(baseClass == null))
+      if (!(baseClass == null ? true : isBlank(baseClass)))
         tmp0_also_0.className = baseClass;
+      else {
+      }
       var tmp1_unsafeCast_0 = tmp0_also_0;
       domNode = tmp1_unsafeCast_0;
     }Tag.call($this, tagName, id, baseClass, job, domNode);
@@ -23623,18 +23625,18 @@
   _no_name_provided__1_11.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_11.prototype.get_3_1 = function (parent) {
-    return parent._like_0;
+  _no_name_provided__1_11.prototype.get_3_3 = function (parent) {
+    return parent._city_0;
   };
   _no_name_provided__1_11.prototype.get_61 = function (parent) {
-    return this.get_3_1(parent instanceof Activity_0 ? parent : THROW_CCE());
+    return this.get_3_3(parent instanceof Address_0 ? parent : THROW_CCE());
   };
-  _no_name_provided__1_11.prototype.set_4_0 = function (parent, value) {
-    return parent.copy$default_2(null, value, 1, null);
+  _no_name_provided__1_11.prototype.set_4_3 = function (parent, value) {
+    return parent.copy$default_1(null, null, null, value, 7, null);
   };
   _no_name_provided__1_11.prototype.set_23 = function (parent, value) {
-    var tmp = parent instanceof Activity_0 ? parent : THROW_CCE();
-    return this.set_4_0(tmp, (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE());
+    var tmp = parent instanceof Address_0 ? parent : THROW_CCE();
+    return this.set_4_3(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_11.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23651,18 +23653,18 @@
   _no_name_provided__1_12.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_12.prototype.get_3_1 = function (parent) {
-    return parent._name_4;
+  _no_name_provided__1_12.prototype.get_3_3 = function (parent) {
+    return parent._number_0;
   };
   _no_name_provided__1_12.prototype.get_61 = function (parent) {
-    return this.get_3_1(parent instanceof Activity_0 ? parent : THROW_CCE());
+    return this.get_3_3(parent instanceof Address_0 ? parent : THROW_CCE());
   };
-  _no_name_provided__1_12.prototype.set_4_1 = function (parent, value) {
-    return parent.copy$default_2(value, false, 2, null);
+  _no_name_provided__1_12.prototype.set_4_3 = function (parent, value) {
+    return parent.copy$default_1(null, value, null, null, 13, null);
   };
   _no_name_provided__1_12.prototype.set_23 = function (parent, value) {
-    var tmp = parent instanceof Activity_0 ? parent : THROW_CCE();
-    return this.set_4_1(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+    var tmp = parent instanceof Address_0 ? parent : THROW_CCE();
+    return this.set_4_3(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_12.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23679,18 +23681,18 @@
   _no_name_provided__1_13.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_13.prototype.get_3_5 = function (parent) {
-    return parent._city_0;
+  _no_name_provided__1_13.prototype.get_3_3 = function (parent) {
+    return parent._postalCode_0;
   };
   _no_name_provided__1_13.prototype.get_61 = function (parent) {
-    return this.get_3_5(parent instanceof Address_0 ? parent : THROW_CCE());
+    return this.get_3_3(parent instanceof Address_0 ? parent : THROW_CCE());
   };
-  _no_name_provided__1_13.prototype.set_4_5 = function (parent, value) {
-    return parent.copy$default_1(null, null, null, value, 7, null);
+  _no_name_provided__1_13.prototype.set_4_3 = function (parent, value) {
+    return parent.copy$default_1(null, null, value, null, 11, null);
   };
   _no_name_provided__1_13.prototype.set_23 = function (parent, value) {
     var tmp = parent instanceof Address_0 ? parent : THROW_CCE();
-    return this.set_4_5(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+    return this.set_4_3(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_13.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23707,18 +23709,18 @@
   _no_name_provided__1_14.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_14.prototype.get_3_5 = function (parent) {
-    return parent._number_0;
+  _no_name_provided__1_14.prototype.get_3_3 = function (parent) {
+    return parent._street_0;
   };
   _no_name_provided__1_14.prototype.get_61 = function (parent) {
-    return this.get_3_5(parent instanceof Address_0 ? parent : THROW_CCE());
+    return this.get_3_3(parent instanceof Address_0 ? parent : THROW_CCE());
   };
-  _no_name_provided__1_14.prototype.set_4_5 = function (parent, value) {
-    return parent.copy$default_1(null, value, null, null, 13, null);
+  _no_name_provided__1_14.prototype.set_4_3 = function (parent, value) {
+    return parent.copy$default_1(value, null, null, null, 14, null);
   };
   _no_name_provided__1_14.prototype.set_23 = function (parent, value) {
     var tmp = parent instanceof Address_0 ? parent : THROW_CCE();
-    return this.set_4_5(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+    return this.set_4_3(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_14.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23735,18 +23737,18 @@
   _no_name_provided__1_15.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_15.prototype.get_3_5 = function (parent) {
-    return parent._postalCode_0;
+  _no_name_provided__1_15.prototype.get_3_8 = function (parent) {
+    return parent._activities_0;
   };
   _no_name_provided__1_15.prototype.get_61 = function (parent) {
-    return this.get_3_5(parent instanceof Address_0 ? parent : THROW_CCE());
+    return this.get_3_8(parent instanceof Person_0 ? parent : THROW_CCE());
   };
-  _no_name_provided__1_15.prototype.set_4_5 = function (parent, value) {
-    return parent.copy$default_1(null, null, value, null, 11, null);
+  _no_name_provided__1_15.prototype.set_4_4 = function (parent, value) {
+    return parent.copy$default_0(null, 0.0, null, null, value, 15, null);
   };
   _no_name_provided__1_15.prototype.set_23 = function (parent, value) {
-    var tmp = parent instanceof Address_0 ? parent : THROW_CCE();
-    return this.set_4_5(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+    var tmp = parent instanceof Person_0 ? parent : THROW_CCE();
+    return this.set_4_4(tmp, (!(value == null) ? isInterface(value, List) : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_15.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23763,18 +23765,18 @@
   _no_name_provided__1_16.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_16.prototype.get_3_5 = function (parent) {
-    return parent._street_0;
+  _no_name_provided__1_16.prototype.get_3_8 = function (parent) {
+    return parent._address_0;
   };
   _no_name_provided__1_16.prototype.get_61 = function (parent) {
-    return this.get_3_5(parent instanceof Address_0 ? parent : THROW_CCE());
+    return this.get_3_8(parent instanceof Person_0 ? parent : THROW_CCE());
   };
   _no_name_provided__1_16.prototype.set_4_5 = function (parent, value) {
-    return parent.copy$default_1(value, null, null, null, 14, null);
+    return parent.copy$default_0(null, 0.0, null, value, null, 23, null);
   };
   _no_name_provided__1_16.prototype.set_23 = function (parent, value) {
-    var tmp = parent instanceof Address_0 ? parent : THROW_CCE();
-    return this.set_4_5(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+    var tmp = parent instanceof Person_0 ? parent : THROW_CCE();
+    return this.set_4_5(tmp, value instanceof Address_0 ? value : THROW_CCE());
   };
   _no_name_provided__1_16.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23791,18 +23793,18 @@
   _no_name_provided__1_17.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_17.prototype.get_3_10 = function (parent) {
-    return parent._activities_0;
+  _no_name_provided__1_17.prototype.get_3_8 = function (parent) {
+    return parent._birthday_0;
   };
   _no_name_provided__1_17.prototype.get_61 = function (parent) {
-    return this.get_3_10(parent instanceof Person_0 ? parent : THROW_CCE());
+    return this.get_3_8(parent instanceof Person_0 ? parent : THROW_CCE());
   };
   _no_name_provided__1_17.prototype.set_4_6 = function (parent, value) {
-    return parent.copy$default_0(null, 0.0, null, null, value, 15, null);
+    return parent.copy$default_0(null, 0.0, value, null, null, 27, null);
   };
   _no_name_provided__1_17.prototype.set_23 = function (parent, value) {
     var tmp = parent instanceof Person_0 ? parent : THROW_CCE();
-    return this.set_4_6(tmp, (!(value == null) ? isInterface(value, List) : false) ? value : THROW_CCE());
+    return this.set_4_6(tmp, value instanceof LocalDate_0 ? value : THROW_CCE());
   };
   _no_name_provided__1_17.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23819,18 +23821,18 @@
   _no_name_provided__1_18.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_18.prototype.get_3_10 = function (parent) {
-    return parent._address_0;
+  _no_name_provided__1_18.prototype.get_3_8 = function (parent) {
+    return parent._name_3;
   };
   _no_name_provided__1_18.prototype.get_61 = function (parent) {
-    return this.get_3_10(parent instanceof Person_0 ? parent : THROW_CCE());
+    return this.get_3_8(parent instanceof Person_0 ? parent : THROW_CCE());
   };
   _no_name_provided__1_18.prototype.set_4_7 = function (parent, value) {
-    return parent.copy$default_0(null, 0.0, null, value, null, 23, null);
+    return parent.copy$default_0(value, 0.0, null, null, null, 30, null);
   };
   _no_name_provided__1_18.prototype.set_23 = function (parent, value) {
     var tmp = parent instanceof Person_0 ? parent : THROW_CCE();
-    return this.set_4_7(tmp, value instanceof Address_0 ? value : THROW_CCE());
+    return this.set_4_7(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_18.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23847,18 +23849,18 @@
   _no_name_provided__1_19.prototype._get_id__22 = function () {
     return this._get_id__2_12();
   };
-  _no_name_provided__1_19.prototype.get_3_10 = function (parent) {
-    return parent._birthday_0;
+  _no_name_provided__1_19.prototype.get_3_8 = function (parent) {
+    return parent._salary_0;
   };
   _no_name_provided__1_19.prototype.get_61 = function (parent) {
-    return this.get_3_10(parent instanceof Person_0 ? parent : THROW_CCE());
+    return this.get_3_8(parent instanceof Person_0 ? parent : THROW_CCE());
   };
   _no_name_provided__1_19.prototype.set_4_8 = function (parent, value) {
-    return parent.copy$default_0(null, 0.0, value, null, null, 27, null);
+    return parent.copy$default_0(null, value, null, null, null, 29, null);
   };
   _no_name_provided__1_19.prototype.set_23 = function (parent, value) {
     var tmp = parent instanceof Person_0 ? parent : THROW_CCE();
-    return this.set_4_8(tmp, value instanceof LocalDate_0 ? value : THROW_CCE());
+    return this.set_4_8(tmp, (!(value == null) ? typeof value === 'number' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_19.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23876,17 +23878,17 @@
     return this._get_id__2_12();
   };
   _no_name_provided__1_20.prototype.get_3_10 = function (parent) {
-    return parent._name_3;
+    return parent._like_0;
   };
   _no_name_provided__1_20.prototype.get_61 = function (parent) {
-    return this.get_3_10(parent instanceof Person_0 ? parent : THROW_CCE());
+    return this.get_3_10(parent instanceof Activity_0 ? parent : THROW_CCE());
   };
   _no_name_provided__1_20.prototype.set_4_9 = function (parent, value) {
-    return parent.copy$default_0(value, 0.0, null, null, null, 30, null);
+    return parent.copy$default_2(null, value, 1, null);
   };
   _no_name_provided__1_20.prototype.set_23 = function (parent, value) {
-    var tmp = parent instanceof Person_0 ? parent : THROW_CCE();
-    return this.set_4_9(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+    var tmp = parent instanceof Activity_0 ? parent : THROW_CCE();
+    return this.set_4_9(tmp, (!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_20.$metadata$ = {
     simpleName: '<no name provided>_1',
@@ -23904,57 +23906,37 @@
     return this._get_id__2_12();
   };
   _no_name_provided__1_21.prototype.get_3_10 = function (parent) {
-    return parent._salary_0;
+    return parent._name_4;
   };
   _no_name_provided__1_21.prototype.get_61 = function (parent) {
-    return this.get_3_10(parent instanceof Person_0 ? parent : THROW_CCE());
+    return this.get_3_10(parent instanceof Activity_0 ? parent : THROW_CCE());
   };
   _no_name_provided__1_21.prototype.set_4_10 = function (parent, value) {
-    return parent.copy$default_0(null, value, null, null, null, 29, null);
+    return parent.copy$default_2(value, false, 2, null);
   };
   _no_name_provided__1_21.prototype.set_23 = function (parent, value) {
-    var tmp = parent instanceof Person_0 ? parent : THROW_CCE();
-    return this.set_4_10(tmp, (!(value == null) ? typeof value === 'number' : false) ? value : THROW_CCE());
+    var tmp = parent instanceof Activity_0 ? parent : THROW_CCE();
+    return this.set_4_10(tmp, (!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   _no_name_provided__1_21.$metadata$ = {
     simpleName: '<no name provided>_1',
     kind: 'class',
     interfaces: [Lens]
   };
-  function Activity() {
-    Activity_instance = this;
-    var tmp = this;
-    var tmp0_buildLens_0 = 'like';
-    tmp._like = new _no_name_provided__1_11(tmp0_buildLens_0);
-    var tmp_0 = this;
-    var tmp0_buildLens_0_0 = 'name';
-    tmp_0._name_1 = new _no_name_provided__1_12(tmp0_buildLens_0_0);
-  }
-  Activity.$metadata$ = {
-    simpleName: 'Activity',
-    kind: 'object',
-    interfaces: []
-  };
-  var Activity_instance;
-  function Activity_getInstance() {
-    if (Activity_instance == null)
-      new Activity();
-    return Activity_instance;
-  }
   function Address() {
     Address_instance = this;
     var tmp = this;
     var tmp0_buildLens_0 = 'city';
-    tmp._city = new _no_name_provided__1_13(tmp0_buildLens_0);
+    tmp._city = new _no_name_provided__1_11(tmp0_buildLens_0);
     var tmp_0 = this;
     var tmp0_buildLens_0_0 = 'number';
-    tmp_0._number = new _no_name_provided__1_14(tmp0_buildLens_0_0);
+    tmp_0._number = new _no_name_provided__1_12(tmp0_buildLens_0_0);
     var tmp_1 = this;
     var tmp0_buildLens_0_1 = 'postalCode';
-    tmp_1._postalCode = new _no_name_provided__1_15(tmp0_buildLens_0_1);
+    tmp_1._postalCode = new _no_name_provided__1_13(tmp0_buildLens_0_1);
     var tmp_2 = this;
     var tmp0_buildLens_0_2 = 'street';
-    tmp_2._street = new _no_name_provided__1_16(tmp0_buildLens_0_2);
+    tmp_2._street = new _no_name_provided__1_14(tmp0_buildLens_0_2);
   }
   Address.$metadata$ = {
     simpleName: 'Address',
@@ -23971,19 +23953,19 @@
     Person_instance = this;
     var tmp = this;
     var tmp0_buildLens_0 = 'activities';
-    tmp._activities = new _no_name_provided__1_17(tmp0_buildLens_0);
+    tmp._activities = new _no_name_provided__1_15(tmp0_buildLens_0);
     var tmp_0 = this;
     var tmp0_buildLens_0_0 = 'address';
-    tmp_0._address = new _no_name_provided__1_18(tmp0_buildLens_0_0);
+    tmp_0._address = new _no_name_provided__1_16(tmp0_buildLens_0_0);
     var tmp_1 = this;
     var tmp0_buildLens_0_1 = 'birthday';
-    tmp_1._birthday = new _no_name_provided__1_19(tmp0_buildLens_0_1);
+    tmp_1._birthday = new _no_name_provided__1_17(tmp0_buildLens_0_1);
     var tmp_2 = this;
     var tmp0_buildLens_0_2 = 'name';
-    tmp_2._name_2 = new _no_name_provided__1_20(tmp0_buildLens_0_2);
+    tmp_2._name_1 = new _no_name_provided__1_18(tmp0_buildLens_0_2);
     var tmp_3 = this;
     var tmp0_buildLens_0_3 = 'salary';
-    tmp_3._salary = new _no_name_provided__1_21(tmp0_buildLens_0_3);
+    tmp_3._salary = new _no_name_provided__1_19(tmp0_buildLens_0_3);
   }
   Person.$metadata$ = {
     simpleName: 'Person',
@@ -23995,6 +23977,26 @@
     if (Person_instance == null)
       new Person();
     return Person_instance;
+  }
+  function Activity() {
+    Activity_instance = this;
+    var tmp = this;
+    var tmp0_buildLens_0 = 'like';
+    tmp._like = new _no_name_provided__1_20(tmp0_buildLens_0);
+    var tmp_0 = this;
+    var tmp0_buildLens_0_0 = 'name';
+    tmp_0._name_2 = new _no_name_provided__1_21(tmp0_buildLens_0_0);
+  }
+  Activity.$metadata$ = {
+    simpleName: 'Activity',
+    kind: 'object',
+    interfaces: []
+  };
+  var Activity_instance;
+  function Activity_getInstance() {
+    if (Activity_instance == null)
+      new Activity();
+    return Activity_instance;
   }
   function Person_init_$Init$(name, salary, birthday, address, activities, $mask0, $marker, $this) {
     if (!(($mask0 & 1) === 0))
@@ -24344,7 +24346,7 @@
   PersonValidator.prototype.validate_0 = function (data, metadata) {
     var msgs = ArrayList_init_$Create$();
     var inspector = inspect$default(data, null, 2, null);
-    var name = inspector.sub_2(Person_getInstance()._name_2);
+    var name = inspector.sub_2(Person_getInstance()._name_1);
     var tmp0_trim_0 = name._data_0;
     if (isBlank(toString_1(trim(isCharSequence(tmp0_trim_0) ? tmp0_trim_0 : THROW_CCE())))) {
       msgs.add_19(new Message(name._get_id__22(), Status_Invalid_getInstance(), 'Please provide a name'));
@@ -24619,7 +24621,7 @@
     return PersonListStore_instance;
   }
   function details(_this_) {
-    var name = PersonStore_getInstance().sub_2(Person_getInstance()._name_2);
+    var name = PersonStore_getInstance().sub_2(Person_getInstance()._name_1);
     var salary = PersonStore_getInstance().sub_2(Person_getInstance()._salary.plus_29(Formats_getInstance()._currency));
     var birthday = PersonStore_getInstance().sub_2(Person_getInstance()._birthday.plus_29(Formats_getInstance()._date));
     var address = PersonStore_getInstance().sub_2(Person_getInstance()._address);
@@ -24693,7 +24695,7 @@
     return formInput(_this_, label, subStore, inputType, extraClass);
   }
   function activityCheckbox(_this_, activity) {
-    var name = activity.sub_2(Activity_getInstance()._name_1);
+    var name = activity.sub_2(Activity_getInstance()._name_2);
     var like = activity.sub_2(Activity_getInstance()._like);
     return _this_.div$default_14('form-check form-check-inline', null, _no_name_provided_$factory_172(activity, like, name), 2, null);
   }
