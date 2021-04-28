@@ -54,7 +54,7 @@ fun main() {
                                 display { flex }
                                 justifyContent { center }
                                 alignItems { center }
-                                background { color { if (cell.isInWinningGroup) success else "white" } }
+                                background { color { if (cell.isInWinningGroup) success.main else "white" } }
                             }) {
                                 if (cell.symbol.isNotBlank()) {
                                     icon({
@@ -71,7 +71,7 @@ fun main() {
                     }
                     clickButton({
                         width { full }
-                        background { color { info } }
+                        background { color { info.main } }
                     }) { text("Reset") }.map {
                         GameState(player = gameStore.current.player)
                     } handledBy gameStore.update
