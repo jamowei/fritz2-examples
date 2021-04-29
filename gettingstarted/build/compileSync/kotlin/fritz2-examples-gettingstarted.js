@@ -241,6 +241,8 @@
   WindowMessageQueue.prototype.constructor = WindowMessageQueue;
   LensException.prototype = Object.create(Exception.prototype);
   LensException.prototype.constructor = LensException;
+  $collect_2_2_2COROUTINE$1.prototype = Object.create(CoroutineImpl_0.prototype);
+  $collect_2_2_2COROUTINE$1.prototype.constructor = $collect_2_2_2COROUTINE$1;
   _no_name_provided__47.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__47.prototype.constructor = _no_name_provided__47;
   _no_name_provided__48.prototype = Object.create(CoroutineImpl_0.prototype);
@@ -249,8 +251,8 @@
   _no_name_provided__49.prototype.constructor = _no_name_provided__49;
   _no_name_provided__50.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__50.prototype.constructor = _no_name_provided__50;
-  $enqueueCOROUTINE$1.prototype = Object.create(CoroutineImpl_0.prototype);
-  $enqueueCOROUTINE$1.prototype.constructor = $enqueueCOROUTINE$1;
+  $enqueueCOROUTINE$3.prototype = Object.create(CoroutineImpl_0.prototype);
+  $enqueueCOROUTINE$3.prototype.constructor = $enqueueCOROUTINE$3;
   _no_name_provided__51.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__51.prototype.constructor = _no_name_provided__51;
   _no_name_provided__52.prototype = Object.create(CoroutineImpl_0.prototype);
@@ -261,14 +263,12 @@
   _no_name_provided__54.prototype.constructor = _no_name_provided__54;
   _no_name_provided__61.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__61.prototype.constructor = _no_name_provided__61;
-  Tag.prototype = Object.create(WithEvents.prototype);
-  Tag.prototype.constructor = Tag;
   Div.prototype = Object.create(Tag.prototype);
   Div.prototype.constructor = Div;
   Label.prototype = Object.create(Tag.prototype);
   Label.prototype.constructor = Label;
-  _no_name_provided__141.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__141.prototype.constructor = _no_name_provided__141;
+  _no_name_provided__62.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__62.prototype.constructor = _no_name_provided__62;
   Input.prototype = Object.create(Tag.prototype);
   Input.prototype.constructor = Input;
   Button.prototype = Object.create(Tag.prototype);
@@ -277,16 +277,14 @@
   MountTargetNotFoundException.prototype.constructor = MountTargetNotFoundException;
   DomListener.prototype = Object.create(Listener.prototype);
   DomListener.prototype.constructor = DomListener;
-  $collect_2_2_2COROUTINE$14.prototype = Object.create(CoroutineImpl_0.prototype);
-  $collect_2_2_2COROUTINE$14.prototype.constructor = $collect_2_2_2COROUTINE$14;
-  _no_name_provided__142.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__142.prototype.constructor = _no_name_provided__142;
-  $collect_2_2_2COROUTINE$25.prototype = Object.create(CoroutineImpl_0.prototype);
-  $collect_2_2_2COROUTINE$25.prototype.constructor = $collect_2_2_2COROUTINE$25;
-  $collect_2_2_2COROUTINE$30.prototype = Object.create(CoroutineImpl_0.prototype);
-  $collect_2_2_2COROUTINE$30.prototype.constructor = $collect_2_2_2COROUTINE$30;
-  _no_name_provided__147.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__147.prototype.constructor = _no_name_provided__147;
+  $collect_2_2_2COROUTINE$16.prototype = Object.create(CoroutineImpl_0.prototype);
+  $collect_2_2_2COROUTINE$16.prototype.constructor = $collect_2_2_2COROUTINE$16;
+  _no_name_provided__63.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__63.prototype.constructor = _no_name_provided__63;
+  $collect_2_2_2COROUTINE$31.prototype = Object.create(CoroutineImpl_0.prototype);
+  $collect_2_2_2COROUTINE$31.prototype.constructor = $collect_2_2_2COROUTINE$31;
+  _no_name_provided__68.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__68.prototype.constructor = _no_name_provided__68;
   function indexOf(_this_, element) {
     if (element == null) {
       var inductionVariable = 0;
@@ -516,7 +514,7 @@
   _no_name_provided_.prototype.invoke_0 = function (it) {
     return it === this._this$0 ? '(this Collection)' : toString_0(it);
   };
-  _no_name_provided_.prototype.invoke_227 = function (p1) {
+  _no_name_provided_.prototype.invoke_148 = function (p1) {
     return this.invoke_0((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided_.$metadata$ = {
@@ -686,19 +684,19 @@
     var tmp2_safe_receiver_4 = e._get_key__23();
     var tmp3_elvis_lhs_3 = tmp2_safe_receiver_4 == null ? null : hashCode(tmp2_safe_receiver_4);
     var tmp = tmp3_elvis_lhs_3 == null ? 0 : tmp3_elvis_lhs_3;
-    var tmp0_safe_receiver_6 = e._get_value__8();
+    var tmp0_safe_receiver_6 = e._get_value__6();
     var tmp1_elvis_lhs_5 = tmp0_safe_receiver_6 == null ? null : hashCode(tmp0_safe_receiver_6);
     return tmp ^ (tmp1_elvis_lhs_5 == null ? 0 : tmp1_elvis_lhs_5);
   };
   Companion_1.prototype.entryToString = function (e) {
-    return '' + e._get_key__23() + '=' + e._get_value__8();
+    return '' + e._get_key__23() + '=' + e._get_value__6();
   };
   Companion_1.prototype.entryEquals = function (e, other) {
     if (!(!(other == null) ? isInterface(other, Entry) : false))
       return false;
     else {
     }
-    return equals_0(e._get_key__23(), other._get_key__23()) ? equals_0(e._get_value__8(), other._get_value__8()) : false;
+    return equals_0(e._get_key__23(), other._get_key__23()) ? equals_0(e._get_value__6(), other._get_value__6()) : false;
   };
   Companion_1.$metadata$ = {
     simpleName: 'Companion',
@@ -717,7 +715,7 @@
   _no_name_provided__0.prototype.invoke_2 = function (it) {
     return this._this$0_0.toString_0(it);
   };
-  _no_name_provided__0.prototype.invoke_227 = function (p1) {
+  _no_name_provided__0.prototype.invoke_148 = function (p1) {
     return this.invoke_2((!(p1 == null) ? isInterface(p1, Entry) : false) ? p1 : THROW_CCE());
   };
   _no_name_provided__0.$metadata$ = {
@@ -738,7 +736,7 @@
     else {
     }
     var key = entry._get_key__23();
-    var value = entry._get_value__8();
+    var value = entry._get_value__6();
     var ourValue = (isInterface(this, Map_0) ? this : THROW_CCE()).get_17(key);
     if (!equals_0(value, ourValue)) {
       return false;
@@ -795,7 +793,7 @@
   };
   AbstractMap.prototype.get_17 = function (key) {
     var tmp0_safe_receiver = implFindEntry(this, key);
-    return tmp0_safe_receiver == null ? null : tmp0_safe_receiver._get_value__8();
+    return tmp0_safe_receiver == null ? null : tmp0_safe_receiver._get_value__6();
   };
   AbstractMap.prototype.hashCode = function () {
     return hashCode(this._get_entries__2());
@@ -811,7 +809,7 @@
     return joinToString$default_0(tmp, ', ', '{', '}', 0, null, _no_name_provided_$factory_0(this), 24, null);
   };
   AbstractMap.prototype.toString_0 = function (entry) {
-    return toString(this, entry._get_key__23()) + '=' + toString(this, entry._get_value__8());
+    return toString(this, entry._get_key__23()) + '=' + toString(this, entry._get_value__6());
   };
   AbstractMap.$metadata$ = {
     simpleName: 'AbstractMap',
@@ -1161,7 +1159,7 @@
     }
     return tmp;
   };
-  _no_name_provided__2.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__2.prototype.invoke_126 = function (p1, p2) {
     var tmp = (!(p1 == null) ? isInterface(p1, CoroutineContext) : false) ? p1 : THROW_CCE();
     return this.invoke_4(tmp, (!(p2 == null) ? isInterface(p2, Element_0) : false) ? p2 : THROW_CCE());
   };
@@ -1273,7 +1271,7 @@
     }
     return tmp;
   };
-  _no_name_provided__3.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__3.prototype.invoke_126 = function (p1, p2) {
     var tmp = (!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE();
     return this.invoke_6(tmp, (!(p2 == null) ? isInterface(p2, Element_0) : false) ? p2 : THROW_CCE());
   };
@@ -1565,11 +1563,11 @@
   }
   function _no_name_provided__4() {
   }
-  _no_name_provided__4.prototype.invoke_214 = function (line) {
+  _no_name_provided__4.prototype.invoke_135 = function (line) {
     return line;
   };
-  _no_name_provided__4.prototype.invoke_227 = function (p1) {
-    return this.invoke_214((!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE());
+  _no_name_provided__4.prototype.invoke_148 = function (p1) {
+    return this.invoke_135((!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE());
   };
   _no_name_provided__4.$metadata$ = {
     kind: 'class',
@@ -1578,11 +1576,11 @@
   function _no_name_provided__5($indent) {
     this._$indent = $indent;
   }
-  _no_name_provided__5.prototype.invoke_214 = function (line) {
+  _no_name_provided__5.prototype.invoke_135 = function (line) {
     return this._$indent + line;
   };
-  _no_name_provided__5.prototype.invoke_227 = function (p1) {
-    return this.invoke_214((!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE());
+  _no_name_provided__5.prototype.invoke_148 = function (p1) {
+    return this.invoke_135((!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE());
   };
   _no_name_provided__5.$metadata$ = {
     kind: 'class',
@@ -1591,13 +1589,13 @@
   function _no_name_provided_$factory_3() {
     var i = new _no_name_provided__4();
     return function (p1) {
-      return i.invoke_214(p1);
+      return i.invoke_135(p1);
     };
   }
   function _no_name_provided_$factory_4($indent) {
     var i = new _no_name_provided__5($indent);
     return function (p1) {
-      return i.invoke_214(p1);
+      return i.invoke_135(p1);
     };
   }
   function toLongOrNull(_this_) {
@@ -1979,7 +1977,7 @@
   _no_name_provided__7.prototype.invoke_12 = function (it) {
     return substring(this._$this_splitToSequence, it);
   };
-  _no_name_provided__7.prototype.invoke_227 = function (p1) {
+  _no_name_provided__7.prototype.invoke_148 = function (p1) {
     return this.invoke_12(p1 instanceof IntRange ? p1 : THROW_CCE());
   };
   _no_name_provided__7.$metadata$ = {
@@ -2000,7 +1998,7 @@
     }
     return tmp;
   };
-  _no_name_provided__8.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__8.prototype.invoke_126 = function (p1, p2) {
     var tmp = (!(p1 == null) ? isCharSequence(p1) : false) ? p1 : THROW_CCE();
     return this.invoke_14(tmp, (!(p2 == null) ? typeof p2 === 'number' : false) ? p2 : THROW_CCE());
   };
@@ -2019,49 +2017,6 @@
     return function (p1, p2) {
       return i.invoke_14(p1, p2);
     };
-  }
-  function Lazy() {
-  }
-  Lazy.$metadata$ = {
-    simpleName: 'Lazy',
-    kind: 'interface',
-    interfaces: []
-  };
-  function UnsafeLazyImpl(initializer) {
-    this._initializer = initializer;
-    this.__value = UNINITIALIZED_VALUE_getInstance();
-  }
-  UnsafeLazyImpl.prototype._get_value__8 = function () {
-    if (this.__value === UNINITIALIZED_VALUE_getInstance()) {
-      this.__value = ensureNotNull(this._initializer)();
-      this._initializer = null;
-    }var tmp = this.__value;
-    return (tmp == null ? true : isObject(tmp)) ? tmp : THROW_CCE();
-  };
-  UnsafeLazyImpl.prototype.isInitialized = function () {
-    return !(this.__value === UNINITIALIZED_VALUE_getInstance());
-  };
-  UnsafeLazyImpl.prototype.toString = function () {
-    return this.isInitialized() ? toString_0(this._get_value__8()) : 'Lazy value not initialized yet.';
-  };
-  UnsafeLazyImpl.$metadata$ = {
-    simpleName: 'UnsafeLazyImpl',
-    kind: 'class',
-    interfaces: [Lazy, Serializable]
-  };
-  function UNINITIALIZED_VALUE() {
-    UNINITIALIZED_VALUE_instance = this;
-  }
-  UNINITIALIZED_VALUE.$metadata$ = {
-    simpleName: 'UNINITIALIZED_VALUE',
-    kind: 'object',
-    interfaces: []
-  };
-  var UNINITIALIZED_VALUE_instance;
-  function UNINITIALIZED_VALUE_getInstance() {
-    if (UNINITIALIZED_VALUE_instance == null)
-      new UNINITIALIZED_VALUE();
-    return UNINITIALIZED_VALUE_instance;
   }
   function _Result___init__impl_(value) {
     return value;
@@ -2611,17 +2566,17 @@
   };
   function SimpleEntry(key, value) {
     this._key_0 = key;
-    this.__value_0 = value;
+    this.__value = value;
   }
   SimpleEntry.prototype._get_key__23 = function () {
     return this._key_0;
   };
-  SimpleEntry.prototype._get_value__8 = function () {
-    return this.__value_0;
+  SimpleEntry.prototype._get_value__6 = function () {
+    return this.__value;
   };
   SimpleEntry.prototype.setValue_0 = function (newValue) {
-    var oldValue = this.__value_0;
-    this.__value_0 = newValue;
+    var oldValue = this.__value;
+    this.__value = newValue;
     return oldValue;
   };
   SimpleEntry.prototype.hashCode = function () {
@@ -3099,7 +3054,7 @@
   };
   InternalHashCodeMap.prototype.get_17 = function (key) {
     var tmp0_safe_receiver = getEntry(this, key);
-    return tmp0_safe_receiver == null ? null : tmp0_safe_receiver._get_value__8();
+    return tmp0_safe_receiver == null ? null : tmp0_safe_receiver._get_value__6();
   };
   InternalHashCodeMap.prototype.iterator_29 = function () {
     return new _no_name_provided__11(this);
@@ -3273,27 +3228,13 @@
     kind: 'interface',
     interfaces: [KCallable]
   };
-  function KProperty1() {
-  }
-  KProperty1.$metadata$ = {
-    simpleName: 'KProperty1',
-    kind: 'interface',
-    interfaces: [KProperty]
-  };
-  function KProperty() {
-  }
-  KProperty.$metadata$ = {
-    simpleName: 'KProperty',
-    kind: 'interface',
-    interfaces: [KCallable]
-  };
   var functionClasses;
   function _no_name_provided__12() {
   }
   _no_name_provided__12.prototype.invoke_56 = function (it) {
     return isObject(it);
   };
-  _no_name_provided__12.prototype.invoke_227 = function (p1) {
+  _no_name_provided__12.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__12.$metadata$ = {
@@ -3305,7 +3246,7 @@
   _no_name_provided__13.prototype.invoke_56 = function (it) {
     return isNumber(it);
   };
-  _no_name_provided__13.prototype.invoke_227 = function (p1) {
+  _no_name_provided__13.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__13.$metadata$ = {
@@ -3317,7 +3258,7 @@
   _no_name_provided__14.prototype.invoke_56 = function (it) {
     return !(it == null) ? typeof it === 'boolean' : false;
   };
-  _no_name_provided__14.prototype.invoke_227 = function (p1) {
+  _no_name_provided__14.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__14.$metadata$ = {
@@ -3329,7 +3270,7 @@
   _no_name_provided__15.prototype.invoke_56 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__15.prototype.invoke_227 = function (p1) {
+  _no_name_provided__15.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__15.$metadata$ = {
@@ -3341,7 +3282,7 @@
   _no_name_provided__16.prototype.invoke_56 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__16.prototype.invoke_227 = function (p1) {
+  _no_name_provided__16.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__16.$metadata$ = {
@@ -3353,7 +3294,7 @@
   _no_name_provided__17.prototype.invoke_56 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__17.prototype.invoke_227 = function (p1) {
+  _no_name_provided__17.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__17.$metadata$ = {
@@ -3365,7 +3306,7 @@
   _no_name_provided__18.prototype.invoke_56 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__18.prototype.invoke_227 = function (p1) {
+  _no_name_provided__18.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__18.$metadata$ = {
@@ -3377,7 +3318,7 @@
   _no_name_provided__19.prototype.invoke_56 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__19.prototype.invoke_227 = function (p1) {
+  _no_name_provided__19.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__19.$metadata$ = {
@@ -3389,7 +3330,7 @@
   _no_name_provided__20.prototype.invoke_56 = function (it) {
     return !(it == null) ? isArray(it) : false;
   };
-  _no_name_provided__20.prototype.invoke_227 = function (p1) {
+  _no_name_provided__20.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__20.$metadata$ = {
@@ -3401,7 +3342,7 @@
   _no_name_provided__21.prototype.invoke_56 = function (it) {
     return !(it == null) ? typeof it === 'string' : false;
   };
-  _no_name_provided__21.prototype.invoke_227 = function (p1) {
+  _no_name_provided__21.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__21.$metadata$ = {
@@ -3413,7 +3354,7 @@
   _no_name_provided__22.prototype.invoke_56 = function (it) {
     return it instanceof Error;
   };
-  _no_name_provided__22.prototype.invoke_227 = function (p1) {
+  _no_name_provided__22.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__22.$metadata$ = {
@@ -3425,7 +3366,7 @@
   _no_name_provided__23.prototype.invoke_56 = function (it) {
     return !(it == null) ? isBooleanArray(it) : false;
   };
-  _no_name_provided__23.prototype.invoke_227 = function (p1) {
+  _no_name_provided__23.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__23.$metadata$ = {
@@ -3437,7 +3378,7 @@
   _no_name_provided__24.prototype.invoke_56 = function (it) {
     return !(it == null) ? isCharArray(it) : false;
   };
-  _no_name_provided__24.prototype.invoke_227 = function (p1) {
+  _no_name_provided__24.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__24.$metadata$ = {
@@ -3449,7 +3390,7 @@
   _no_name_provided__25.prototype.invoke_56 = function (it) {
     return !(it == null) ? isByteArray(it) : false;
   };
-  _no_name_provided__25.prototype.invoke_227 = function (p1) {
+  _no_name_provided__25.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__25.$metadata$ = {
@@ -3461,7 +3402,7 @@
   _no_name_provided__26.prototype.invoke_56 = function (it) {
     return !(it == null) ? isShortArray(it) : false;
   };
-  _no_name_provided__26.prototype.invoke_227 = function (p1) {
+  _no_name_provided__26.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__26.$metadata$ = {
@@ -3473,7 +3414,7 @@
   _no_name_provided__27.prototype.invoke_56 = function (it) {
     return !(it == null) ? isIntArray(it) : false;
   };
-  _no_name_provided__27.prototype.invoke_227 = function (p1) {
+  _no_name_provided__27.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__27.$metadata$ = {
@@ -3485,7 +3426,7 @@
   _no_name_provided__28.prototype.invoke_56 = function (it) {
     return !(it == null) ? isLongArray(it) : false;
   };
-  _no_name_provided__28.prototype.invoke_227 = function (p1) {
+  _no_name_provided__28.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__28.$metadata$ = {
@@ -3497,7 +3438,7 @@
   _no_name_provided__29.prototype.invoke_56 = function (it) {
     return !(it == null) ? isFloatArray(it) : false;
   };
-  _no_name_provided__29.prototype.invoke_227 = function (p1) {
+  _no_name_provided__29.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__29.$metadata$ = {
@@ -3509,7 +3450,7 @@
   _no_name_provided__30.prototype.invoke_56 = function (it) {
     return !(it == null) ? isDoubleArray(it) : false;
   };
-  _no_name_provided__30.prototype.invoke_227 = function (p1) {
+  _no_name_provided__30.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__30.$metadata$ = {
@@ -3528,7 +3469,7 @@
     }
     return tmp;
   };
-  _no_name_provided__31.prototype.invoke_227 = function (p1) {
+  _no_name_provided__31.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__31.$metadata$ = {
@@ -4477,7 +4418,7 @@
   _no_name_provided__33.prototype.invoke_56 = function (it) {
     return toString_1(it);
   };
-  _no_name_provided__33.prototype.invoke_227 = function (p1) {
+  _no_name_provided__33.prototype.invoke_148 = function (p1) {
     return this.invoke_56((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__33.$metadata$ = {
@@ -4731,9 +4672,6 @@
   }
   function THROW_CCE() {
     throw ClassCastException_init_$Create$();
-  }
-  function lazy(initializer) {
-    return new UnsafeLazyImpl(initializer);
   }
   function arrayCopyResize(source, newSize, defaultValue) {
     var tmp0_unsafeCast_0 = source.slice(0, newSize);
@@ -5134,37 +5072,6 @@
   }
   function numberRangeToNumber(start, endInclusive) {
     return new IntRange(start, endInclusive);
-  }
-  var propertyRefClassMetadataCache;
-  function getPropertyCallableRef(name, paramCount, type, getter, setter) {
-    getter.get = getter;
-    getter.set = setter;
-    getter.callableName = name;
-    var tmp0_unsafeCast_0 = getPropertyRefClass(getter, getKPropMetadata(paramCount, setter, type));
-    return tmp0_unsafeCast_0;
-  }
-  function getPropertyRefClass(obj, metadata) {
-    obj.$metadata$ = metadata;
-    obj.constructor = obj;
-    return obj;
-  }
-  function getKPropMetadata(paramCount, setter, type) {
-    var mdata = propertyRefClassMetadataCache[paramCount][setter == null ? 0 : 1];
-    if (mdata.interfaces.length == 0) {
-      mdata.interfaces.push(type);
-    }return mdata;
-  }
-  function propertyRefClassMetadataCache$init$() {
-    var tmp = {kind: 'class', interfaces: []};
-    var tmp0_arrayOf_0 = [tmp, {kind: 'class', interfaces: []}];
-    var tmp_0 = tmp0_arrayOf_0;
-    var tmp_1 = {kind: 'class', interfaces: []};
-    var tmp1_arrayOf_0 = [tmp_1, {kind: 'class', interfaces: []}];
-    var tmp_2 = tmp1_arrayOf_0;
-    var tmp_3 = {kind: 'class', interfaces: []};
-    var tmp2_arrayOf_0 = [tmp_3, {kind: 'class', interfaces: []}];
-    var tmp3_arrayOf_0 = [tmp_0, tmp_2, tmp2_arrayOf_0];
-    return tmp3_arrayOf_0;
   }
   function isArrayish(o) {
     var tmp;
@@ -5731,7 +5638,7 @@
   AtomicRef.prototype._set_value__3 = function (_set___) {
     this._value_0 = _set___;
   };
-  AtomicRef.prototype._get_value__8 = function () {
+  AtomicRef.prototype._get_value__6 = function () {
     return this._value_0;
   };
   AtomicRef.prototype.compareAndSet$atomicfu = function (expect, update) {
@@ -5755,7 +5662,7 @@
   };
   Object.defineProperty(AtomicRef.prototype, 'kotlinx$atomicfu$value', {
     configurable: true,
-    get: AtomicRef.prototype._get_value__8,
+    get: AtomicRef.prototype._get_value__6,
     set: AtomicRef.prototype._set_value__3
   });
   function atomic(initial) {
@@ -5767,7 +5674,7 @@
   AtomicBoolean.prototype._set_value__0 = function (_set___) {
     this._value_1 = _set___;
   };
-  AtomicBoolean.prototype._get_value__8 = function () {
+  AtomicBoolean.prototype._get_value__6 = function () {
     return this._value_1;
   };
   AtomicBoolean.prototype.compareAndSet$atomicfu = function (expect, update) {
@@ -5791,7 +5698,7 @@
   };
   Object.defineProperty(AtomicBoolean.prototype, 'kotlinx$atomicfu$value', {
     configurable: true,
-    get: AtomicBoolean.prototype._get_value__8,
+    get: AtomicBoolean.prototype._get_value__6,
     set: AtomicBoolean.prototype._set_value__0
   });
   function atomic_0(initial) {
@@ -5803,7 +5710,7 @@
   AtomicInt.prototype._set_value__1 = function (_set___) {
     this._value_2 = _set___;
   };
-  AtomicInt.prototype._get_value__8 = function () {
+  AtomicInt.prototype._get_value__6 = function () {
     return this._value_2;
   };
   AtomicInt.prototype.compareAndSet$atomicfu = function (expect, update) {
@@ -5860,7 +5767,7 @@
   };
   Object.defineProperty(AtomicInt.prototype, 'kotlinx$atomicfu$value', {
     configurable: true,
-    get: AtomicInt.prototype._get_value__8,
+    get: AtomicInt.prototype._get_value__6,
     set: AtomicInt.prototype._set_value__1
   });
   function atomic_1(initial) {
@@ -6869,7 +6776,7 @@
   _no_name_provided__34.prototype.invoke_60 = function (it) {
     return it instanceof CoroutineDispatcher ? it : null;
   };
-  _no_name_provided__34.prototype.invoke_227 = function (p1) {
+  _no_name_provided__34.prototype.invoke_148 = function (p1) {
     return this.invoke_60((!(p1 == null) ? isInterface(p1, Element_0) : false) ? p1 : THROW_CCE());
   };
   _no_name_provided__34.$metadata$ = {
@@ -10407,7 +10314,7 @@
     var tmp0_success_0_1_6 = Companion_getInstance_2();
     this._$cancellable_2_2.resumeWith_27(_Result___init__impl_(Unit_getInstance()));
   };
-  _no_name_provided__35.prototype.invoke_227 = function (p1) {
+  _no_name_provided__35.prototype.invoke_148 = function (p1) {
     this.invoke_69((p1 == null ? true : p1 instanceof Error) ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
@@ -10729,13 +10636,6 @@
     kind: 'interface',
     interfaces: []
   };
-  function SharedFlow() {
-  }
-  SharedFlow.$metadata$ = {
-    simpleName: 'SharedFlow',
-    kind: 'interface',
-    interfaces: [Flow]
-  };
   function MutableSharedFlow() {
   }
   MutableSharedFlow.$metadata$ = {
@@ -10743,15 +10643,15 @@
     kind: 'interface',
     interfaces: [SharedFlow, FlowCollector]
   };
+  function SharedFlow() {
+  }
+  SharedFlow.$metadata$ = {
+    simpleName: 'SharedFlow',
+    kind: 'interface',
+    interfaces: [Flow]
+  };
   var NONE;
   var PENDING;
-  function StateFlow() {
-  }
-  StateFlow.$metadata$ = {
-    simpleName: 'StateFlow',
-    kind: 'interface',
-    interfaces: [SharedFlow]
-  };
   function MutableStateFlow() {
   }
   MutableStateFlow.$metadata$ = {
@@ -10763,6 +10663,13 @@
     var tmp0_elvis_lhs = value;
     return new StateFlowImpl(tmp0_elvis_lhs == null ? NULL : tmp0_elvis_lhs);
   }
+  function StateFlow() {
+  }
+  StateFlow.$metadata$ = {
+    simpleName: 'StateFlow',
+    kind: 'interface',
+    interfaces: [SharedFlow]
+  };
   function updateState($this, expectedState, newState) {
     var curSequence = 0;
     var curSlots = $this._get_slots__0();
@@ -10955,7 +10862,7 @@
     updateState(this, null, tmp0_elvis_lhs == null ? NULL : tmp0_elvis_lhs);
     Unit_getInstance();
   };
-  StateFlowImpl.prototype._get_value__8 = function () {
+  StateFlowImpl.prototype._get_value__6 = function () {
     var tmp0_unbox_0 = NULL;
     var tmp1_unbox_0 = this.__state_1._value_0;
     var tmp;
@@ -11061,7 +10968,7 @@
   };
   function increment(_this_, delta_0) {
     while (true) {
-      var current = _this_._get_value__8();
+      var current = _this_._get_value__6();
       if (_this_.compareAndSet_0(current, current + delta_0 | 0))
         return Unit_getInstance();
     }
@@ -11208,7 +11115,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__36.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__36.prototype.invoke_148 = function (p1, $cont) {
     this.invoke_71((!(p1 == null) ? isInterface(p1, ProducerScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
@@ -11263,7 +11170,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__37.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__37.prototype.invoke_148 = function (p1, $cont) {
     this.invoke_97((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
@@ -11428,7 +11335,7 @@
       throw IllegalStateException_init_$Create$(toString_1(tmp0_error_0));
     }return collectJob == null ? count : count + 1 | 0;
   };
-  _no_name_provided__38.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__38.prototype.invoke_126 = function (p1, p2) {
     var tmp = (!(p1 == null) ? typeof p1 === 'number' : false) ? p1 : THROW_CCE();
     return this.invoke_91(tmp, (!(p2 == null) ? isInterface(p2, Element_0) : false) ? p2 : THROW_CCE());
   };
@@ -12078,7 +11985,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__39.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__39.prototype.invoke_148 = function (p1, $cont) {
     this.invoke_97((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
@@ -12742,7 +12649,7 @@
   _no_name_provided__40.prototype.invoke_83 = function (_anonymous_parameter_0_) {
     callUndeliveredElement(this._$this_bindCancellationFun, this._$element, this._$context);
   };
-  _no_name_provided__40.prototype.invoke_227 = function (p1) {
+  _no_name_provided__40.prototype.invoke_148 = function (p1) {
     this.invoke_83(p1 instanceof Error ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
@@ -13007,7 +12914,7 @@
   _no_name_provided__41.prototype.invoke_83 = function (it) {
     this._this$0_7.unlock_0(this._this$1._get_owner__0());
   };
-  _no_name_provided__41.prototype.invoke_227 = function (p1) {
+  _no_name_provided__41.prototype.invoke_148 = function (p1) {
     this.invoke_83(p1 instanceof Error ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
@@ -13157,7 +13064,7 @@
   _no_name_provided__42.prototype.invoke_83 = function (it) {
     this._this$0_8.unlock_0(this._$owner);
   };
-  _no_name_provided__42.prototype.invoke_227 = function (p1) {
+  _no_name_provided__42.prototype.invoke_148 = function (p1) {
     this.invoke_83(p1 instanceof Error ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
@@ -13571,7 +13478,7 @@
   _no_name_provided__43.prototype.invoke_119 = function () {
     this._this$0_9.process_1();
   };
-  _no_name_provided__43.prototype.invoke_201 = function () {
+  _no_name_provided__43.prototype.invoke_120 = function () {
     this.invoke_119();
     return Unit_getInstance();
   };
@@ -13676,7 +13583,7 @@
       event.stopPropagation();
       this._this$0_10.process_1();
     }};
-  _no_name_provided__44.prototype.invoke_227 = function (p1) {
+  _no_name_provided__44.prototype.invoke_148 = function (p1) {
     this.invoke_87((p1 == null ? true : p1) ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
@@ -13690,7 +13597,7 @@
   _no_name_provided__45.prototype.invoke_107 = function (it) {
     this._this$0_11.process_1();
   };
-  _no_name_provided__45.prototype.invoke_227 = function (p1) {
+  _no_name_provided__45.prototype.invoke_148 = function (p1) {
     this.invoke_107(p1 instanceof Unit ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
@@ -13772,7 +13679,7 @@
   _no_name_provided__46.prototype.invoke_91 = function (count, _anonymous_parameter_1_) {
     return count + 1 | 0;
   };
-  _no_name_provided__46.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__46.prototype.invoke_126 = function (p1, p2) {
     var tmp = (!(p1 == null) ? typeof p1 === 'number' : false) ? p1 : THROW_CCE();
     return this.invoke_91(tmp, (!(p2 == null) ? isInterface(p2, Element_0) : false) ? p2 : THROW_CCE());
   };
@@ -13942,10 +13849,86 @@
     kind: 'interface',
     interfaces: []
   };
+  function _no_name_provided__1_7_3_3($collector) {
+    this._$collector_3 = $collector;
+  }
+  _no_name_provided__1_7_3_3.prototype.emit_2_8_4_4 = function (value, $cont) {
+    return this._$collector_3.emit_9(Unit_getInstance(), $cont);
+  };
+  _no_name_provided__1_7_3_3.prototype.emit_9 = function (value, $cont) {
+    return this.emit_2_8_4_4(value instanceof Event ? value : THROW_CCE(), $cont);
+  };
+  _no_name_provided__1_7_3_3.$metadata$ = {
+    simpleName: '<no name provided>_1_7_3_3',
+    kind: 'class',
+    interfaces: [FlowCollector]
+  };
+  function $collect_2_2_2COROUTINE$1(_this_, collector, resultContinuation) {
+    CoroutineImpl_0.call(this, resultContinuation);
+    this.__this__13 = _this_;
+    this._collector_6 = collector;
+  }
+  $collect_2_2_2COROUTINE$1.prototype.doResume_32 = function () {
+    var suspendResult = this._result;
+    $sm: do
+      try {
+        var tmp = this._state_0;
+        switch (tmp) {
+          case 0:
+            this._exceptionState = 2;
+            this._state_0 = 1;
+            suspendResult = this.__this__13._$tmp0_map_0.collect_12(new _no_name_provided__1_7_3_3(this._collector_6), this);
+            if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+              return suspendResult;
+            }
+            continue $sm;
+          case 1:
+            suspendResult;
+            return Unit_getInstance();
+          case 2:
+            throw this._exception_0;
+        }
+      } catch ($p) {
+        if (this._exceptionState === 2) {
+          throw $p;
+        } else {
+          this._state_0 = this._exceptionState;
+          this._exception_0 = $p;
+        }
+      }
+     while (true);
+  };
+  $collect_2_2_2COROUTINE$1.$metadata$ = {
+    simpleName: '$collect_2_2_2COROUTINE$1',
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__1_1_1($tmp0_map_0) {
+    this._$tmp0_map_0 = $tmp0_map_0;
+  }
+  _no_name_provided__1_1_1.prototype.collect_2_2_2 = function (collector, $cont) {
+    var tmp = new $collect_2_2_2COROUTINE$1(this, collector, $cont);
+    tmp._result = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_32();
+  };
+  _no_name_provided__1_1_1.prototype.collect_12 = function (collector, $cont) {
+    return this.collect_2_2_2(collector, $cont);
+  };
+  _no_name_provided__1_1_1.$metadata$ = {
+    simpleName: '<no name provided>_1_1_1',
+    kind: 'class',
+    interfaces: [Flow]
+  };
   function WithJob() {
   }
-  WithJob.prototype.handledBy_0 = function (_this__0, handler) {
+  WithJob.prototype.handledBy_1 = function (_this__0, handler) {
     return handler._get_collect__0()(_this__0, this._get_job__10());
+  };
+  WithJob.prototype.handledBy_2 = function (_this__0, handler) {
+    var tmp = handler._get_collect__0();
+    var tmp0_map_0 = _this__0._get_events__0();
+    return tmp(new _no_name_provided__1_1_1(tmp0_map_0), this._get_job__10());
   };
   WithJob.$metadata$ = {
     simpleName: 'WithJob',
@@ -13968,7 +13951,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__47.prototype.invoke_205 = function (p1, p2, $cont) {
+  _no_name_provided__47.prototype.invoke_126 = function (p1, p2, $cont) {
     var tmp = (p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE();
     return this.invoke_93(tmp, (p2 == null ? true : isObject(p2)) ? p2 : THROW_CCE(), $cont);
   };
@@ -14023,7 +14006,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__48.prototype.invoke_205 = function (p1, p2, $cont) {
+  _no_name_provided__48.prototype.invoke_126 = function (p1, p2, $cont) {
     var tmp = (!(p1 == null) ? isInterface(p1, FlowCollector) : false) ? p1 : THROW_CCE();
     this.invoke_95(tmp, p2 instanceof Error ? p2 : THROW_CCE(), $cont);
     return Unit_getInstance();
@@ -14074,7 +14057,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__49.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__49.prototype.invoke_148 = function (p1, $cont) {
     this.invoke_97((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
@@ -14152,7 +14135,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__50.prototype.invoke_205 = function (p1, p2, $cont) {
+  _no_name_provided__50.prototype.invoke_126 = function (p1, p2, $cont) {
     var tmp = (p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE();
     return this.invoke_99(tmp, (p2 == null ? true : isObject(p2)) ? p2 : THROW_CCE(), $cont);
   };
@@ -14182,12 +14165,12 @@
     interfaces: [],
     suspendArity: 2
   };
-  function $enqueueCOROUTINE$1(_this_, update, resultContinuation) {
+  function $enqueueCOROUTINE$3(_this_, update, resultContinuation) {
     CoroutineImpl_0.call(this, resultContinuation);
-    this.__this__13 = _this_;
+    this.__this__14 = _this_;
     this._update = update;
   }
-  $enqueueCOROUTINE$1.prototype.doResume_32 = function () {
+  $enqueueCOROUTINE$3.prototype.doResume_32 = function () {
     var suspendResult = this._result;
     $sm: do
       try {
@@ -14200,7 +14183,7 @@
             continue $sm;
           case 1:
             var tmp_0 = this;
-            tmp_0._tmp0_withLock_01 = this.__this__13._mutex;
+            tmp_0._tmp0_withLock_01 = this.__this__14._mutex;
             var tmp_1 = this;
             tmp_1._tmp1_withLock_02 = null;
             this._state_0 = 2;
@@ -14218,9 +14201,9 @@
             continue $sm;
           case 4:
             this._exceptionState = 9;
-            this._ARGUMENT5 = this.__this__13._state_3;
+            this._ARGUMENT5 = this.__this__14._state_3;
             this._state_0 = 5;
-            suspendResult = this._update._update_1(this.__this__13._state_3._get_value__8(), this);
+            suspendResult = this._update._update_1(this.__this__14._state_3._get_value__6(), this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -14258,7 +14241,7 @@
             var tmp_4 = this._exception_0;
             if (tmp_4 instanceof Error) {
               var e = this._exception_0;
-              this._update._errorHandler(e, this.__this__13._state_3._get_value__8());
+              this._update._errorHandler(e, this.__this__14._state_3._get_value__6());
               Unit_getInstance();
               this._state_0 = 12;
               continue $sm;
@@ -14285,8 +14268,8 @@
       }
      while (true);
   };
-  $enqueueCOROUTINE$1.$metadata$ = {
-    simpleName: '$enqueueCOROUTINE$1',
+  $enqueueCOROUTINE$3.$metadata$ = {
+    simpleName: '$enqueueCOROUTINE$3',
     kind: 'class',
     interfaces: []
   };
@@ -14307,14 +14290,14 @@
   RootStore.prototype._get_job__10 = function () {
     return this._job_1;
   };
+  RootStore.prototype._get_data_ = function () {
+    return this._data;
+  };
   RootStore.prototype.enqueue_3 = function (update, $cont) {
-    var tmp = new $enqueueCOROUTINE$1(this, update, $cont);
+    var tmp = new $enqueueCOROUTINE$3(this, update, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_32();
-  };
-  RootStore.prototype._get_data_ = function () {
-    return this._data;
   };
   RootStore.prototype._get_update_ = function () {
     return this._update_0;
@@ -14343,7 +14326,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__51.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__51.prototype.invoke_148 = function (p1, $cont) {
     return this.invoke_105((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE(), $cont);
   };
   _no_name_provided__51.prototype.doResume_32 = function () {
@@ -14397,7 +14380,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__52.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__52.prototype.invoke_148 = function (p1, $cont) {
     this.invoke_103((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
@@ -14451,7 +14434,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__53.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__53.prototype.invoke_148 = function (p1, $cont) {
     return this.invoke_105((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE(), $cont);
   };
   _no_name_provided__53.prototype.doResume_32 = function () {
@@ -14505,7 +14488,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__54.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__54.prototype.invoke_148 = function (p1, $cont) {
     this.invoke_107(p1 instanceof Unit ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
@@ -14555,7 +14538,7 @@
   _no_name_provided__55.prototype.invoke_113 = function (p0, p1) {
     return this._$boundThis.errorHandler_0(p0, p1);
   };
-  _no_name_provided__55.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__55.prototype.invoke_126 = function (p1, p2) {
     var tmp = p1 instanceof Error ? p1 : THROW_CCE();
     return this.invoke_113(tmp, (p2 == null ? true : isObject(p2)) ? p2 : THROW_CCE());
   };
@@ -14575,7 +14558,7 @@
     launchIn(onEach(flow, _no_name_provided_$factory_49(this._this$0_14, this._$errorHandler_1, this._$execute_3, null)), plus(MainScope(), job));
     Unit_getInstance();
   };
-  _no_name_provided__56.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__56.prototype.invoke_126 = function (p1, p2) {
     var tmp = (!(p1 == null) ? isInterface(p1, Flow) : false) ? p1 : THROW_CCE();
     this.invoke_111(tmp, (!(p2 == null) ? isInterface(p2, Job) : false) ? p2 : THROW_CCE());
     return Unit_getInstance();
@@ -14590,7 +14573,7 @@
   _no_name_provided__57.prototype.invoke_113 = function (p0, p1) {
     return this._$boundThis_0.errorHandler_0(p0, p1);
   };
-  _no_name_provided__57.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__57.prototype.invoke_126 = function (p1, p2) {
     var tmp = p1 instanceof Error ? p1 : THROW_CCE();
     return this.invoke_113(tmp, (p2 == null ? true : isObject(p2)) ? p2 : THROW_CCE());
   };
@@ -14610,7 +14593,7 @@
     launchIn(onEach(flow, _no_name_provided_$factory_51(this._this$0_15, this._$errorHandler_2, this._$execute_4, null)), plus(MainScope(), job));
     Unit_getInstance();
   };
-  _no_name_provided__58.prototype.invoke_205 = function (p1, p2) {
+  _no_name_provided__58.prototype.invoke_126 = function (p1, p2) {
     var tmp = (!(p1 == null) ? isInterface(p1, Flow) : false) ? p1 : THROW_CCE();
     this.invoke_115(tmp, (!(p2 == null) ? isInterface(p2, Job) : false) ? p2 : THROW_CCE());
     return Unit_getInstance();
@@ -14735,6 +14718,13 @@
     kind: 'interface',
     interfaces: [TagContext]
   };
+  function EventContext() {
+  }
+  EventContext.$metadata$ = {
+    simpleName: 'EventContext',
+    kind: 'interface',
+    interfaces: [WithJob, WithEvents]
+  };
   function _no_name_provided__59($this_callbackFlow) {
     this._$this_callbackFlow = $this_callbackFlow;
   }
@@ -14742,7 +14732,7 @@
     this._$this_callbackFlow.offer_8(it);
     Unit_getInstance();
   };
-  _no_name_provided__59.prototype.invoke_227 = function (p1) {
+  _no_name_provided__59.prototype.invoke_148 = function (p1) {
     this.invoke_117(p1 instanceof Event ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
@@ -14758,7 +14748,7 @@
   _no_name_provided__60.prototype.invoke_119 = function () {
     this._this$0_16.domNode.removeEventListener(this._$type._name_0, this._$listener);
   };
-  _no_name_provided__60.prototype.invoke_201 = function () {
+  _no_name_provided__60.prototype.invoke_120 = function () {
     this.invoke_119();
     return Unit_getInstance();
   };
@@ -14767,7 +14757,7 @@
     interfaces: []
   };
   function subscribe($this, type) {
-    return new DomListener(callbackFlow(_no_name_provided_$factory_132($this, type, null)));
+    return new DomListener(callbackFlow(_no_name_provided_$factory_53($this, type, null)));
   }
   function _no_name_provided__61(this$0, $type, resultContinuation) {
     this._this$0_17 = this$0;
@@ -14780,7 +14770,7 @@
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__61.prototype.invoke_227 = function (p1, $cont) {
+  _no_name_provided__61.prototype.invoke_148 = function (p1, $cont) {
     this.invoke_121((!(p1 == null) ? isInterface(p1, ProducerScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
@@ -14793,10 +14783,10 @@
           case 0:
             this._exceptionState = 2;
             var tmp_0 = this;
-            tmp_0._listener0 = _no_name_provided_$factory_133(this._$this$callbackFlow);
+            tmp_0._listener0 = _no_name_provided_$factory_54(this._$this$callbackFlow);
             this._this$0_17.domNode.addEventListener(this._$type_0._name_0, this._listener0);
             this._state_0 = 1;
-            suspendResult = awaitClose(this._$this$callbackFlow, _no_name_provided_$factory_134(this._this$0_17, this._$type_0, this._listener0), this);
+            suspendResult = awaitClose(this._$this$callbackFlow, _no_name_provided_$factory_55(this._this$0_17, this._$type_0, this._listener0), this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -14827,1456 +14817,20 @@
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__62(this$0) {
-    this._this$0_18 = this$0;
-  }
-  _no_name_provided__62.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_18, Events_getInstance()._abort);
-  };
-  _no_name_provided__62.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__63(this$0) {
-    this._this$0_19 = this$0;
-  }
-  _no_name_provided__63.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_19, Events_getInstance()._afterprint);
-  };
-  _no_name_provided__63.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__64(this$0) {
-    this._this$0_20 = this$0;
-  }
-  _no_name_provided__64.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_20, Events_getInstance()._beforeprint);
-  };
-  _no_name_provided__64.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__65(this$0) {
-    this._this$0_21 = this$0;
-  }
-  _no_name_provided__65.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_21, Events_getInstance()._beforeunload);
-  };
-  _no_name_provided__65.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__66(this$0) {
-    this._this$0_22 = this$0;
-  }
-  _no_name_provided__66.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_22, Events_getInstance()._blur);
-  };
-  _no_name_provided__66.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__67(this$0) {
-    this._this$0_23 = this$0;
-  }
-  _no_name_provided__67.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_23, Events_getInstance()._canplay);
-  };
-  _no_name_provided__67.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__68(this$0) {
-    this._this$0_24 = this$0;
-  }
-  _no_name_provided__68.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_24, Events_getInstance()._canplaythrough);
-  };
-  _no_name_provided__68.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__69(this$0) {
-    this._this$0_25 = this$0;
-  }
-  _no_name_provided__69.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_25, Events_getInstance()._change);
-  };
-  _no_name_provided__69.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__70(this$0) {
-    this._this$0_26 = this$0;
-  }
-  _no_name_provided__70.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_26, Events_getInstance()._click);
-  };
-  _no_name_provided__70.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__71(this$0) {
-    this._this$0_27 = this$0;
-  }
-  _no_name_provided__71.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_27, Events_getInstance()._contextmenu);
-  };
-  _no_name_provided__71.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__72(this$0) {
-    this._this$0_28 = this$0;
-  }
-  _no_name_provided__72.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_28, Events_getInstance()._copy);
-  };
-  _no_name_provided__72.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__73(this$0) {
-    this._this$0_29 = this$0;
-  }
-  _no_name_provided__73.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_29, Events_getInstance()._cut);
-  };
-  _no_name_provided__73.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__74(this$0) {
-    this._this$0_30 = this$0;
-  }
-  _no_name_provided__74.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_30, Events_getInstance()._dblclick);
-  };
-  _no_name_provided__74.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__75(this$0) {
-    this._this$0_31 = this$0;
-  }
-  _no_name_provided__75.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_31, Events_getInstance()._drag);
-  };
-  _no_name_provided__75.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__76(this$0) {
-    this._this$0_32 = this$0;
-  }
-  _no_name_provided__76.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_32, Events_getInstance()._dragend);
-  };
-  _no_name_provided__76.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__77(this$0) {
-    this._this$0_33 = this$0;
-  }
-  _no_name_provided__77.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_33, Events_getInstance()._dragenter);
-  };
-  _no_name_provided__77.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__78(this$0) {
-    this._this$0_34 = this$0;
-  }
-  _no_name_provided__78.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_34, Events_getInstance()._dragleave);
-  };
-  _no_name_provided__78.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__79(this$0) {
-    this._this$0_35 = this$0;
-  }
-  _no_name_provided__79.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_35, Events_getInstance()._dragover);
-  };
-  _no_name_provided__79.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__80(this$0) {
-    this._this$0_36 = this$0;
-  }
-  _no_name_provided__80.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_36, Events_getInstance()._dragstart);
-  };
-  _no_name_provided__80.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__81(this$0) {
-    this._this$0_37 = this$0;
-  }
-  _no_name_provided__81.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_37, Events_getInstance()._drop);
-  };
-  _no_name_provided__81.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__82(this$0) {
-    this._this$0_38 = this$0;
-  }
-  _no_name_provided__82.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_38, Events_getInstance()._durationchange);
-  };
-  _no_name_provided__82.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__83(this$0) {
-    this._this$0_39 = this$0;
-  }
-  _no_name_provided__83.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_39, Events_getInstance()._ended);
-  };
-  _no_name_provided__83.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__84(this$0) {
-    this._this$0_40 = this$0;
-  }
-  _no_name_provided__84.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_40, Events_getInstance()._focus);
-  };
-  _no_name_provided__84.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__85(this$0) {
-    this._this$0_41 = this$0;
-  }
-  _no_name_provided__85.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_41, Events_getInstance()._focusin);
-  };
-  _no_name_provided__85.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__86(this$0) {
-    this._this$0_42 = this$0;
-  }
-  _no_name_provided__86.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_42, Events_getInstance()._focusout);
-  };
-  _no_name_provided__86.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__87(this$0) {
-    this._this$0_43 = this$0;
-  }
-  _no_name_provided__87.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_43, Events_getInstance()._fullscreenchange);
-  };
-  _no_name_provided__87.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__88(this$0) {
-    this._this$0_44 = this$0;
-  }
-  _no_name_provided__88.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_44, Events_getInstance()._fullscreenerror);
-  };
-  _no_name_provided__88.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__89(this$0) {
-    this._this$0_45 = this$0;
-  }
-  _no_name_provided__89.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_45, Events_getInstance()._hashchange);
-  };
-  _no_name_provided__89.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__90(this$0) {
-    this._this$0_46 = this$0;
-  }
-  _no_name_provided__90.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_46, Events_getInstance()._input_0);
-  };
-  _no_name_provided__90.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__91(this$0) {
-    this._this$0_47 = this$0;
-  }
-  _no_name_provided__91.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_47, Events_getInstance()._invalid);
-  };
-  _no_name_provided__91.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__92(this$0) {
-    this._this$0_48 = this$0;
-  }
-  _no_name_provided__92.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_48, Events_getInstance()._keydown);
-  };
-  _no_name_provided__92.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__93(this$0) {
-    this._this$0_49 = this$0;
-  }
-  _no_name_provided__93.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_49, Events_getInstance()._keypress);
-  };
-  _no_name_provided__93.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__94(this$0) {
-    this._this$0_50 = this$0;
-  }
-  _no_name_provided__94.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_50, Events_getInstance()._keyup);
-  };
-  _no_name_provided__94.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__95(this$0) {
-    this._this$0_51 = this$0;
-  }
-  _no_name_provided__95.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_51, Events_getInstance()._load);
-  };
-  _no_name_provided__95.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__96(this$0) {
-    this._this$0_52 = this$0;
-  }
-  _no_name_provided__96.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_52, Events_getInstance()._loadeddata);
-  };
-  _no_name_provided__96.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__97(this$0) {
-    this._this$0_53 = this$0;
-  }
-  _no_name_provided__97.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_53, Events_getInstance()._loadedmetadata);
-  };
-  _no_name_provided__97.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__98(this$0) {
-    this._this$0_54 = this$0;
-  }
-  _no_name_provided__98.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_54, Events_getInstance()._loadstart);
-  };
-  _no_name_provided__98.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__99(this$0) {
-    this._this$0_55 = this$0;
-  }
-  _no_name_provided__99.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_55, Events_getInstance()._message);
-  };
-  _no_name_provided__99.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__100(this$0) {
-    this._this$0_56 = this$0;
-  }
-  _no_name_provided__100.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_56, Events_getInstance()._mousedown);
-  };
-  _no_name_provided__100.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__101(this$0) {
-    this._this$0_57 = this$0;
-  }
-  _no_name_provided__101.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_57, Events_getInstance()._mouseenter);
-  };
-  _no_name_provided__101.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__102(this$0) {
-    this._this$0_58 = this$0;
-  }
-  _no_name_provided__102.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_58, Events_getInstance()._mouseleave);
-  };
-  _no_name_provided__102.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__103(this$0) {
-    this._this$0_59 = this$0;
-  }
-  _no_name_provided__103.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_59, Events_getInstance()._mousemove);
-  };
-  _no_name_provided__103.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__104(this$0) {
-    this._this$0_60 = this$0;
-  }
-  _no_name_provided__104.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_60, Events_getInstance()._mouseover);
-  };
-  _no_name_provided__104.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__105(this$0) {
-    this._this$0_61 = this$0;
-  }
-  _no_name_provided__105.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_61, Events_getInstance()._mouseout);
-  };
-  _no_name_provided__105.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__106(this$0) {
-    this._this$0_62 = this$0;
-  }
-  _no_name_provided__106.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_62, Events_getInstance()._mouseup);
-  };
-  _no_name_provided__106.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__107(this$0) {
-    this._this$0_63 = this$0;
-  }
-  _no_name_provided__107.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_63, Events_getInstance()._offline);
-  };
-  _no_name_provided__107.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__108(this$0) {
-    this._this$0_64 = this$0;
-  }
-  _no_name_provided__108.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_64, Events_getInstance()._online);
-  };
-  _no_name_provided__108.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__109(this$0) {
-    this._this$0_65 = this$0;
-  }
-  _no_name_provided__109.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_65, Events_getInstance()._open);
-  };
-  _no_name_provided__109.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__110(this$0) {
-    this._this$0_66 = this$0;
-  }
-  _no_name_provided__110.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_66, Events_getInstance()._pagehide);
-  };
-  _no_name_provided__110.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__111(this$0) {
-    this._this$0_67 = this$0;
-  }
-  _no_name_provided__111.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_67, Events_getInstance()._pageshow);
-  };
-  _no_name_provided__111.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__112(this$0) {
-    this._this$0_68 = this$0;
-  }
-  _no_name_provided__112.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_68, Events_getInstance()._paste);
-  };
-  _no_name_provided__112.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__113(this$0) {
-    this._this$0_69 = this$0;
-  }
-  _no_name_provided__113.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_69, Events_getInstance()._pause);
-  };
-  _no_name_provided__113.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__114(this$0) {
-    this._this$0_70 = this$0;
-  }
-  _no_name_provided__114.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_70, Events_getInstance()._play);
-  };
-  _no_name_provided__114.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__115(this$0) {
-    this._this$0_71 = this$0;
-  }
-  _no_name_provided__115.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_71, Events_getInstance()._playing);
-  };
-  _no_name_provided__115.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__116(this$0) {
-    this._this$0_72 = this$0;
-  }
-  _no_name_provided__116.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_72, Events_getInstance()._popstate);
-  };
-  _no_name_provided__116.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__117(this$0) {
-    this._this$0_73 = this$0;
-  }
-  _no_name_provided__117.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_73, Events_getInstance()._progress);
-  };
-  _no_name_provided__117.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__118(this$0) {
-    this._this$0_74 = this$0;
-  }
-  _no_name_provided__118.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_74, Events_getInstance()._ratechange);
-  };
-  _no_name_provided__118.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__119(this$0) {
-    this._this$0_75 = this$0;
-  }
-  _no_name_provided__119.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_75, Events_getInstance()._resize);
-  };
-  _no_name_provided__119.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__120(this$0) {
-    this._this$0_76 = this$0;
-  }
-  _no_name_provided__120.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_76, Events_getInstance()._reset);
-  };
-  _no_name_provided__120.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__121(this$0) {
-    this._this$0_77 = this$0;
-  }
-  _no_name_provided__121.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_77, Events_getInstance()._scroll);
-  };
-  _no_name_provided__121.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__122(this$0) {
-    this._this$0_78 = this$0;
-  }
-  _no_name_provided__122.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_78, Events_getInstance()._search);
-  };
-  _no_name_provided__122.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__123(this$0) {
-    this._this$0_79 = this$0;
-  }
-  _no_name_provided__123.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_79, Events_getInstance()._seeked);
-  };
-  _no_name_provided__123.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__124(this$0) {
-    this._this$0_80 = this$0;
-  }
-  _no_name_provided__124.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_80, Events_getInstance()._seeking);
-  };
-  _no_name_provided__124.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__125(this$0) {
-    this._this$0_81 = this$0;
-  }
-  _no_name_provided__125.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_81, Events_getInstance()._select);
-  };
-  _no_name_provided__125.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__126(this$0) {
-    this._this$0_82 = this$0;
-  }
-  _no_name_provided__126.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_82, Events_getInstance()._show);
-  };
-  _no_name_provided__126.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__127(this$0) {
-    this._this$0_83 = this$0;
-  }
-  _no_name_provided__127.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_83, Events_getInstance()._stalled);
-  };
-  _no_name_provided__127.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__128(this$0) {
-    this._this$0_84 = this$0;
-  }
-  _no_name_provided__128.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_84, Events_getInstance()._storage);
-  };
-  _no_name_provided__128.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__129(this$0) {
-    this._this$0_85 = this$0;
-  }
-  _no_name_provided__129.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_85, Events_getInstance()._submit);
-  };
-  _no_name_provided__129.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__130(this$0) {
-    this._this$0_86 = this$0;
-  }
-  _no_name_provided__130.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_86, Events_getInstance()._suspend);
-  };
-  _no_name_provided__130.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__131(this$0) {
-    this._this$0_87 = this$0;
-  }
-  _no_name_provided__131.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_87, Events_getInstance()._timeupdate);
-  };
-  _no_name_provided__131.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__132(this$0) {
-    this._this$0_88 = this$0;
-  }
-  _no_name_provided__132.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_88, Events_getInstance()._toggle);
-  };
-  _no_name_provided__132.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__133(this$0) {
-    this._this$0_89 = this$0;
-  }
-  _no_name_provided__133.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_89, Events_getInstance()._touchcancel);
-  };
-  _no_name_provided__133.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__134(this$0) {
-    this._this$0_90 = this$0;
-  }
-  _no_name_provided__134.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_90, Events_getInstance()._touchend);
-  };
-  _no_name_provided__134.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__135(this$0) {
-    this._this$0_91 = this$0;
-  }
-  _no_name_provided__135.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_91, Events_getInstance()._touchmove);
-  };
-  _no_name_provided__135.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__136(this$0) {
-    this._this$0_92 = this$0;
-  }
-  _no_name_provided__136.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_92, Events_getInstance()._touchstart);
-  };
-  _no_name_provided__136.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__137(this$0) {
-    this._this$0_93 = this$0;
-  }
-  _no_name_provided__137.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_93, Events_getInstance()._unload);
-  };
-  _no_name_provided__137.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__138(this$0) {
-    this._this$0_94 = this$0;
-  }
-  _no_name_provided__138.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_94, Events_getInstance()._volumechange);
-  };
-  _no_name_provided__138.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__139(this$0) {
-    this._this$0_95 = this$0;
-  }
-  _no_name_provided__139.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_95, Events_getInstance()._waiting);
-  };
-  _no_name_provided__139.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__140(this$0) {
-    this._this$0_96 = this$0;
-  }
-  _no_name_provided__140.prototype.invoke_201 = function () {
-    return subscribe(this._this$0_96, Events_getInstance()._wheel);
-  };
-  _no_name_provided__140.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
   function WithEvents() {
-    var tmp = this;
-    tmp._aborts$delegate = lazy(_no_name_provided_$factory_53(this));
-    var tmp_0 = this;
-    tmp_0._afterprints$delegate = lazy(_no_name_provided_$factory_54(this));
-    var tmp_1 = this;
-    tmp_1._beforeprints$delegate = lazy(_no_name_provided_$factory_55(this));
-    var tmp_2 = this;
-    tmp_2._beforeunloads$delegate = lazy(_no_name_provided_$factory_56(this));
-    var tmp_3 = this;
-    tmp_3._blurs$delegate = lazy(_no_name_provided_$factory_57(this));
-    var tmp_4 = this;
-    tmp_4._canplays$delegate = lazy(_no_name_provided_$factory_58(this));
-    var tmp_5 = this;
-    tmp_5._canplaythroughs$delegate = lazy(_no_name_provided_$factory_59(this));
-    var tmp_6 = this;
-    tmp_6._changes$delegate = lazy(_no_name_provided_$factory_60(this));
-    var tmp_7 = this;
-    tmp_7._clicks$delegate = lazy(_no_name_provided_$factory_61(this));
-    var tmp_8 = this;
-    tmp_8._contextmenus$delegate = lazy(_no_name_provided_$factory_62(this));
-    var tmp_9 = this;
-    tmp_9._copys$delegate = lazy(_no_name_provided_$factory_63(this));
-    var tmp_10 = this;
-    tmp_10._cuts$delegate = lazy(_no_name_provided_$factory_64(this));
-    var tmp_11 = this;
-    tmp_11._dblclicks$delegate = lazy(_no_name_provided_$factory_65(this));
-    var tmp_12 = this;
-    tmp_12._drags$delegate = lazy(_no_name_provided_$factory_66(this));
-    var tmp_13 = this;
-    tmp_13._dragends$delegate = lazy(_no_name_provided_$factory_67(this));
-    var tmp_14 = this;
-    tmp_14._dragenters$delegate = lazy(_no_name_provided_$factory_68(this));
-    var tmp_15 = this;
-    tmp_15._dragleaves$delegate = lazy(_no_name_provided_$factory_69(this));
-    var tmp_16 = this;
-    tmp_16._dragovers$delegate = lazy(_no_name_provided_$factory_70(this));
-    var tmp_17 = this;
-    tmp_17._dragstarts$delegate = lazy(_no_name_provided_$factory_71(this));
-    var tmp_18 = this;
-    tmp_18._drops$delegate = lazy(_no_name_provided_$factory_72(this));
-    var tmp_19 = this;
-    tmp_19._durationchanges$delegate = lazy(_no_name_provided_$factory_73(this));
-    var tmp_20 = this;
-    tmp_20._endeds$delegate = lazy(_no_name_provided_$factory_74(this));
-    var tmp_21 = this;
-    tmp_21._focuss$delegate = lazy(_no_name_provided_$factory_75(this));
-    var tmp_22 = this;
-    tmp_22._focusins$delegate = lazy(_no_name_provided_$factory_76(this));
-    var tmp_23 = this;
-    tmp_23._focusouts$delegate = lazy(_no_name_provided_$factory_77(this));
-    var tmp_24 = this;
-    tmp_24._fullscreenchanges$delegate = lazy(_no_name_provided_$factory_78(this));
-    var tmp_25 = this;
-    tmp_25._fullscreenerrors$delegate = lazy(_no_name_provided_$factory_79(this));
-    var tmp_26 = this;
-    tmp_26._hashchanges$delegate = lazy(_no_name_provided_$factory_80(this));
-    var tmp_27 = this;
-    tmp_27._inputs$delegate = lazy(_no_name_provided_$factory_81(this));
-    var tmp_28 = this;
-    tmp_28._invalids$delegate = lazy(_no_name_provided_$factory_82(this));
-    var tmp_29 = this;
-    tmp_29._keydowns$delegate = lazy(_no_name_provided_$factory_83(this));
-    var tmp_30 = this;
-    tmp_30._keypresss$delegate = lazy(_no_name_provided_$factory_84(this));
-    var tmp_31 = this;
-    tmp_31._keyups$delegate = lazy(_no_name_provided_$factory_85(this));
-    var tmp_32 = this;
-    tmp_32._loads$delegate = lazy(_no_name_provided_$factory_86(this));
-    var tmp_33 = this;
-    tmp_33._loadeddatas$delegate = lazy(_no_name_provided_$factory_87(this));
-    var tmp_34 = this;
-    tmp_34._loadedmetadatas$delegate = lazy(_no_name_provided_$factory_88(this));
-    var tmp_35 = this;
-    tmp_35._loadstarts$delegate = lazy(_no_name_provided_$factory_89(this));
-    var tmp_36 = this;
-    tmp_36._messages$delegate = lazy(_no_name_provided_$factory_90(this));
-    var tmp_37 = this;
-    tmp_37._mousedowns$delegate = lazy(_no_name_provided_$factory_91(this));
-    var tmp_38 = this;
-    tmp_38._mouseenters$delegate = lazy(_no_name_provided_$factory_92(this));
-    var tmp_39 = this;
-    tmp_39._mouseleaves$delegate = lazy(_no_name_provided_$factory_93(this));
-    var tmp_40 = this;
-    tmp_40._mousemoves$delegate = lazy(_no_name_provided_$factory_94(this));
-    var tmp_41 = this;
-    tmp_41._mouseovers$delegate = lazy(_no_name_provided_$factory_95(this));
-    var tmp_42 = this;
-    tmp_42._mouseouts$delegate = lazy(_no_name_provided_$factory_96(this));
-    var tmp_43 = this;
-    tmp_43._mouseups$delegate = lazy(_no_name_provided_$factory_97(this));
-    var tmp_44 = this;
-    tmp_44._offlines$delegate = lazy(_no_name_provided_$factory_98(this));
-    var tmp_45 = this;
-    tmp_45._onlines$delegate = lazy(_no_name_provided_$factory_99(this));
-    var tmp_46 = this;
-    tmp_46._opens$delegate = lazy(_no_name_provided_$factory_100(this));
-    var tmp_47 = this;
-    tmp_47._pagehides$delegate = lazy(_no_name_provided_$factory_101(this));
-    var tmp_48 = this;
-    tmp_48._pageshows$delegate = lazy(_no_name_provided_$factory_102(this));
-    var tmp_49 = this;
-    tmp_49._pastes$delegate = lazy(_no_name_provided_$factory_103(this));
-    var tmp_50 = this;
-    tmp_50._pauses$delegate = lazy(_no_name_provided_$factory_104(this));
-    var tmp_51 = this;
-    tmp_51._plays$delegate = lazy(_no_name_provided_$factory_105(this));
-    var tmp_52 = this;
-    tmp_52._playings$delegate = lazy(_no_name_provided_$factory_106(this));
-    var tmp_53 = this;
-    tmp_53._popstates$delegate = lazy(_no_name_provided_$factory_107(this));
-    var tmp_54 = this;
-    tmp_54._progresss$delegate = lazy(_no_name_provided_$factory_108(this));
-    var tmp_55 = this;
-    tmp_55._ratechanges$delegate = lazy(_no_name_provided_$factory_109(this));
-    var tmp_56 = this;
-    tmp_56._resizes$delegate = lazy(_no_name_provided_$factory_110(this));
-    var tmp_57 = this;
-    tmp_57._resets$delegate = lazy(_no_name_provided_$factory_111(this));
-    var tmp_58 = this;
-    tmp_58._scrolls$delegate = lazy(_no_name_provided_$factory_112(this));
-    var tmp_59 = this;
-    tmp_59._searchs$delegate = lazy(_no_name_provided_$factory_113(this));
-    var tmp_60 = this;
-    tmp_60._seekeds$delegate = lazy(_no_name_provided_$factory_114(this));
-    var tmp_61 = this;
-    tmp_61._seekings$delegate = lazy(_no_name_provided_$factory_115(this));
-    var tmp_62 = this;
-    tmp_62._selects$delegate = lazy(_no_name_provided_$factory_116(this));
-    var tmp_63 = this;
-    tmp_63._shows$delegate = lazy(_no_name_provided_$factory_117(this));
-    var tmp_64 = this;
-    tmp_64._stalleds$delegate = lazy(_no_name_provided_$factory_118(this));
-    var tmp_65 = this;
-    tmp_65._storages$delegate = lazy(_no_name_provided_$factory_119(this));
-    var tmp_66 = this;
-    tmp_66._submits$delegate = lazy(_no_name_provided_$factory_120(this));
-    var tmp_67 = this;
-    tmp_67._suspends$delegate = lazy(_no_name_provided_$factory_121(this));
-    var tmp_68 = this;
-    tmp_68._timeupdates$delegate = lazy(_no_name_provided_$factory_122(this));
-    var tmp_69 = this;
-    tmp_69._toggles$delegate = lazy(_no_name_provided_$factory_123(this));
-    var tmp_70 = this;
-    tmp_70._touchcancels$delegate = lazy(_no_name_provided_$factory_124(this));
-    var tmp_71 = this;
-    tmp_71._touchends$delegate = lazy(_no_name_provided_$factory_125(this));
-    var tmp_72 = this;
-    tmp_72._touchmoves$delegate = lazy(_no_name_provided_$factory_126(this));
-    var tmp_73 = this;
-    tmp_73._touchstarts$delegate = lazy(_no_name_provided_$factory_127(this));
-    var tmp_74 = this;
-    tmp_74._unloads$delegate = lazy(_no_name_provided_$factory_128(this));
-    var tmp_75 = this;
-    tmp_75._volumechanges$delegate = lazy(_no_name_provided_$factory_129(this));
-    var tmp_76 = this;
-    tmp_76._waitings$delegate = lazy(_no_name_provided_$factory_130(this));
-    var tmp_77 = this;
-    tmp_77._wheels$delegate = lazy(_no_name_provided_$factory_131(this));
   }
-  WithEvents.prototype._get_changes__4 = function () {
-    var tmp0_getValue_0 = this._changes$delegate;
-    var tmp1_getValue_0 = changes$factory();
-    return tmp0_getValue_0._get_value__8();
+  WithEvents.prototype._get_changes__0 = function () {
+    return subscribe(this, Events_getInstance()._change);
   };
-  WithEvents.prototype._get_clicks__4 = function () {
-    var tmp0_getValue_0 = this._clicks$delegate;
-    var tmp1_getValue_0 = clicks$factory();
-    return tmp0_getValue_0._get_value__8();
+  WithEvents.prototype._get_clicks__0 = function () {
+    return subscribe(this, Events_getInstance()._click);
   };
   WithEvents.$metadata$ = {
     simpleName: 'WithEvents',
-    kind: 'class',
+    kind: 'interface',
     interfaces: []
   };
-  function changes$factory() {
-    return getPropertyCallableRef('changes', 1, KProperty1, function (receiver) {
-      return receiver._get_changes__4();
-    }, null);
-  }
-  function clicks$factory() {
-    return getPropertyCallableRef('clicks', 1, KProperty1, function (receiver) {
-      return receiver._get_clicks__4();
-    }, null);
-  }
-  function _no_name_provided_$factory_53(this$0) {
-    var i = new _no_name_provided__62(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_54(this$0) {
-    var i = new _no_name_provided__63(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_55(this$0) {
-    var i = new _no_name_provided__64(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_56(this$0) {
-    var i = new _no_name_provided__65(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_57(this$0) {
-    var i = new _no_name_provided__66(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_58(this$0) {
-    var i = new _no_name_provided__67(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_59(this$0) {
-    var i = new _no_name_provided__68(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_60(this$0) {
-    var i = new _no_name_provided__69(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_61(this$0) {
-    var i = new _no_name_provided__70(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_62(this$0) {
-    var i = new _no_name_provided__71(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_63(this$0) {
-    var i = new _no_name_provided__72(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_64(this$0) {
-    var i = new _no_name_provided__73(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_65(this$0) {
-    var i = new _no_name_provided__74(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_66(this$0) {
-    var i = new _no_name_provided__75(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_67(this$0) {
-    var i = new _no_name_provided__76(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_68(this$0) {
-    var i = new _no_name_provided__77(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_69(this$0) {
-    var i = new _no_name_provided__78(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_70(this$0) {
-    var i = new _no_name_provided__79(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_71(this$0) {
-    var i = new _no_name_provided__80(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_72(this$0) {
-    var i = new _no_name_provided__81(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_73(this$0) {
-    var i = new _no_name_provided__82(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_74(this$0) {
-    var i = new _no_name_provided__83(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_75(this$0) {
-    var i = new _no_name_provided__84(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_76(this$0) {
-    var i = new _no_name_provided__85(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_77(this$0) {
-    var i = new _no_name_provided__86(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_78(this$0) {
-    var i = new _no_name_provided__87(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_79(this$0) {
-    var i = new _no_name_provided__88(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_80(this$0) {
-    var i = new _no_name_provided__89(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_81(this$0) {
-    var i = new _no_name_provided__90(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_82(this$0) {
-    var i = new _no_name_provided__91(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_83(this$0) {
-    var i = new _no_name_provided__92(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_84(this$0) {
-    var i = new _no_name_provided__93(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_85(this$0) {
-    var i = new _no_name_provided__94(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_86(this$0) {
-    var i = new _no_name_provided__95(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_87(this$0) {
-    var i = new _no_name_provided__96(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_88(this$0) {
-    var i = new _no_name_provided__97(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_89(this$0) {
-    var i = new _no_name_provided__98(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_90(this$0) {
-    var i = new _no_name_provided__99(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_91(this$0) {
-    var i = new _no_name_provided__100(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_92(this$0) {
-    var i = new _no_name_provided__101(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_93(this$0) {
-    var i = new _no_name_provided__102(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_94(this$0) {
-    var i = new _no_name_provided__103(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_95(this$0) {
-    var i = new _no_name_provided__104(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_96(this$0) {
-    var i = new _no_name_provided__105(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_97(this$0) {
-    var i = new _no_name_provided__106(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_98(this$0) {
-    var i = new _no_name_provided__107(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_99(this$0) {
-    var i = new _no_name_provided__108(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_100(this$0) {
-    var i = new _no_name_provided__109(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_101(this$0) {
-    var i = new _no_name_provided__110(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_102(this$0) {
-    var i = new _no_name_provided__111(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_103(this$0) {
-    var i = new _no_name_provided__112(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_104(this$0) {
-    var i = new _no_name_provided__113(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_105(this$0) {
-    var i = new _no_name_provided__114(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_106(this$0) {
-    var i = new _no_name_provided__115(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_107(this$0) {
-    var i = new _no_name_provided__116(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_108(this$0) {
-    var i = new _no_name_provided__117(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_109(this$0) {
-    var i = new _no_name_provided__118(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_110(this$0) {
-    var i = new _no_name_provided__119(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_111(this$0) {
-    var i = new _no_name_provided__120(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_112(this$0) {
-    var i = new _no_name_provided__121(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_113(this$0) {
-    var i = new _no_name_provided__122(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_114(this$0) {
-    var i = new _no_name_provided__123(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_115(this$0) {
-    var i = new _no_name_provided__124(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_116(this$0) {
-    var i = new _no_name_provided__125(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_117(this$0) {
-    var i = new _no_name_provided__126(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_118(this$0) {
-    var i = new _no_name_provided__127(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_119(this$0) {
-    var i = new _no_name_provided__128(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_120(this$0) {
-    var i = new _no_name_provided__129(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_121(this$0) {
-    var i = new _no_name_provided__130(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_122(this$0) {
-    var i = new _no_name_provided__131(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_123(this$0) {
-    var i = new _no_name_provided__132(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_124(this$0) {
-    var i = new _no_name_provided__133(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_125(this$0) {
-    var i = new _no_name_provided__134(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_126(this$0) {
-    var i = new _no_name_provided__135(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_127(this$0) {
-    var i = new _no_name_provided__136(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_128(this$0) {
-    var i = new _no_name_provided__137(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_129(this$0) {
-    var i = new _no_name_provided__138(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_130(this$0) {
-    var i = new _no_name_provided__139(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_131(this$0) {
-    var i = new _no_name_provided__140(this$0);
-    return function () {
-      return i.invoke_201();
-    };
-  }
-  function _no_name_provided_$factory_132(this$0, $type, resultContinuation) {
+  function _no_name_provided_$factory_53(this$0, $type, resultContinuation) {
     var i = new _no_name_provided__61(this$0, $type, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_121(p1, $cont);
@@ -16284,14 +14838,14 @@
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_133($this_callbackFlow) {
+  function _no_name_provided_$factory_54($this_callbackFlow) {
     var i = new _no_name_provided__59($this_callbackFlow);
     return function (p1) {
       i.invoke_117(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_134(this$0, $type, $listener) {
+  function _no_name_provided_$factory_55(this$0, $type, $listener) {
     var i = new _no_name_provided__60(this$0, $type, $listener);
     return function () {
       i.invoke_119();
@@ -16317,29 +14871,29 @@
     kind: 'class',
     interfaces: [WithText]
   };
-  function _no_name_provided__141(this$0, resultContinuation) {
-    this._this$0_97 = this$0;
+  function _no_name_provided__62(this$0, resultContinuation) {
+    this._this$0_18 = this$0;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__141.prototype.invoke_202 = function (v, _anonymous_parameter_1_, $cont) {
+  _no_name_provided__62.prototype.invoke_123 = function (v, _anonymous_parameter_1_, $cont) {
     var tmp = this.create_11(v, _anonymous_parameter_1_, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__141.prototype.invoke_205 = function (p1, p2, $cont) {
+  _no_name_provided__62.prototype.invoke_126 = function (p1, p2, $cont) {
     var tmp = (!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE();
-    this.invoke_202(tmp, (p2 == null ? true : typeof p2 === 'string') ? p2 : THROW_CCE(), $cont);
+    this.invoke_123(tmp, (p2 == null ? true : typeof p2 === 'string') ? p2 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__141.prototype.doResume_32 = function () {
+  _no_name_provided__62.prototype.doResume_32 = function () {
     var suspendResult = this._result;
     $sm: do
       try {
         var tmp = this._state_0;
         if (tmp === 0) {
           this._exceptionState = 1;
-          this._this$0_97.value_0(this._v);
+          this._this$0_18.value_0(this._v);
           return Unit_getInstance();
         } else if (tmp === 1) {
           throw this._exception_0;
@@ -16348,13 +14902,13 @@
       }
      while (true);
   };
-  _no_name_provided__141.prototype.create_11 = function (v, _anonymous_parameter_1_, completion) {
-    var i = new _no_name_provided__141(this._this$0_97, completion);
+  _no_name_provided__62.prototype.create_11 = function (v, _anonymous_parameter_1_, completion) {
+    var i = new _no_name_provided__62(this._this$0_18, completion);
     i._v = v;
     i.__anonymous_parameter_1_ = _anonymous_parameter_1_;
     return i;
   };
-  _no_name_provided__141.$metadata$ = {
+  _no_name_provided__62.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 2
@@ -16372,7 +14926,7 @@
   };
   Input.prototype.value_1 = function (value) {
     var tmp = this._get_job__10();
-    mountSingle(tmp, value, _no_name_provided_$factory_135(this, null));
+    mountSingle(tmp, value, _no_name_provided_$factory_56(this, null));
   };
   Input.$metadata$ = {
     simpleName: 'Input',
@@ -16427,10 +14981,10 @@
     kind: 'interface',
     interfaces: [WithJob]
   };
-  function _no_name_provided_$factory_135(this$0, resultContinuation) {
-    var i = new _no_name_provided__141(this$0, resultContinuation);
+  function _no_name_provided_$factory_56(this$0, resultContinuation) {
+    var i = new _no_name_provided__62(this$0, resultContinuation);
     var l = function (p1, p2, $cont) {
-      return i.invoke_202(p1, p2, $cont);
+      return i.invoke_123(p1, p2, $cont);
     };
     l.$arity = 2;
     return l;
@@ -16596,7 +15150,7 @@
   };
   function values(_this_) {
     var tmp0_map_0 = _this_._get_events__0();
-    return new _no_name_provided__1_1_1(tmp0_map_0);
+    return new _no_name_provided__1_1_1_0(tmp0_map_0);
   }
   function DomListener(events) {
     Listener.call(this, events);
@@ -16617,150 +15171,12 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__1_7_3_3($collector) {
-    this._$collector_3 = $collector;
-  }
-  _no_name_provided__1_7_3_3.prototype.emit_2_8_4_4 = function (value, $cont) {
-    var tmp0_unsafeCast_0_12 = value.target;
-    return this._$collector_3.emit_9(tmp0_unsafeCast_0_12.value, $cont);
-  };
-  _no_name_provided__1_7_3_3.prototype.emit_9 = function (value, $cont) {
-    return this.emit_2_8_4_4(value instanceof Event ? value : THROW_CCE(), $cont);
-  };
-  _no_name_provided__1_7_3_3.$metadata$ = {
-    simpleName: '<no name provided>_1_7_3_3',
-    kind: 'class',
-    interfaces: [FlowCollector]
-  };
-  function $collect_2_2_2COROUTINE$14(_this_, collector, resultContinuation) {
-    CoroutineImpl_0.call(this, resultContinuation);
-    this.__this__14 = _this_;
-    this._collector_6 = collector;
-  }
-  $collect_2_2_2COROUTINE$14.prototype.doResume_32 = function () {
-    var suspendResult = this._result;
-    $sm: do
-      try {
-        var tmp = this._state_0;
-        switch (tmp) {
-          case 0:
-            this._exceptionState = 2;
-            this._state_0 = 1;
-            suspendResult = this.__this__14._$tmp0_map_0.collect_12(new _no_name_provided__1_7_3_3(this._collector_6), this);
-            if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
-              return suspendResult;
-            }
-            continue $sm;
-          case 1:
-            suspendResult;
-            return Unit_getInstance();
-          case 2:
-            throw this._exception_0;
-        }
-      } catch ($p) {
-        if (this._exceptionState === 2) {
-          throw $p;
-        } else {
-          this._state_0 = this._exceptionState;
-          this._exception_0 = $p;
-        }
-      }
-     while (true);
-  };
-  $collect_2_2_2COROUTINE$14.$metadata$ = {
-    simpleName: '$collect_2_2_2COROUTINE$14',
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__1_1_1($tmp0_map_0) {
-    this._$tmp0_map_0 = $tmp0_map_0;
-  }
-  _no_name_provided__1_1_1.prototype.collect_2_2_2 = function (collector, $cont) {
-    var tmp = new $collect_2_2_2COROUTINE$14(this, collector, $cont);
-    tmp._result = Unit_getInstance();
-    tmp._exception_0 = null;
-    return tmp.doResume_32();
-  };
-  _no_name_provided__1_1_1.prototype.collect_12 = function (collector, $cont) {
-    return this.collect_2_2_2(collector, $cont);
-  };
-  _no_name_provided__1_1_1.$metadata$ = {
-    simpleName: '<no name provided>_1_1_1',
-    kind: 'class',
-    interfaces: [Flow]
-  };
-  function mountDomNode(job, target, upstream) {
-    var placeholder = {_v: document.createComment('')};
-    target.appendChild(ensureNotNull(placeholder._v));
-    Unit_getInstance();
-    mountSingle(job, upstream, _no_name_provided_$factory_136(target, placeholder, null));
-  }
-  function _no_name_provided__142($target, $placeholder, resultContinuation) {
-    this._$target = $target;
-    this._$placeholder = $placeholder;
-    CoroutineImpl_0.call(this, resultContinuation);
-  }
-  _no_name_provided__142.prototype.invoke_204 = function (value, last, $cont) {
-    var tmp = this.create_12(value, last, $cont);
-    tmp._result = Unit_getInstance();
-    tmp._exception_0 = null;
-    return tmp.doResume_32();
-  };
-  _no_name_provided__142.prototype.invoke_205 = function (p1, p2, $cont) {
-    var tmp = (!(p1 == null) ? isObject(p1) : false) ? p1 : THROW_CCE();
-    this.invoke_204(tmp, (p2 == null ? true : isObject(p2)) ? p2 : THROW_CCE(), $cont);
-    return Unit_getInstance();
-  };
-  _no_name_provided__142.prototype.doResume_32 = function () {
-    var suspendResult = this._result;
-    $sm: do
-      try {
-        var tmp = this._state_0;
-        if (tmp === 0) {
-          this._exceptionState = 1;
-          var tmp0_safe_receiver = this._last_2;
-          if (!((tmp0_safe_receiver == null ? null : tmp0_safe_receiver.domNode) == null)) {
-            this._$target.replaceChild(this._value_9.domNode, this._last_2.domNode);
-            Unit_getInstance();
-          } else {
-            {
-              this._$target.replaceChild(this._value_9.domNode, ensureNotNull(this._$placeholder._v));
-              Unit_getInstance();
-              this._$placeholder._v = null;
-            }
-          }
-          return Unit_getInstance();
-        } else if (tmp === 1) {
-          throw this._exception_0;
-        }} catch ($p) {
-        throw $p;
-      }
-     while (true);
-  };
-  _no_name_provided__142.prototype.create_12 = function (value, last, completion) {
-    var i = new _no_name_provided__142(this._$target, this._$placeholder, completion);
-    i._value_9 = value;
-    i._last_2 = last;
-    return i;
-  };
-  _no_name_provided__142.$metadata$ = {
-    kind: 'class',
-    interfaces: [],
-    suspendArity: 2
-  };
-  function _no_name_provided_$factory_136($target, $placeholder, resultContinuation) {
-    var i = new _no_name_provided__142($target, $placeholder, resultContinuation);
-    var l = function (p1, p2, $cont) {
-      return i.invoke_204(p1, p2, $cont);
-    };
-    l.$arity = 2;
-    return l;
-  }
   function _no_name_provided__1_7_3_3_0($collector) {
     this._$collector_4 = $collector;
   }
   _no_name_provided__1_7_3_3_0.prototype.emit_2_8_4_4_0 = function (value, $cont) {
-    return this._$collector_4.emit_9(Unit_getInstance(), $cont);
+    var tmp0_unsafeCast_0_12 = value.target;
+    return this._$collector_4.emit_9(tmp0_unsafeCast_0_12.value, $cont);
   };
   _no_name_provided__1_7_3_3_0.prototype.emit_9 = function (value, $cont) {
     return this.emit_2_8_4_4_0(value instanceof Event ? value : THROW_CCE(), $cont);
@@ -16770,12 +15186,12 @@
     kind: 'class',
     interfaces: [FlowCollector]
   };
-  function $collect_2_2_2COROUTINE$25(_this_, collector, resultContinuation) {
+  function $collect_2_2_2COROUTINE$16(_this_, collector, resultContinuation) {
     CoroutineImpl_0.call(this, resultContinuation);
     this.__this__15 = _this_;
     this._collector_7 = collector;
   }
-  $collect_2_2_2COROUTINE$25.prototype.doResume_32 = function () {
+  $collect_2_2_2COROUTINE$16.prototype.doResume_32 = function () {
     var suspendResult = this._result;
     $sm: do
       try {
@@ -16805,11 +15221,95 @@
       }
      while (true);
   };
-  $collect_2_2_2COROUTINE$25.$metadata$ = {
-    simpleName: '$collect_2_2_2COROUTINE$25',
+  $collect_2_2_2COROUTINE$16.$metadata$ = {
+    simpleName: '$collect_2_2_2COROUTINE$16',
     kind: 'class',
     interfaces: []
   };
+  function _no_name_provided__1_1_1_0($tmp0_map_0) {
+    this._$tmp0_map_0_0 = $tmp0_map_0;
+  }
+  _no_name_provided__1_1_1_0.prototype.collect_2_2_2_0 = function (collector, $cont) {
+    var tmp = new $collect_2_2_2COROUTINE$16(this, collector, $cont);
+    tmp._result = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_32();
+  };
+  _no_name_provided__1_1_1_0.prototype.collect_12 = function (collector, $cont) {
+    return this.collect_2_2_2_0(collector, $cont);
+  };
+  _no_name_provided__1_1_1_0.$metadata$ = {
+    simpleName: '<no name provided>_1_1_1',
+    kind: 'class',
+    interfaces: [Flow]
+  };
+  function mountDomNode(job, target, upstream) {
+    var placeholder = {_v: document.createComment('')};
+    target.appendChild(ensureNotNull(placeholder._v));
+    Unit_getInstance();
+    mountSingle(job, upstream, _no_name_provided_$factory_57(target, placeholder, null));
+  }
+  function _no_name_provided__63($target, $placeholder, resultContinuation) {
+    this._$target = $target;
+    this._$placeholder = $placeholder;
+    CoroutineImpl_0.call(this, resultContinuation);
+  }
+  _no_name_provided__63.prototype.invoke_125 = function (value, last, $cont) {
+    var tmp = this.create_12(value, last, $cont);
+    tmp._result = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_32();
+  };
+  _no_name_provided__63.prototype.invoke_126 = function (p1, p2, $cont) {
+    var tmp = (!(p1 == null) ? isObject(p1) : false) ? p1 : THROW_CCE();
+    this.invoke_125(tmp, (p2 == null ? true : isObject(p2)) ? p2 : THROW_CCE(), $cont);
+    return Unit_getInstance();
+  };
+  _no_name_provided__63.prototype.doResume_32 = function () {
+    var suspendResult = this._result;
+    $sm: do
+      try {
+        var tmp = this._state_0;
+        if (tmp === 0) {
+          this._exceptionState = 1;
+          var tmp0_safe_receiver = this._last_2;
+          if (!((tmp0_safe_receiver == null ? null : tmp0_safe_receiver.domNode) == null)) {
+            this._$target.replaceChild(this._value_9.domNode, this._last_2.domNode);
+            Unit_getInstance();
+          } else {
+            {
+              this._$target.replaceChild(this._value_9.domNode, ensureNotNull(this._$placeholder._v));
+              Unit_getInstance();
+              this._$placeholder._v = null;
+            }
+          }
+          return Unit_getInstance();
+        } else if (tmp === 1) {
+          throw this._exception_0;
+        }} catch ($p) {
+        throw $p;
+      }
+     while (true);
+  };
+  _no_name_provided__63.prototype.create_12 = function (value, last, completion) {
+    var i = new _no_name_provided__63(this._$target, this._$placeholder, completion);
+    i._value_9 = value;
+    i._last_2 = last;
+    return i;
+  };
+  _no_name_provided__63.$metadata$ = {
+    kind: 'class',
+    interfaces: [],
+    suspendArity: 2
+  };
+  function _no_name_provided_$factory_57($target, $placeholder, resultContinuation) {
+    var i = new _no_name_provided__63($target, $placeholder, resultContinuation);
+    var l = function (p1, p2, $cont) {
+      return i.invoke_125(p1, p2, $cont);
+    };
+    l.$arity = 2;
+    return l;
+  }
   function Tag_init_$Init$(tagName, id, baseClass, job, domNode, $mask0, $marker, $this) {
     if (!(($mask0 & 2) === 0))
       id = null;
@@ -16845,26 +15345,8 @@
       new Companion_10();
     return Companion_instance_9;
   }
-  function _no_name_provided__1_1_1_0($tmp0_map_0) {
-    this._$tmp0_map_0_0 = $tmp0_map_0;
-  }
-  _no_name_provided__1_1_1_0.prototype.collect_2_2_2_0 = function (collector, $cont) {
-    var tmp = new $collect_2_2_2COROUTINE$25(this, collector, $cont);
-    tmp._result = Unit_getInstance();
-    tmp._exception_0 = null;
-    return tmp.doResume_32();
-  };
-  _no_name_provided__1_1_1_0.prototype.collect_12 = function (collector, $cont) {
-    return this.collect_2_2_2_0(collector, $cont);
-  };
-  _no_name_provided__1_1_1_0.$metadata$ = {
-    simpleName: '<no name provided>_1_1_1',
-    kind: 'class',
-    interfaces: [Flow]
-  };
   function Tag(tagName, id, baseClass, job, domNode) {
     Companion_getInstance_9();
-    WithEvents.call(this);
     this._id_0 = id;
     this._baseClass = baseClass;
     this._job_2 = job;
@@ -16885,18 +15367,13 @@
   Tag.prototype.register_6 = function (element, content) {
     return this.register_5(isObject(element) ? element : THROW_CCE(), content);
   };
-  Tag.prototype.handledBy_2 = function (_this__0, handler) {
-    var tmp = handler._get_collect__0();
-    var tmp0_map_0 = _this__0._get_events__0();
-    return tmp(new _no_name_provided__1_1_1_0(tmp0_map_0), this._get_job__10());
-  };
   Tag.prototype.attr_2 = function (name, value) {
     this._get_domNode__6().setAttribute(name, value);
   };
   Tag.$metadata$ = {
     simpleName: 'Tag',
     kind: 'class',
-    interfaces: [WithComment, TagContext]
+    interfaces: [WithComment, EventContext, TagContext]
   };
   Object.defineProperty(Tag.prototype, 'domNode', {
     configurable: true,
@@ -16916,12 +15393,12 @@
     kind: 'class',
     interfaces: [FlowCollector]
   };
-  function $collect_2_2_2COROUTINE$30(_this_, collector, resultContinuation) {
+  function $collect_2_2_2COROUTINE$31(_this_, collector, resultContinuation) {
     CoroutineImpl_0.call(this, resultContinuation);
     this.__this__16 = _this_;
     this._collector_8 = collector;
   }
-  $collect_2_2_2COROUTINE$30.prototype.doResume_32 = function () {
+  $collect_2_2_2COROUTINE$31.prototype.doResume_32 = function () {
     var suspendResult = this._result;
     $sm: do
       try {
@@ -16951,8 +15428,8 @@
       }
      while (true);
   };
-  $collect_2_2_2COROUTINE$30.$metadata$ = {
-    simpleName: '$collect_2_2_2COROUTINE$30',
+  $collect_2_2_2COROUTINE$31.$metadata$ = {
+    simpleName: '$collect_2_2_2COROUTINE$31',
     kind: 'class',
     interfaces: []
   };
@@ -16960,7 +15437,7 @@
     this._$this_asText = $this_asText;
   }
   _no_name_provided__1_1_1_1.prototype.collect_2_2_2_1 = function (collector, $cont) {
-    var tmp = new $collect_2_2_2COROUTINE$30(this, collector, $cont);
+    var tmp = new $collect_2_2_2COROUTINE$31(this, collector, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_32();
@@ -17015,82 +15492,82 @@
   });
   function main() {
     var store = storeOf$default('', null, 2, null);
-    render$default('#target', false, _no_name_provided_$factory_137(store), 2, null);
+    render$default('#target', false, _no_name_provided_$factory_58(store), 2, null);
   }
-  function _no_name_provided__143($store) {
+  function _no_name_provided__64($store) {
     this._$store = $store;
   }
-  _no_name_provided__143.prototype.invoke_210 = function ($this$label) {
+  _no_name_provided__64.prototype.invoke_131 = function ($this$label) {
     $this$label.for(this._$store._get_id__0());
     $this$label.unaryPlus_1('Input');
     Unit_getInstance();
   };
-  _no_name_provided__143.prototype.invoke_227 = function (p1) {
-    this.invoke_210(p1 instanceof Label ? p1 : THROW_CCE());
+  _no_name_provided__64.prototype.invoke_148 = function (p1) {
+    this.invoke_131(p1 instanceof Label ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__143.$metadata$ = {
+  _no_name_provided__64.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__144($store) {
+  function _no_name_provided__65($store) {
     this._$store_0 = $store;
   }
-  _no_name_provided__144.prototype.invoke_208 = function ($this$input) {
+  _no_name_provided__65.prototype.invoke_129 = function ($this$input) {
     $this$input.placeholder_0('Add some input');
     $this$input.value_1(this._$store_0._get_data_());
-    $this$input.handledBy_0(values($this$input._get_changes__4()), this._$store_0._get_update_());
+    $this$input.handledBy_1(values($this$input._get_changes__0()), this._$store_0._get_update_());
   };
-  _no_name_provided__144.prototype.invoke_227 = function (p1) {
-    this.invoke_208(p1 instanceof Input ? p1 : THROW_CCE());
+  _no_name_provided__65.prototype.invoke_148 = function (p1) {
+    this.invoke_129(p1 instanceof Input ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__144.$metadata$ = {
+  _no_name_provided__65.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__145() {
+  function _no_name_provided__66() {
   }
-  _no_name_provided__145.prototype.invoke_210 = function ($this$label) {
+  _no_name_provided__66.prototype.invoke_131 = function ($this$label) {
     $this$label.unaryPlus_1('Value');
     Unit_getInstance();
   };
-  _no_name_provided__145.prototype.invoke_227 = function (p1) {
-    this.invoke_210(p1 instanceof Label ? p1 : THROW_CCE());
+  _no_name_provided__66.prototype.invoke_148 = function (p1) {
+    this.invoke_131(p1 instanceof Label ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__145.$metadata$ = {
+  _no_name_provided__66.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__146($store) {
+  function _no_name_provided__67($store) {
     this._$store_1 = $store;
   }
-  _no_name_provided__146.prototype.invoke_224 = function ($this$div) {
+  _no_name_provided__67.prototype.invoke_145 = function ($this$div) {
     $this$div.asText_0(this._$store_1._get_data_());
     $this$div.attr_2('readonly', 'true');
   };
-  _no_name_provided__146.prototype.invoke_227 = function (p1) {
-    this.invoke_224(p1 instanceof Div ? p1 : THROW_CCE());
+  _no_name_provided__67.prototype.invoke_148 = function (p1) {
+    this.invoke_145(p1 instanceof Div ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__146.$metadata$ = {
+  _no_name_provided__67.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__147(resultContinuation) {
+  function _no_name_provided__68(resultContinuation) {
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__147.prototype.invoke_214 = function (it, $cont) {
+  _no_name_provided__68.prototype.invoke_135 = function (it, $cont) {
     var tmp = this.create_13(it, $cont);
     tmp._result = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_32();
   };
-  _no_name_provided__147.prototype.invoke_227 = function (p1, $cont) {
-    return this.invoke_214((!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE(), $cont);
+  _no_name_provided__68.prototype.invoke_148 = function (p1, $cont) {
+    return this.invoke_135((!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE(), $cont);
   };
-  _no_name_provided__147.prototype.doResume_32 = function () {
+  _no_name_provided__68.prototype.doResume_32 = function () {
     var suspendResult = this._result;
     $sm: do
       try {
@@ -17105,191 +15582,191 @@
       }
      while (true);
   };
-  _no_name_provided__147.prototype.create_13 = function (it, completion) {
-    var i = new _no_name_provided__147(completion);
+  _no_name_provided__68.prototype.create_13 = function (it, completion) {
+    var i = new _no_name_provided__68(completion);
     i._it_3 = it;
     return i;
   };
-  _no_name_provided__147.$metadata$ = {
+  _no_name_provided__68.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__148($store) {
+  function _no_name_provided__69($store) {
     this._$store_2 = $store;
   }
-  _no_name_provided__148.prototype.invoke_216 = function ($this$button) {
+  _no_name_provided__69.prototype.invoke_137 = function ($this$button) {
     $this$button.unaryPlus_1('Add a dot');
     Unit_getInstance();
-    var tmp = $this$button._get_clicks__4();
-    $this$button.handledBy_2(tmp, this._$store_2.handle$default_2(null, _no_name_provided_$factory_147(null), 1, null));
+    var tmp = $this$button._get_clicks__0();
+    $this$button.handledBy_2(tmp, this._$store_2.handle$default_2(null, _no_name_provided_$factory_68(null), 1, null));
   };
-  _no_name_provided__148.prototype.invoke_227 = function (p1) {
-    this.invoke_216(p1 instanceof Button ? p1 : THROW_CCE());
+  _no_name_provided__69.prototype.invoke_148 = function (p1) {
+    this.invoke_137(p1 instanceof Button ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__148.$metadata$ = {
+  _no_name_provided__69.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__149($store) {
+  function _no_name_provided__70($store) {
     this._$store_3 = $store;
   }
-  _no_name_provided__149.prototype.invoke_224 = function ($this$div) {
-    $this$div.label$default_4(null, null, _no_name_provided_$factory_142(this._$store_3), 3, null);
+  _no_name_provided__70.prototype.invoke_145 = function ($this$div) {
+    $this$div.label$default_4(null, null, _no_name_provided_$factory_63(this._$store_3), 3, null);
     Unit_getInstance();
     var tmp = this._$store_3._get_id__0();
-    $this$div.input_0('form-control', tmp, _no_name_provided_$factory_143(this._$store_3));
+    $this$div.input_0('form-control', tmp, _no_name_provided_$factory_64(this._$store_3));
     Unit_getInstance();
   };
-  _no_name_provided__149.prototype.invoke_227 = function (p1) {
-    this.invoke_224(p1 instanceof Div ? p1 : THROW_CCE());
+  _no_name_provided__70.prototype.invoke_148 = function (p1) {
+    this.invoke_145(p1 instanceof Div ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__149.$metadata$ = {
+  _no_name_provided__70.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__150($store) {
+  function _no_name_provided__71($store) {
     this._$store_4 = $store;
   }
-  _no_name_provided__150.prototype.invoke_224 = function ($this$div) {
-    $this$div.label$default_4(null, null, _no_name_provided_$factory_144(), 3, null);
+  _no_name_provided__71.prototype.invoke_145 = function ($this$div) {
+    $this$div.label$default_4(null, null, _no_name_provided_$factory_65(), 3, null);
     Unit_getInstance();
-    $this$div.div$default_4('form-control', null, _no_name_provided_$factory_145(this._$store_4), 2, null);
+    $this$div.div$default_4('form-control', null, _no_name_provided_$factory_66(this._$store_4), 2, null);
     Unit_getInstance();
   };
-  _no_name_provided__150.prototype.invoke_227 = function (p1) {
-    this.invoke_224(p1 instanceof Div ? p1 : THROW_CCE());
+  _no_name_provided__71.prototype.invoke_148 = function (p1) {
+    this.invoke_145(p1 instanceof Div ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__150.$metadata$ = {
+  _no_name_provided__71.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__151($store) {
+  function _no_name_provided__72($store) {
     this._$store_5 = $store;
   }
-  _no_name_provided__151.prototype.invoke_224 = function ($this$div) {
-    $this$div.button$default_4('btn btn-primary', null, _no_name_provided_$factory_146(this._$store_5), 2, null);
+  _no_name_provided__72.prototype.invoke_145 = function ($this$div) {
+    $this$div.button$default_4('btn btn-primary', null, _no_name_provided_$factory_67(this._$store_5), 2, null);
     Unit_getInstance();
   };
-  _no_name_provided__151.prototype.invoke_227 = function (p1) {
-    this.invoke_224(p1 instanceof Div ? p1 : THROW_CCE());
+  _no_name_provided__72.prototype.invoke_148 = function (p1) {
+    this.invoke_145(p1 instanceof Div ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__151.$metadata$ = {
+  _no_name_provided__72.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__152($store) {
+  function _no_name_provided__73($store) {
     this._$store_6 = $store;
   }
-  _no_name_provided__152.prototype.invoke_224 = function ($this$div) {
-    $this$div.div$default_4('form-group', null, _no_name_provided_$factory_139(this._$store_6), 2, null);
+  _no_name_provided__73.prototype.invoke_145 = function ($this$div) {
+    $this$div.div$default_4('form-group', null, _no_name_provided_$factory_60(this._$store_6), 2, null);
     Unit_getInstance();
-    $this$div.div$default_4('form-group', null, _no_name_provided_$factory_140(this._$store_6), 2, null);
+    $this$div.div$default_4('form-group', null, _no_name_provided_$factory_61(this._$store_6), 2, null);
     Unit_getInstance();
-    $this$div.div$default_4('form-group', null, _no_name_provided_$factory_141(this._$store_6), 2, null);
+    $this$div.div$default_4('form-group', null, _no_name_provided_$factory_62(this._$store_6), 2, null);
     Unit_getInstance();
   };
-  _no_name_provided__152.prototype.invoke_227 = function (p1) {
-    this.invoke_224(p1 instanceof Div ? p1 : THROW_CCE());
+  _no_name_provided__73.prototype.invoke_148 = function (p1) {
+    this.invoke_145(p1 instanceof Div ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__152.$metadata$ = {
+  _no_name_provided__73.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__153($store) {
+  function _no_name_provided__74($store) {
     this._$store_7 = $store;
   }
-  _no_name_provided__153.prototype.invoke_226 = function ($this$render) {
-    $this$render.div$default_4(null, null, _no_name_provided_$factory_138(this._$store_7), 3, null);
+  _no_name_provided__74.prototype.invoke_147 = function ($this$render) {
+    $this$render.div$default_4(null, null, _no_name_provided_$factory_59(this._$store_7), 3, null);
     Unit_getInstance();
   };
-  _no_name_provided__153.prototype.invoke_227 = function (p1) {
-    this.invoke_226(p1 instanceof Tag ? p1 : THROW_CCE());
+  _no_name_provided__74.prototype.invoke_148 = function (p1) {
+    this.invoke_147(p1 instanceof Tag ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__153.$metadata$ = {
+  _no_name_provided__74.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided_$factory_137($store) {
-    var i = new _no_name_provided__153($store);
+  function _no_name_provided_$factory_58($store) {
+    var i = new _no_name_provided__74($store);
     return function (p1) {
-      i.invoke_226(p1);
+      i.invoke_147(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_138($store) {
-    var i = new _no_name_provided__152($store);
+  function _no_name_provided_$factory_59($store) {
+    var i = new _no_name_provided__73($store);
     return function (p1) {
-      i.invoke_224(p1);
+      i.invoke_145(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_139($store) {
-    var i = new _no_name_provided__149($store);
+  function _no_name_provided_$factory_60($store) {
+    var i = new _no_name_provided__70($store);
     return function (p1) {
-      i.invoke_224(p1);
+      i.invoke_145(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_140($store) {
-    var i = new _no_name_provided__150($store);
+  function _no_name_provided_$factory_61($store) {
+    var i = new _no_name_provided__71($store);
     return function (p1) {
-      i.invoke_224(p1);
+      i.invoke_145(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_141($store) {
-    var i = new _no_name_provided__151($store);
+  function _no_name_provided_$factory_62($store) {
+    var i = new _no_name_provided__72($store);
     return function (p1) {
-      i.invoke_224(p1);
+      i.invoke_145(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_142($store) {
-    var i = new _no_name_provided__143($store);
+  function _no_name_provided_$factory_63($store) {
+    var i = new _no_name_provided__64($store);
     return function (p1) {
-      i.invoke_210(p1);
+      i.invoke_131(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_143($store) {
-    var i = new _no_name_provided__144($store);
+  function _no_name_provided_$factory_64($store) {
+    var i = new _no_name_provided__65($store);
     return function (p1) {
-      i.invoke_208(p1);
+      i.invoke_129(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_144() {
-    var i = new _no_name_provided__145();
+  function _no_name_provided_$factory_65() {
+    var i = new _no_name_provided__66();
     return function (p1) {
-      i.invoke_210(p1);
+      i.invoke_131(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_145($store) {
-    var i = new _no_name_provided__146($store);
+  function _no_name_provided_$factory_66($store) {
+    var i = new _no_name_provided__67($store);
     return function (p1) {
-      i.invoke_224(p1);
+      i.invoke_145(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_146($store) {
-    var i = new _no_name_provided__148($store);
+  function _no_name_provided_$factory_67($store) {
+    var i = new _no_name_provided__69($store);
     return function (p1) {
-      i.invoke_216(p1);
+      i.invoke_137(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_147(resultContinuation) {
-    var i = new _no_name_provided__147(resultContinuation);
+  function _no_name_provided_$factory_68(resultContinuation) {
+    var i = new _no_name_provided__68(resultContinuation);
     var l = function (p1, $cont) {
-      return i.invoke_214(p1, $cont);
+      return i.invoke_135(p1, $cont);
     };
     l.$arity = 1;
     return l;
@@ -17427,19 +15904,22 @@
   Label.prototype.label_5 = TagContext.prototype.label_5;
   Label.prototype.label$default_4 = TagContext.prototype.label$default_4;
   Label.prototype.unaryPlus_1 = WithText.prototype.unaryPlus_1;
-  Input.prototype.handledBy_0 = WithJob.prototype.handledBy_0;
   Input.prototype.button_5 = TagContext.prototype.button_5;
   Input.prototype.button$default_4 = TagContext.prototype.button$default_4;
   Input.prototype.div_5 = TagContext.prototype.div_5;
   Input.prototype.div$default_4 = TagContext.prototype.div$default_4;
   Input.prototype.label_5 = TagContext.prototype.label_5;
   Input.prototype.label$default_4 = TagContext.prototype.label$default_4;
+  Input.prototype.handledBy_1 = WithJob.prototype.handledBy_1;
+  Input.prototype._get_changes__0 = WithEvents.prototype._get_changes__0;
   Button.prototype.button_5 = TagContext.prototype.button_5;
   Button.prototype.button$default_4 = TagContext.prototype.button$default_4;
   Button.prototype.div_5 = TagContext.prototype.div_5;
   Button.prototype.div$default_4 = TagContext.prototype.div$default_4;
   Button.prototype.label_5 = TagContext.prototype.label_5;
   Button.prototype.label$default_4 = TagContext.prototype.label$default_4;
+  Button.prototype.handledBy_2 = WithJob.prototype.handledBy_2;
+  Button.prototype._get_clicks__0 = WithEvents.prototype._get_clicks__0;
   Button.prototype.unaryPlus_1 = WithText.prototype.unaryPlus_1;
   functionClasses = functionClasses$init$();
   buf = new ArrayBuffer(8);
@@ -17453,7 +15933,6 @@
   MAX_VALUE = new Long(-1, 2147483647);
   MIN_VALUE = new Long(0, -2147483648);
   TWO_PWR_24_ = fromInt(16777216);
-  propertyRefClassMetadataCache = propertyRefClassMetadataCache$init$();
   RESUME_TOKEN = new Symbol('RESUME_TOKEN');
   COMPLETING_ALREADY = new Symbol('COMPLETING_ALREADY');
   COMPLETING_WAITING_CHILDREN = new Symbol('COMPLETING_WAITING_CHILDREN');
