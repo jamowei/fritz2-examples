@@ -10,6 +10,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.map
 
 class GameStore(private val engine: Engine, initialState: GameState) : RootStore<GameState>(initialState) {
+
+    val field = data.map { it.field }
+
     val check = handle<Cell> { state, move ->
         engine.next(state, move)
     }
@@ -48,7 +51,7 @@ fun main() {
                         gap { tiny }
                         background { color { gray300 } }
                     }) {
-                        gameStore.data.map { it.field }.renderEach { cell ->
+                        gameStore.field.renderEach { cell ->
                             box({
                                 height { "10rem" }
                                 display { flex }
@@ -77,13 +80,11 @@ fun main() {
                     } handledBy gameStore.update
                     gameStore.data.render {
                         if (it.hasEnded()) {
-                            alert({
+                            it.messages.first().asAlert({
                                 width { full }
                                 radius { small }
-                            }) {
-                                severity { if (it.messages.first().severity == Severity.Success) success else info }
-                                content(it.messages.first().message)
-                            }
+                                margin { none }
+                            }, this)
                         }
                     }
                 }
