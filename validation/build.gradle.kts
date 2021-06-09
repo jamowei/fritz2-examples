@@ -17,8 +17,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("dev.fritz2:core:0.10-SNAPSHOT")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
             }
         }
         val jvmMain by getting {

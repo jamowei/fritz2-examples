@@ -15,7 +15,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("dev.fritz2:components:0.10-SNAPSHOT")
+                implementation("dev.fritz2:components:0.11")
             }
         }
         val jsMain by getting {
