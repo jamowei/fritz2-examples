@@ -14,13 +14,10 @@ kotlin {
         browser()
     }.binaries.executable()
 
-    val serializationVersion = "1.1.0"
-
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("dev.fritz2:core:0.10-SNAPSHOT")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
             }
         }
         val jvmMain by getting {
