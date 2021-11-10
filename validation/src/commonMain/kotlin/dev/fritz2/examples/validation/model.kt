@@ -20,7 +20,11 @@ data class Person(
         Activity("programming"),
         Activity("to go biking")
     )
-)
+) {
+    companion object {
+        const val id = "person"
+    }
+}
 
 @Lenses
 data class Address(

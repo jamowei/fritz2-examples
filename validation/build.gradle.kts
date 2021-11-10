@@ -15,6 +15,11 @@ kotlin {
     }.binaries.executable()
 
     sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("kotlin.ExperimentalStdlibApi")
+            }
+        }
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")

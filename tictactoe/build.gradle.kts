@@ -13,9 +13,14 @@ kotlin {
     }.binaries.executable()
 
     sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("kotlin.ExperimentalStdlibApi")
+            }
+        }
         val commonMain by getting {
             dependencies {
-                implementation("dev.fritz2:components:0.11")
+                implementation("dev.fritz2:components:0.13")
             }
         }
         val jsMain by getting {

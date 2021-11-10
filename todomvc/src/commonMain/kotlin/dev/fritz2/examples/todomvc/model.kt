@@ -1,5 +1,6 @@
 package dev.fritz2.examples.todomvc
 
+import dev.fritz2.identification.Id
 import dev.fritz2.identification.uniqueId
 import dev.fritz2.lenses.IdProvider
 import dev.fritz2.lenses.Lenses
@@ -7,7 +8,7 @@ import dev.fritz2.resource.Resource
 
 @Lenses
 data class ToDo(
-    val id: String = uniqueId(),
+    val id: String = Id.next(),
     val text: String,
     val completed: Boolean = false
 )

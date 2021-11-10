@@ -147,7 +147,7 @@ fun RenderContext.formGroup(
 }
 
 // helper method for creating checkboxes for activities
-fun RenderContext.activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Div {
+fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
     val activityName = activity.sub(L.Activity.name)
     val activityLike = activity.sub(L.Activity.like)
 

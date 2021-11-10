@@ -1,8 +1,10 @@
 package dev.fritz2.examples.validation
 
-import dev.fritz2.binding.*
+import dev.fritz2.binding.RootStore
+import dev.fritz2.binding.Store
 import dev.fritz2.dom.html.Div
 import dev.fritz2.dom.html.RenderContext
+import dev.fritz2.dom.html.handledBy
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
@@ -15,12 +17,12 @@ import kotlinx.dom.addClass
 import kotlinx.dom.removeClass
 import org.w3c.dom.get
 
-object PersonStore : RootStore<Person>(Person()) {
+object PersonStore : RootStore<Person>(Person(), id = Person.id) {
     val validator = PersonValidator()
 
     val save = handleAndEmit<Person> { person ->
         // only update the list when new person is valid
-        if (validator.isValid(person, "add")) {
+        if (validator.isValid(person, Unit)) {
             emit(person)
             cleanUpValMessages()
             Person()
@@ -216,7 +218,7 @@ fun RenderContext.formInput(
 }
 
 // helper method for creating checkboxes for activities
-fun RenderContext.activityCheckbox(activity: SubStore<Person, List<Activity>, Activity>): Div {
+fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
     val name = activity.sub(L.Activity.name)
     val like = activity.sub(L.Activity.like)
 
@@ -255,15 +257,17 @@ fun main() {
         // cleanup validation
         cleanUpValMessages()
 
+        console.log("$isValid, ${msgs.joinToString { it.id }}")
         // add messages to input groups only if there were errors
-        if(!isValid) {
-            for (msg in msgs) {
-                val element = document.getElementById(msg.id)
-                element?.addClass(msg.status.inputClass)
-                val message = document.getElementById("${msg.id}-message")
-                message?.addClass(msg.status.messageClass)
-                message?.textContent = msg.text
-            }
+        if(!isValid) msgs else emptyList()
+    } handledBy { messages ->
+
+        for (msg in messages) {
+            val element = document.getElementById(msg.id)
+            element?.addClass(msg.status.inputClass)
+            val message = document.getElementById("${msg.id}-message")
+            message?.addClass(msg.status.messageClass)
+            message?.textContent = msg.text
         }
-    }.watch()
+    }
 }
