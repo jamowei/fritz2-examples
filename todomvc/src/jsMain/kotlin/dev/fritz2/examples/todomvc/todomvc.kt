@@ -25,7 +25,7 @@ const val persistencePrefix = "todos"
 val router = router("all")
 
 @ExperimentalStdlibApi
-object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
+object ToDoListStore : RootStore<List<ToDo>>(emptyList(), id = persistencePrefix) {
 
     private val localStorage = localStorageQuery<ToDo, String, Unit>(ToDoResource, persistencePrefix)
 
@@ -33,7 +33,7 @@ object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
 
     val save = handle<ToDo> { toDos, new ->
         if (new.text.isNotBlank()) localStorage.addOrUpdate(toDos, new)
-        else toDos
+        else localStorage.delete(toDos, new.id)
     }
 
     val remove = handle<String> { toDos, id ->
@@ -45,8 +45,10 @@ object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
             if(it.completed != toggle) it.copy(completed = toggle) else null
         }
         console.log(toUpdate.joinToString { it.toString() })
+
         val result = localStorage.updateMany(toDos, toUpdate)
         console.log(result.joinToString { it.toString() })
+
         result
     }
 
@@ -108,7 +110,7 @@ fun main() {
                 ToDoListStore.data.combine(router.data) { all, route ->
                     filters[route]?.function?.invoke(all) ?: all
                 }.renderEach(ToDo::id){ toDo ->
-                    val toDoStore = storeOf(toDo)
+                    val toDoStore = ToDoListStore.sub(toDo, ToDo::id)
                     toDoStore.syncBy(ToDoListStore.save)
                     val textStore = toDoStore.sub(L.ToDo.text)
                     val completedStore = toDoStore.sub(L.ToDo.completed)
