@@ -1,10 +1,13 @@
 package dev.fritz2.examples.validation
 
-import dev.fritz2.identification.inspect
+import dev.fritz2.identification.Inspector
 import dev.fritz2.lenses.Lens
 import dev.fritz2.validation.ValidationMessage
 import dev.fritz2.validation.Validator
-import kotlinx.datetime.*
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.todayAt
 
 enum class Status(val inputClass: String, val messageClass: String) {
     Valid("is-valid", "valid-feedback"),
@@ -17,80 +20,75 @@ data class Message(val id: String, val status: Status, val text: String) : Valid
 
 class PersonValidator : Validator<Person, Message, String>() {
 
-    override fun validate(data: Person, metadata: String): List<Message> {
-        // working with mutable list here is much more easier
-        val msgs = mutableListOf<Message>()
-        val inspector = inspect(data)
-
-        // validate name
-        val name = inspector.sub(L.Person.name)
-        if (name.data.trim().isBlank())
-            msgs.add(Message(name.id, Status.Invalid, "Please provide a name"))
-        else
-            msgs.add(Message(name.id, Status.Valid, "Good name"))
-
-        val salary = inspector.sub(L.Person.salary)
-        if(salary.data < 1) {
-            msgs.add(Message(salary.id, Status.Invalid, "Please provide a salary"))
-        } else {
-            msgs.add(Message(salary.id, Status.Valid, "Not bad"))
-        }
-
-        // validate the birthday
-        val birthday = inspector.sub(L.Person.birthday)
-        val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
-        when {
-            birthday.data == LocalDate(1900, 1, 1) -> {
-                msgs.add(Message(birthday.id, Status.Invalid, "Please provide a birthday"))
-            }
-            birthday.data.year < 1900 -> {
-                msgs.add(Message(birthday.id, Status.Invalid, "Its a bit to old"))
-            }
-            birthday.data.year > today.year -> {
-                msgs.add(Message(birthday.id, Status.Invalid, "Cannot be in future"))
-            }
-            else -> {
-                val age = today.let {
-                    val years = it.year - birthday.data.year
-                    if(birthday.data.dayOfYear >= it.dayOfYear) years - 1 else years
-                }
-                msgs.add(Message(birthday.id, Status.Valid, "Age is $age"))
-            }
-        }
-
-        // check address fields
-        val address = inspector.sub(L.Person.address)
-        fun checkAddressField(name: String, lens: Lens<Address, String>) {
-            val field = address.sub(lens)
-            if (field.data.trim().isBlank())
-                msgs.add(Message(field.id, Status.Invalid, "Please provide a $name"))
+    override fun validate(inspector: Inspector<Person>, metadata: String): List<Message> =
+        buildList {
+            // validate name
+            val name = inspector.sub(L.Person.name)
+            if (name.data.trim().isBlank())
+                add(Message(name.path, Status.Invalid, "Please provide a name"))
             else
-                msgs.add(Message(field.id, Status.Valid, "Ok"))
+                add(Message(name.path, Status.Valid, "Good name"))
+
+            val salary = inspector.sub(L.Person.salary)
+            if(salary.data < 1) {
+                add(Message(salary.path, Status.Invalid, "Please provide a salary"))
+            } else {
+                add(Message(salary.path, Status.Valid, "Not bad"))
+            }
+
+            // validate the birthday
+            val birthday = inspector.sub(L.Person.birthday)
+            val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
+            when {
+                birthday.data == LocalDate(1900, 1, 1) -> {
+                    add(Message(birthday.path, Status.Invalid, "Please provide a birthday"))
+                }
+                birthday.data.year < 1900 -> {
+                    add(Message(birthday.path, Status.Invalid, "Its a bit to old"))
+                }
+                birthday.data.year > today.year -> {
+                    add(Message(birthday.path, Status.Invalid, "Cannot be in future"))
+                }
+                else -> {
+                    val age = today.let {
+                        val years = it.year - birthday.data.year
+                        if(birthday.data.dayOfYear >= it.dayOfYear) years - 1 else years
+                    }
+                    add(Message(birthday.path, Status.Valid, "Age is $age"))
+                }
+            }
+
+            // check address fields
+            val address = inspector.sub(L.Person.address)
+            fun checkAddressField(name: String, lens: Lens<Address, String>) {
+                val field = address.sub(lens)
+                if (field.data.trim().isBlank())
+                    add(Message(field.path, Status.Invalid, "Please provide a $name"))
+                else
+                    add(Message(field.path, Status.Valid, "Ok"))
+            }
+            checkAddressField("street", L.Address.street)
+            checkAddressField("house number", L.Address.number)
+            checkAddressField("postalcode", L.Address.postalCode)
+            checkAddressField("city", L.Address.city)
+
+            // check activities
+            val activities = inspector.sub(L.Person.activities)
+            if (activities.data.none { it.like })
+                add(
+                    Message(
+                        activities.path,
+                        Status.Invalid,
+                        "Please provide at least one activity"
+                    )
+                )
+            else
+                add(
+                    Message(
+                        activities.path,
+                        Status.Valid,
+                        "You choose ${activities.data.count { it.like }} activities"
+                    )
+                )
         }
-        checkAddressField("street", L.Address.street)
-        checkAddressField("house number", L.Address.number)
-        checkAddressField("postalcode", L.Address.postalCode)
-        checkAddressField("city", L.Address.city)
-
-        // check activities
-        val activities = inspector.sub(L.Person.activities)
-        if (activities.data.none { it.like })
-            msgs.add(
-                Message(
-                    activities.id,
-                    Status.Invalid,
-                    "Please provide at least one activity"
-                )
-            )
-        else
-            msgs.add(
-                Message(
-                    activities.id,
-                    Status.Valid,
-                    "You choose ${activities.data.count { it.like }} activities"
-                )
-            )
-
-        return msgs
-    }
 }

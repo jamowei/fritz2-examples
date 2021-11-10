@@ -95,8 +95,8 @@ fun main() {
                 }
             }
             div("card") {
-                router.select("page").renderElement { (page, params) ->
-                    when (page) {
+                router.select("page").render { (value, route) ->
+                    when (value) {
                         Pages.home ->
                             div("card-body") {
                                 h5("card-title") {
@@ -119,7 +119,7 @@ fun main() {
                                         +"Extra parameter"
                                     }
                                     div("form-control") {
-                                        +(params["extra"] ?: "")
+                                        +(route["extra"] ?: "")
                                         attr("readonly", "true")
                                     }
                                 }
@@ -136,10 +136,10 @@ fun main() {
                                     div("form-check") {
                                         input("form-check-input", id = "debug") {
                                             type("checkbox")
-                                            checked(params["debug"]?.toBoolean() ?: false)
+                                            checked(route["debug"]?.toBoolean() ?: false)
 
                                             changes.states().map { checked ->
-                                                params.plus("debug" to checked.toString())
+                                                route + ("debug" to checked.toString())
                                             } handledBy router.navTo
                                         }
                                         label("form-check-label") {
@@ -155,19 +155,19 @@ fun main() {
                                     select("form-control") {
                                         option {
                                             +Roles.anonymous
-                                            selected(params["role"] == Roles.anonymous)
+                                            selected(route["role"] == Roles.anonymous)
                                         }
                                         option {
                                             +Roles.user
-                                            selected(params["role"] == Roles.user)
+                                            selected(route["role"] == Roles.user)
                                         }
                                         option {
                                             +Roles.admin
-                                            selected(params["role"] == Roles.admin)
+                                            selected(route["role"] == Roles.admin)
                                         }
 
                                         changes.selectedText().map { text ->
-                                            params.plus("role" to text)
+                                            route + ("role" to text)
                                         } handledBy router.navTo
                                     }
                                 }

@@ -1,14 +1,17 @@
 package dev.fritz2.examples.performance
 
 import dev.fritz2.binding.RootStore
+import dev.fritz2.dom.html.keyOf
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.values
+import kotlinx.browser.window
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.sample
+import kotlin.js.Date
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -17,9 +20,12 @@ fun main() {
     val startStore = object : RootStore<Int>(1000, "start") {
 
         val start = handleAndEmit<Int> { maxCount ->
+            val now = Date()
             for (i in 0..maxCount) {
                 delay(1)
                 emit(i)
+                if(i == maxCount)
+                    window.alert("Duration: ${Date().getTime() - now.getTime()} ms")
             }
             maxCount
         }
@@ -40,6 +46,8 @@ fun main() {
             max == current
         }
 
+    val key = keyOf<String>("key")
+
     render("#target") {
         div("form-group") {
 
@@ -57,9 +65,14 @@ fun main() {
             }
 
             countStore.data.render {
-                p {
+                p(scope = {
+                    set(key, "$it")
+                }) {
                     +"number of updates: $it"
                     clicks handledBy startStore.dummyHandler //register dummy handler
+                    span {
+                        scope.asDataAttr()
+                    }
                 }
             }
 

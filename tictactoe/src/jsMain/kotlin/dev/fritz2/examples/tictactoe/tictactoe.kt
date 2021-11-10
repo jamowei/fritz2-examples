@@ -2,8 +2,8 @@ package dev.fritz2.examples.tictactoe
 
 import dev.fritz2.binding.RootStore
 import dev.fritz2.components.*
-import dev.fritz2.components.validation.Severity
 import dev.fritz2.dom.html.render
+import dev.fritz2.styling.div
 import dev.fritz2.styling.theme.IconDefinition
 import dev.fritz2.styling.theme.Theme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -52,7 +52,7 @@ fun main() {
                         background { color { gray300 } }
                     }) {
                         gameStore.field.renderEach { cell ->
-                            box({
+                            div({
                                 height { "10rem" }
                                 display { flex }
                                 justifyContent { center }

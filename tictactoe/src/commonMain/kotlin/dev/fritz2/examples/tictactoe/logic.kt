@@ -4,19 +4,17 @@ import dev.fritz2.components.validation.ComponentValidationMessage
 import dev.fritz2.components.validation.ComponentValidator
 import dev.fritz2.components.validation.infoMessage
 import dev.fritz2.components.validation.successMessage
+import dev.fritz2.identification.Inspector
 
 object EndingValidator : ComponentValidator<Field, GameState>() {
-    override fun validate(data: Field, metadata: GameState): List<ComponentValidationMessage> {
-        val messages = mutableListOf<ComponentValidationMessage>()
-
-        if (data.any { it.isInWinningGroup }) {
-            messages.add(successMessage("", "Player ${metadata.player} has won!"))
-        } else if (GameState.isFull(data)) {
-            messages.add(infoMessage("", "This is a draw!"))
+    override fun validate(inspector: Inspector<Field>, metadata: GameState): List<ComponentValidationMessage> =
+        buildList {
+            if (inspector.data.any { it.isInWinningGroup }) {
+                add(successMessage("", "Player ${metadata.player} has won!"))
+            } else if (GameState.isFull(inspector.data)) {
+                add(infoMessage("", "This is a draw!"))
+            }
         }
-
-        return messages
-    }
 }
 
 class Engine(private val endingValidator: ComponentValidator<Field, GameState> = EndingValidator) {
