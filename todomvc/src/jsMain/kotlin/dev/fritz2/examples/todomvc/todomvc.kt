@@ -20,7 +20,7 @@ val filters = mapOf(
     "completed" to Filter("Completed") { toDos -> toDos.filter { it.completed } }
 )
 
-const val persistencePrefix = "todos-"
+const val persistencePrefix = "todos"
 //val toDoResource = Resource(ToDo::id, ToDoSerializer, ToDo(text = ""))
 val router = router("all")
 
@@ -41,9 +41,13 @@ object ToDoListStore : RootStore<List<ToDo>>(emptyList()) {
     }
 
     val toggleAll = handle { toDos, toggle: Boolean ->
-        localStorage.updateMany(toDos, toDos.mapNotNull {
+        val toUpdate = toDos.mapNotNull {
             if(it.completed != toggle) it.copy(completed = toggle) else null
-        })
+        }
+        console.log(toUpdate.joinToString { it.toString() })
+        val result = localStorage.updateMany(toDos, toUpdate)
+        console.log(result.joinToString { it.toString() })
+        result
     }
 
     val clearCompleted = handle { toDos ->
