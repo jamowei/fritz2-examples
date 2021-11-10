@@ -1,6 +1,7 @@
 package dev.fritz2.examples.validation
 
 import dev.fritz2.identification.Inspector
+import dev.fritz2.identification.inspect
 import dev.fritz2.lenses.Lens
 import dev.fritz2.validation.ValidationMessage
 import dev.fritz2.validation.Validator
@@ -18,22 +19,22 @@ data class Message(val id: String, val status: Status, val text: String) : Valid
     override fun isError(): Boolean = status > Status.Valid
 }
 
-class PersonValidator : Validator<Person, Message, String>() {
+class PersonValidator : Validator<Person, Message, Unit>() {
 
-    override fun validate(inspector: Inspector<Person>, metadata: String): List<Message> =
+    override fun validate(inspector: Inspector<Person>, metadata: Unit): List<Message> =
         buildList {
             // validate name
             val name = inspector.sub(L.Person.name)
             if (name.data.trim().isBlank())
-                add(Message(name.path, Status.Invalid, "Please provide a name"))
+                add(Message(Person.id + name.path, Status.Invalid, "Please provide a name"))
             else
-                add(Message(name.path, Status.Valid, "Good name"))
+                add(Message(Person.id + name.path, Status.Valid, "Good name"))
 
             val salary = inspector.sub(L.Person.salary)
             if(salary.data < 1) {
-                add(Message(salary.path, Status.Invalid, "Please provide a salary"))
+                add(Message(Person.id + salary.path, Status.Invalid, "Please provide a salary"))
             } else {
-                add(Message(salary.path, Status.Valid, "Not bad"))
+                add(Message(Person.id + salary.path, Status.Valid, "Not bad"))
             }
 
             // validate the birthday
@@ -41,20 +42,20 @@ class PersonValidator : Validator<Person, Message, String>() {
             val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
             when {
                 birthday.data == LocalDate(1900, 1, 1) -> {
-                    add(Message(birthday.path, Status.Invalid, "Please provide a birthday"))
+                    add(Message(Person.id + birthday.path, Status.Invalid, "Please provide a birthday"))
                 }
                 birthday.data.year < 1900 -> {
-                    add(Message(birthday.path, Status.Invalid, "Its a bit to old"))
+                    add(Message(Person.id + birthday.path, Status.Invalid, "Its a bit to old"))
                 }
                 birthday.data.year > today.year -> {
-                    add(Message(birthday.path, Status.Invalid, "Cannot be in future"))
+                    add(Message(Person.id + birthday.path, Status.Invalid, "Cannot be in future"))
                 }
                 else -> {
                     val age = today.let {
                         val years = it.year - birthday.data.year
                         if(birthday.data.dayOfYear >= it.dayOfYear) years - 1 else years
                     }
-                    add(Message(birthday.path, Status.Valid, "Age is $age"))
+                    add(Message(Person.id + birthday.path, Status.Valid, "Age is $age"))
                 }
             }
 
@@ -63,9 +64,9 @@ class PersonValidator : Validator<Person, Message, String>() {
             fun checkAddressField(name: String, lens: Lens<Address, String>) {
                 val field = address.sub(lens)
                 if (field.data.trim().isBlank())
-                    add(Message(field.path, Status.Invalid, "Please provide a $name"))
+                    add(Message(Person.id + field.path, Status.Invalid, "Please provide a $name"))
                 else
-                    add(Message(field.path, Status.Valid, "Ok"))
+                    add(Message(Person.id + field.path, Status.Valid, "Ok"))
             }
             checkAddressField("street", L.Address.street)
             checkAddressField("house number", L.Address.number)
@@ -77,7 +78,7 @@ class PersonValidator : Validator<Person, Message, String>() {
             if (activities.data.none { it.like })
                 add(
                     Message(
-                        activities.path,
+                        Person.id + activities.path,
                         Status.Invalid,
                         "Please provide at least one activity"
                     )
@@ -85,7 +86,7 @@ class PersonValidator : Validator<Person, Message, String>() {
             else
                 add(
                     Message(
-                        activities.path,
+                        Person.id + activities.path,
                         Status.Valid,
                         "You choose ${activities.data.count { it.like }} activities"
                     )
