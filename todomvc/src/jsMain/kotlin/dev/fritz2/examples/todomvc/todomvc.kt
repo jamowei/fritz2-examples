@@ -139,12 +139,12 @@ fun main() {
                             value(textStore.data)
                             changes.values() handledBy textStore.update
 
-                            editingStore.data.onEach { isEditing ->
+                            editingStore.data handledBy { isEditing ->
                                 if (isEditing) {
                                     domNode.focus()
                                     domNode.select()
                                 }
-                            }.watch()
+                            }
                             merge(
                                 blurs.map { false },
                                 keyups.key().filter { it == Keys.Enter }.map { false }
