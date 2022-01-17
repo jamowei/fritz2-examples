@@ -32,13 +32,18 @@ data class Address(
     val number: String = "",
     val postalCode: String = "",
     val city: String = ""
-)
+) {
+    companion object
+}
 
 @Lenses
 data class Activity(
     val name: String,
     val like: Boolean = false
-)
+) {
+    companion object
+}
+
 
 object Formats {
     val date: Lens<LocalDate, String> = format(

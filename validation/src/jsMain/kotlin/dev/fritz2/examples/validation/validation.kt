@@ -110,7 +110,7 @@ fun RenderContext.details() {
                             +"Activities"
                         }
                         div(id = activities.id) {
-                            activities.renderEach { activity ->
+                            activities.renderEach(Activity::name) { activity ->
                                 activityCheckbox(activity)
                             }
                         }

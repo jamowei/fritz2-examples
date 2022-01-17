@@ -1,7 +1,7 @@
 package dev.fritz2.examples.webcomponent
 
 import dev.fritz2.dom.Tag
-import dev.fritz2.dom.html.TagContext
+import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.webcomponents.WebComponent
 import dev.fritz2.webcomponents.registerWebComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,7 +15,7 @@ object WeatherCard : WebComponent<HTMLDivElement>() {
 
     private val city = attributeChanges("city")
 
-    override fun TagContext.init(element: HTMLElement, shadowRoot: ShadowRoot): Tag<HTMLDivElement> {
+    override fun RenderContext.init(element: HTMLElement, shadowRoot: ShadowRoot): Tag<HTMLDivElement> {
         linkStylesheet(shadowRoot, "./weathercard.css")
         // setStylesheet(shadowRoot, """.weather-card { border: 1px solid red; }""")
 

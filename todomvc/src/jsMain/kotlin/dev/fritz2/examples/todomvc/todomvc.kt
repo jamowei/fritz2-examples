@@ -8,7 +8,7 @@ import dev.fritz2.dom.key
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
 import dev.fritz2.repositories.localstorage.localStorageQuery
-import dev.fritz2.routing.router
+import dev.fritz2.routing.routerOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
@@ -21,8 +21,9 @@ val filters = mapOf(
 )
 
 const val persistencePrefix = "todos"
+
 //val toDoResource = Resource(ToDo::id, ToDoSerializer, ToDo(text = ""))
-val router = router("all")
+val router = routerOf("all")
 
 @ExperimentalStdlibApi
 object ToDoListStore : RootStore<List<ToDo>>(emptyList(), id = persistencePrefix) {
