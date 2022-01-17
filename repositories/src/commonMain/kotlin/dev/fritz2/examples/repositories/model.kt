@@ -1,6 +1,6 @@
 package dev.fritz2.examples.repositories
 
-import dev.fritz2.identification.uniqueId
+import dev.fritz2.identification.Id
 import dev.fritz2.lenses.IdProvider
 import dev.fritz2.lenses.Lenses
 import dev.fritz2.resource.Resource
@@ -11,12 +11,14 @@ import kotlinx.serialization.json.Json
 @Lenses
 @Serializable
 data class Person(
-    val _id: String = uniqueId(),
+    val _id: String = Id.next(),
     val name: String = "",
     val age: Int = 0,
     val salary: Int = 0,
     val saved: Boolean = false
-)
+) {
+    companion object
+}
 
 object PersonResource : Resource<Person, String> {
     override val idProvider: IdProvider<Person, String> = Person::_id

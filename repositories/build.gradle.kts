@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    id("dev.fritz2.fritz2-gradle")
+    id("com.google.devtools.ksp")
 }
 
 repositories {
@@ -17,7 +17,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+                implementation("dev.fritz2:core:${rootProject.ext["fritz2Version"]}")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${rootProject.ext["serializationVersion"]}")
             }
         }
         val jvmMain by getting {
@@ -30,3 +31,19 @@ kotlin {
         }
     }
 }
+
+/**
+ * KSP support - start
+ */
+dependencies {
+    add("kspMetadata", "dev.fritz2:lenses-annotation-processor:${rootProject.ext["fritz2Version"]}")
+}
+
+kotlin.sourceSets.commonMain { kotlin.srcDir("build/generated/ksp/commonMain/kotlin") }
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().all {
+    if (name != "kspKotlinMetadata") dependsOn("kspKotlinMetadata")
+}
+// needed to work on Apple Silicon. Should be fixed by 1.6.20 (https://youtrack.jetbrains.com/issue/KT-49109#focus=Comments-27-5259190.0-0)
+/**
+ * KSP support - end
+ */

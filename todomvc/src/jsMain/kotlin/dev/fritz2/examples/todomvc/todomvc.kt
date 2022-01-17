@@ -8,7 +8,7 @@ import dev.fritz2.dom.key
 import dev.fritz2.dom.states
 import dev.fritz2.dom.values
 import dev.fritz2.repositories.localstorage.localStorageQuery
-import dev.fritz2.routing.router
+import dev.fritz2.routing.routerOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
@@ -21,8 +21,9 @@ val filters = mapOf(
 )
 
 const val persistencePrefix = "todos"
+
 //val toDoResource = Resource(ToDo::id, ToDoSerializer, ToDo(text = ""))
-val router = router("all")
+val router = routerOf("all")
 
 @ExperimentalStdlibApi
 object ToDoListStore : RootStore<List<ToDo>>(emptyList(), id = persistencePrefix) {
@@ -112,8 +113,8 @@ fun main() {
                 }.renderEach(ToDo::id){ toDo ->
                     val toDoStore = ToDoListStore.sub(toDo, ToDo::id)
                     toDoStore.syncBy(ToDoListStore.save)
-                    val textStore = toDoStore.sub(L.ToDo.text)
-                    val completedStore = toDoStore.sub(L.ToDo.completed)
+                    val textStore = toDoStore.sub(ToDo.text())
+                    val completedStore = toDoStore.sub(ToDo.completed())
 
                     val editingStore = storeOf(false)
 
@@ -133,7 +134,7 @@ fun main() {
                                 changes.states() handledBy completedStore.update
                             }
                             label {
-                                textStore.data.asText()
+                                textStore.data.renderText()
 
                                 dblclicks.map { true } handledBy editingStore.update
                             }

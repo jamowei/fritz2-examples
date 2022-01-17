@@ -42,15 +42,15 @@ object PersonListStore : RootStore<List<Person>>(emptyList()) {
 }
 
 fun RenderContext.details() {
-    val name = PersonStore.sub(L.Person.name)
-    val salary = PersonStore.sub(L.Person.salary + Formats.currency)
-    val birthday = PersonStore.sub(L.Person.birthday + Formats.date)
-    val address = PersonStore.sub(L.Person.address)
-    val street = address.sub(L.Address.street)
-    val number = address.sub(L.Address.number)
-    val postalCode = address.sub(L.Address.postalCode)
-    val city = address.sub(L.Address.city)
-    val activities = PersonStore.sub(L.Person.activities)
+    val name = PersonStore.sub(Person.name())
+    val salary = PersonStore.sub(Person.salary() + Formats.currency)
+    val birthday = PersonStore.sub(Person.birthday() + Formats.date)
+    val address = PersonStore.sub(Person.address())
+    val street = address.sub(Address.street())
+    val number = address.sub(Address.number())
+    val postalCode = address.sub(Address.postalCode())
+    val city = address.sub(Address.city())
+    val activities = PersonStore.sub(Person.activities())
 
     div("col-12") {
         div("card") {
@@ -110,7 +110,7 @@ fun RenderContext.details() {
                             +"Activities"
                         }
                         div(id = activities.id) {
-                            activities.renderEach { activity ->
+                            activities.renderEach(Activity::name) { activity ->
                                 activityCheckbox(activity)
                             }
                         }
@@ -133,7 +133,7 @@ fun RenderContext.details() {
                     div("card card-body") {
                         pre {
                             code {
-                                PersonStore.data.map { JSON.stringify(it, space = 2) }.asText()
+                                PersonStore.data.map { JSON.stringify(it, space = 2) }.renderText()
                             }
                         }
                     }
@@ -219,8 +219,8 @@ fun RenderContext.formInput(
 
 // helper method for creating checkboxes for activities
 fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
-    val name = activity.sub(L.Activity.name)
-    val like = activity.sub(L.Activity.like)
+    val name = activity.sub(Activity.name())
+    val like = activity.sub(Activity.like())
 
     return div("form-check form-check-inline") {
         input("form-check-input", id = activity.id) {
@@ -231,7 +231,7 @@ fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
         }
         label("form-check-label") {
             `for`(activity.id)
-            name.data.asText()
+            name.data.renderText()
         }
     }
 }

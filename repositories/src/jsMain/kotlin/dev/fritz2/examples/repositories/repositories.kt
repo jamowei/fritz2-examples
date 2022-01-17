@@ -139,13 +139,14 @@ fun RenderContext.details() {
     div("col-12") {
         div("card") {
             h5("card-header") { EntityStore.data.map {
-                "Persons Details (...${it._id.takeLast(5)})" }.asText()
+                "Persons Details (...${it._id.takeLast(5)})"
+            }.renderText()
             }
             div("card-body") {
                 div {
-                    formGroup("name", EntityStore.sub(L.Person.name))
-                    formGroup("age", EntityStore.sub(L.Person.age + numberFormat), inputType = "number")
-                    formGroup("salary", EntityStore.sub(L.Person.salary + numberFormat), inputType = "number")
+                    formGroup("name", EntityStore.sub(Person.name()))
+                    formGroup("age", EntityStore.sub(Person.age() + numberFormat), inputType = "number")
+                    formGroup("salary", EntityStore.sub(Person.salary() + numberFormat), inputType = "number")
                 }
             }
             div("card-footer") {
@@ -155,7 +156,7 @@ fun RenderContext.details() {
                             if(it) "spinner-border spinner-border-sm mr-2" else ""
                         })
                     }
-                    EntityStore.isSaved.map { if(it) "Save" else "Add" }.asText()
+                    EntityStore.isSaved.map { if (it) "Save" else "Add" }.renderText()
 
                     clicks handledBy EntityStore.addOrUpdate
                 }
@@ -185,7 +186,7 @@ fun RenderContext.details() {
                     div("card card-body") {
                         pre {
                             code {
-                                EntityStore.data.map { JSON.stringify(it, space = 2) }.asText()
+                                EntityStore.data.map { JSON.stringify(it, space = 2) }.renderText()
                             }
                         }
                     }

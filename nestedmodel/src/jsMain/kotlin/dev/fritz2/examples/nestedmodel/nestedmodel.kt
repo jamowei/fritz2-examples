@@ -3,7 +3,6 @@ package dev.fritz2.examples.nestedmodel
 import dev.fritz2.binding.RootStore
 import dev.fritz2.binding.SimpleHandler
 import dev.fritz2.binding.Store
-import dev.fritz2.binding.SubStore
 import dev.fritz2.dom.html.Div
 import dev.fritz2.dom.html.RenderContext
 import dev.fritz2.dom.html.render
@@ -33,14 +32,14 @@ object PersonListStore : RootStore<List<Person>>(emptyList(), id = "list") {
 }
 
 fun RenderContext.details() {
-    val name = PersonStore.sub(L.Person.name)
-    val birthday = PersonStore.sub(L.Person.birthday)
-    val address = PersonStore.sub(L.Person.address)
-    val street = address.sub(L.Address.street)
-    val number = address.sub(L.Address.number)
-    val postalCode = address.sub(L.Address.postalCode)
-    val city = address.sub(L.Address.city)
-    val activities = PersonStore.sub(L.Person.activities)
+    val name = PersonStore.sub(Person.name())
+    val birthday = PersonStore.sub(Person.birthday())
+    val address = PersonStore.sub(Person.address())
+    val street = address.sub(Address.street())
+    val number = address.sub(Address.number())
+    val postalCode = address.sub(Address.postalCode())
+    val city = address.sub(Address.city())
+    val activities = PersonStore.sub(Person.activities())
 
     div("col-12") {
         div("card") {
@@ -58,7 +57,7 @@ fun RenderContext.details() {
                 }
                 div("form-row") {
                     div("form-group") {
-                        activities.renderEach { activity ->
+                        activities.renderEach(Activity::name) { activity ->
                             activityCheckbox(activity)
                         }
                     }
@@ -80,7 +79,7 @@ fun RenderContext.details() {
                         div("card card-body") {
                             pre {
                                 code {
-                                    PersonStore.data.map { JSON.stringify(it, space = 2) }.asText()
+                                    PersonStore.data.map { JSON.stringify(it, space = 2) }.renderText()
                                 }
                             }
                         }
@@ -148,8 +147,8 @@ fun RenderContext.formGroup(
 
 // helper method for creating checkboxes for activities
 fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
-    val activityName = activity.sub(L.Activity.name)
-    val activityLike = activity.sub(L.Activity.like)
+    val activityName = activity.sub(Activity.name())
+    val activityLike = activity.sub(Activity.like())
 
 
     return div("form-check form-check-inline") {
@@ -161,7 +160,7 @@ fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
         }
         label("form-check-label") {
             `for`(activity.id)
-            activityName.data.asText()
+            activityName.data.renderText()
         }
     }
 }
