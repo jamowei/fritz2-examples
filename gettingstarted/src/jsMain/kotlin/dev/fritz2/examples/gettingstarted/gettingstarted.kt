@@ -25,7 +25,7 @@ fun main() {
                     +"Value"
                 }
                 div("form-control") {
-                    store.data.asText()
+                    store.data.renderText()
                     attr("readonly", "true")
                 }
             }

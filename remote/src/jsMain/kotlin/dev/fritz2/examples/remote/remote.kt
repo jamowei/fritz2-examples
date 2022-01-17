@@ -3,7 +3,6 @@ package dev.fritz2.examples.remote
 import dev.fritz2.binding.RootStore
 import dev.fritz2.dom.html.render
 import dev.fritz2.dom.values
-import dev.fritz2.remote.getBody
 import dev.fritz2.remote.http
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -17,22 +16,24 @@ fun main() {
         val users = http("https://reqres.in/api/users")
 
         val loadAllUsers = handle {
-            users.get().getBody()
+            users.get().body()
         }
 
         val loadUserById = handle { _, s: String ->
-            users.acceptJson().get(s).getBody()
+            users.acceptJson().get(s).body()
         }
 
         val saveUserWithName = handle { _, s: String ->
-            users.body("""
+            users.body(
+                """
                     {
                         "name": "$s",
                         "job": "programmer"
                     }
-                """.trimIndent())
+                """.trimIndent()
+            )
                 .contentType("application/json; charset=utf-8")
-                .acceptJson().post().getBody()
+                .acceptJson().post().body()
         }
     }
 
@@ -74,7 +75,7 @@ fun main() {
                 }
                 pre("text-wrap") {
                     code {
-                        userStore.data.asText()
+                        userStore.data.renderText()
                     }
                 }
             }

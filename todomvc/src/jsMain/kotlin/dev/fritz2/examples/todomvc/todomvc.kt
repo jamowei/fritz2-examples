@@ -112,8 +112,8 @@ fun main() {
                 }.renderEach(ToDo::id){ toDo ->
                     val toDoStore = ToDoListStore.sub(toDo, ToDo::id)
                     toDoStore.syncBy(ToDoListStore.save)
-                    val textStore = toDoStore.sub(L.ToDo.text)
-                    val completedStore = toDoStore.sub(L.ToDo.completed)
+                    val textStore = toDoStore.sub(ToDo.text())
+                    val completedStore = toDoStore.sub(ToDo.completed())
 
                     val editingStore = storeOf(false)
 
@@ -133,7 +133,7 @@ fun main() {
                                 changes.states() handledBy completedStore.update
                             }
                             label {
-                                textStore.data.asText()
+                                textStore.data.renderText()
 
                                 dblclicks.map { true } handledBy editingStore.update
                             }

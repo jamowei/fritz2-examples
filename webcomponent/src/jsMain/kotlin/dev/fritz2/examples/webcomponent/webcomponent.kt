@@ -22,7 +22,7 @@ object WeatherCard : WebComponent<HTMLDivElement>() {
         // add you Stores, etc. here
 
         return div("weather-card") {
-            h2 { city.asText() }
+            h2 { city.renderText() }
             custom("m3-stars") {
                 attr("max", "5")
                 attr("current", "3.5")

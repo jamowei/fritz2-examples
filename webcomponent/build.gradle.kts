@@ -1,9 +1,10 @@
 plugins {
     kotlin("multiplatform")
-    id("dev.fritz2.fritz2-gradle")
+    kotlin("plugin.serialization")
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -15,6 +16,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("dev.fritz2:core:${rootProject.ext["fritz2Version"]}")
             }
         }
         val jsMain by getting {

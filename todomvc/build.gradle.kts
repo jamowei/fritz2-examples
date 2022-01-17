@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
-    id("dev.fritz2.fritz2-gradle")
+    kotlin("plugin.serialization")
+    id("com.google.devtools.ksp")
 }
 
 repositories {
@@ -15,6 +16,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("dev.fritz2:core:${rootProject.ext["fritz2Version"]}")
             }
         }
         val jsMain by getting {

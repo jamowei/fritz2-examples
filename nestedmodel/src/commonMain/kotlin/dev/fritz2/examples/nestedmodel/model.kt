@@ -15,7 +15,9 @@ data class Person(
         Activity("programming"),
         Activity("to go biking")
     )
-)
+) {
+    companion object
+}
 
 @Lenses
 data class Address(
@@ -23,10 +25,14 @@ data class Address(
     val number: String = "",
     val postalCode: String = "",
     val city: String = ""
-)
+) {
+    companion object
+}
 
 @Lenses
 data class Activity(
     val name: String,
     val like: Boolean = false
-)
+) {
+    companion object
+}
