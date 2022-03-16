@@ -4,7 +4,7 @@
 
 These ready-to-try examples give you some insight into web-app development with fritz2. 
 
-If you want to learn more about fritz2 and how it works, take a look at our [documentation](https://docs.fritz2.dev/).
+If you want to learn more about fritz2 and how it works, take a look at our [documentation](https://www.fritz2.dev/docs/).
 
 The following examples are available:
 * [gettingstarted](https://examples.fritz2.dev/gettingstarted/build/distributions/index.html) - one- and two-way-databinding in fritz2
@@ -15,7 +15,7 @@ The following examples are available:
 * [validation](https://examples.fritz2.dev/validation/build/distributions/index.html) - validation service in fritz2
 * [todomvc](https://examples.fritz2.dev/todomvc/build/distributions/index.html) - implementing the [TodoMVC](http://todomvc.com/) specification using fritz2
 * [webcomponent](https://examples.fritz2.dev/webcomponent/build/distributions/index.html) - implementing a [WebComponent](https://www.webcomponents.org/) using fritz2
-* [tictactoe](https://examples.fritz2.dev/tictactoe/build/distributions/index.html) -  demonstrates the combination of UI, logic and state with fritz2's components and styling facilities
+* [tictactoe](https://examples.fritz2.dev/tictactoe/build/distributions/index.html) -  demonstrates the combination of UI, logic and state with fritz2
 
 ### Running locally
 To run our examples locally, clone this repository and then execute
