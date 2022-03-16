@@ -6,7 +6,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven("https://kotlin.bintray.com/kotlinx/")
 }
 
 kotlin {
@@ -16,11 +15,6 @@ kotlin {
     }.binaries.executable()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.ExperimentalStdlibApi")
-            }
-        }
         val commonMain by getting {
             dependencies {
                 implementation("dev.fritz2:core:${rootProject.ext["fritz2Version"]}")

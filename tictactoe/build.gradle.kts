@@ -10,19 +10,17 @@ repositories {
 
 kotlin {
     js(IR) {
-        browser()
+        browser {
+            webpackTask {
+                cssSupport.enabled = true
+            }
+        }
     }.binaries.executable()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.ExperimentalStdlibApi")
-            }
-        }
         val commonMain by getting {
             dependencies {
                 implementation("dev.fritz2:core:${rootProject.ext["fritz2Version"]}")
-                implementation("dev.fritz2:components:${rootProject.ext["fritz2Version"]}")
             }
         }
         val jsMain by getting {

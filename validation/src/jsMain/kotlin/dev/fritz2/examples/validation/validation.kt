@@ -1,43 +1,31 @@
 package dev.fritz2.examples.validation
 
-import dev.fritz2.binding.RootStore
-import dev.fritz2.binding.Store
-import dev.fritz2.dom.html.Div
-import dev.fritz2.dom.html.RenderContext
-import dev.fritz2.dom.html.handledBy
-import dev.fritz2.dom.html.render
-import dev.fritz2.dom.states
-import dev.fritz2.dom.values
+import dev.fritz2.core.*
+import dev.fritz2.validation.ValidatingStore
+import dev.fritz2.validation.valid
 import kotlinx.browser.document
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.dom.addClass
 import kotlinx.dom.removeClass
+import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.get
 
-object PersonStore : RootStore<Person>(Person(), id = Person.id) {
-    val validator = PersonValidator()
-
-    val save = handleAndEmit<Person> { person ->
-        // only update the list when new person is valid
-        if (validator.isValid(person, Unit)) {
-            emit(person)
-            cleanUpValMessages()
-            Person()
-        } else person
+object PersonListStore : RootStore<List<Person>>(emptyList()) {
+    val add = handle<Person> { list, person ->
+        list + person
     }
 }
 
-object PersonListStore : RootStore<List<Person>>(emptyList()) {
-    private val add = handle<Person> { list, person ->
-        list + person
-    }
-
-    init {
-        //connect the two stores
-        PersonStore.save handledBy add
+object PersonStore : ValidatingStore<Person, Unit, Message>(
+    Person(), personValidator, id = Person.id, validateAfterUpdate = false
+) {
+    val save = handle { person ->
+        if (validate(person, Unit).valid) {
+            PersonListStore.add(person)
+            cleanUpValMessages()
+            Person()
+        } else person
     }
 }
 
@@ -120,7 +108,7 @@ fun RenderContext.details() {
             }
             div("card-footer") {
                 button("btn btn-primary") {
-                    +"Add"
+                    +"Save"
                     clicks handledBy PersonStore.save
                 }
 
@@ -191,7 +179,7 @@ fun cleanUpValMessages() {
         message?.textContent = ""
     }
     // activities
-    document.getElementById(".activities")?.removeClass(Status.Invalid.inputClass, Status.Valid.inputClass)
+    document.getElementById("${PersonStore.id}.activities")?.removeClass(Status.Invalid.inputClass, Status.Valid.inputClass)
 }
 
 // helper method for creating form-groups for text input
@@ -218,7 +206,7 @@ fun RenderContext.formInput(
 }
 
 // helper method for creating checkboxes for activities
-fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
+fun RenderContext.activityCheckbox(activity: Store<Activity>): HtmlTag<HTMLDivElement> {
     val name = activity.sub(Activity.name())
     val like = activity.sub(Activity.like())
 
@@ -236,8 +224,6 @@ fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
     }
 }
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 fun main() {
 
     render("#target") {
@@ -253,19 +239,18 @@ fun main() {
 
 
     // adding bootstrap css classes to the validated elements
-    PersonStore.validator.isValid.combine(PersonStore.validator.data) { isValid, msgs ->
+    PersonStore.messages.valid.combine(PersonStore.messages) { isValid, msgs ->
         // cleanup validation
         cleanUpValMessages()
 
-        console.log("$isValid, ${msgs.joinToString { it.id }}")
+        console.log("$isValid, ${msgs.joinToString { it.path }}")
         // add messages to input groups only if there were errors
-        if(!isValid) msgs else emptyList()
+        if (!isValid) msgs else emptyList()
     } handledBy { messages ->
-
         for (msg in messages) {
-            val element = document.getElementById(msg.id)
+            val element = document.getElementById(msg.path)
             element?.addClass(msg.status.inputClass)
-            val message = document.getElementById("${msg.id}-message")
+            val message = document.getElementById("${msg.path}-message")
             message?.addClass(msg.status.messageClass)
             message?.textContent = msg.text
         }

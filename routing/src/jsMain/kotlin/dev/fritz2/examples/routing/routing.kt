@@ -1,11 +1,7 @@
 package dev.fritz2.examples.routing
 
-import dev.fritz2.dom.html.render
-import dev.fritz2.dom.selectedText
-import dev.fritz2.dom.states
+import dev.fritz2.core.*
 import dev.fritz2.routing.routerOf
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.map
 
 object Pages {
@@ -20,8 +16,6 @@ object Roles {
     const val admin = "admin"
 }
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 fun main() {
 
     val router = routerOf(mapOf("page" to Pages.home))

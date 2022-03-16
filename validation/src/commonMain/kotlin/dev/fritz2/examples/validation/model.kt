@@ -1,8 +1,8 @@
 package dev.fritz2.examples.validation
 
-import dev.fritz2.lenses.Lens
-import dev.fritz2.lenses.Lenses
-import dev.fritz2.lenses.format
+import dev.fritz2.core.Lens
+import dev.fritz2.core.Lenses
+import dev.fritz2.core.format
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toLocalDate
 

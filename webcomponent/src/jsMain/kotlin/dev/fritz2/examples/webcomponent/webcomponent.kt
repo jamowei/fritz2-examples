@@ -1,21 +1,19 @@
 package dev.fritz2.examples.webcomponent
 
-import dev.fritz2.dom.Tag
-import dev.fritz2.dom.html.RenderContext
+import dev.fritz2.core.HtmlTag
+import dev.fritz2.core.RenderContext
 import dev.fritz2.webcomponents.WebComponent
 import dev.fritz2.webcomponents.registerWebComponent
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.ShadowRoot
 
 
-@ExperimentalCoroutinesApi
 object WeatherCard : WebComponent<HTMLDivElement>() {
 
     private val city = attributeChanges("city")
 
-    override fun RenderContext.init(element: HTMLElement, shadowRoot: ShadowRoot): Tag<HTMLDivElement> {
+    override fun RenderContext.init(element: HTMLElement, shadowRoot: ShadowRoot): HtmlTag<HTMLDivElement> {
         linkStylesheet(shadowRoot, "./weathercard.css")
         // setStylesheet(shadowRoot, """.weather-card { border: 1px solid red; }""")
 
@@ -75,7 +73,6 @@ object WeatherCard : WebComponent<HTMLDivElement>() {
 @JsNonModule
 external object Stars
 
-@ExperimentalCoroutinesApi
 fun main() {
     registerWebComponent("weather-card", WeatherCard, "city")
     Stars // have to use the component somewhere to get the import executed

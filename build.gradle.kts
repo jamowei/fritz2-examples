@@ -8,13 +8,14 @@ plugins {
 allprojects {
     repositories {
         mavenCentral()
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 
 ext {
     // Dependencies
     set("kotlinVersion", "1.6.10")
-    set("fritz2Version", "0.14")
+    set("fritz2Version", "1.0-SNAPSHOT")
     set("serializationVersion", "1.3.1")
     set("kspVersion", "1.6.10-1.0.2")
 }
