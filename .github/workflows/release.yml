@@ -42,6 +42,7 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
+          keep_history: false
           jekyll: true
           fqdn: examples.fritz2.dev
           build_dir: .
