@@ -1,4 +1,4 @@
-[![fritz2](https://www.fritz2.dev/images/fritz2_logo_grey.png)](https://www.fritz2.dev/)
+[![fritz2](https://fritz2.dev/img/fritz2_header.png)](https://www.fritz2.dev/)
 # Examples
 ![build](https://github.com/jamowei/fritz2-examples/workflows/build/badge.svg)
 

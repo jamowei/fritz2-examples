@@ -15,7 +15,7 @@ allprojects {
 ext {
     // Dependencies
     set("kotlinVersion", "1.6.10")
-    set("fritz2Version", "1.0-SNAPSHOT")
+    set("fritz2Version", "1.0-RC1")
     set("serializationVersion", "1.3.1")
     set("kspVersion", "1.6.10-1.0.2")
 }
