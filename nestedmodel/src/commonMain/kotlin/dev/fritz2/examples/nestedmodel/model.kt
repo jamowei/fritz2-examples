@@ -1,6 +1,6 @@
 package dev.fritz2.examples.nestedmodel
 
-import dev.fritz2.lenses.Lenses
+import dev.fritz2.core.Lenses
 
 @Lenses
 data class Person(

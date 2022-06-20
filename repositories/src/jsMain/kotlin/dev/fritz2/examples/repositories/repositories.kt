@@ -1,35 +1,27 @@
 package dev.fritz2.examples.repositories
 
-import dev.fritz2.binding.RootStore
-import dev.fritz2.binding.Store
-import dev.fritz2.dom.html.Input
-import dev.fritz2.dom.html.RenderContext
-import dev.fritz2.dom.html.render
-import dev.fritz2.dom.values
+import dev.fritz2.core.*
 import dev.fritz2.history.history
-import dev.fritz2.lenses.format
-import dev.fritz2.repositories.localstorage.localStorageEntity
-import dev.fritz2.repositories.localstorage.localStorageQuery
+import dev.fritz2.repository.localstorage.localStorageEntityOf
+import dev.fritz2.repository.localstorage.localStorageQueryOf
 import dev.fritz2.tracking.tracker
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
+import org.w3c.dom.HTMLInputElement
 
 val numberFormat = format({ it.toInt() }, { it.toString() })
 
 const val personPrefix = "dev.fritz2.examples.person"
 
-@ExperimentalCoroutinesApi
 object EntityStore : RootStore<Person>(Person()) {
 
     val running = tracker()
     val history = history<Person>(10).sync(this)
 
-    private val localStorage = localStorageEntity(PersonResource, personPrefix)
+    private val localStorage = localStorageEntityOf(PersonResource, personPrefix)
 
     val load = handle<String> { _, id ->
         history.reset()
@@ -64,10 +56,8 @@ object EntityStore : RootStore<Person>(Person()) {
     val isSaved = data.map { it.saved }
 }
 
-@ExperimentalStdlibApi
-@ExperimentalCoroutinesApi
 object QueryStore : RootStore<List<Person>>(emptyList()) {
-    private val localStorage = localStorageQuery<Person, String, Unit>(PersonResource, personPrefix)
+    private val localStorage = localStorageQueryOf<Person, String, Unit>(PersonResource, personPrefix)
 
     private val query = handle { localStorage.query(Unit) }
     val delete = handle<String> { list, id ->
@@ -84,8 +74,6 @@ object QueryStore : RootStore<List<Person>>(emptyList()) {
 /*
  * List-View
  */
-@ExperimentalCoroutinesApi
-@ExperimentalStdlibApi
 fun RenderContext.table() {
     div("col-12") {
         div("card") {
@@ -132,7 +120,6 @@ fun RenderContext.table() {
 /*
  * Details-View
  */
-@ExperimentalCoroutinesApi
 fun RenderContext.details() {
     val visibleWhenSaved = EntityStore.isSaved.map { if (it) "" else "d-none" }
 
@@ -201,7 +188,7 @@ fun RenderContext.formGroup(
     store: Store<String>,
     inputType: String = "text",
     cssClassName: Flow<String>? = null,
-    handleChanges: Input.(Store<String>) -> Unit = {
+    handleChanges: HtmlTag<HTMLInputElement>.(Store<String>) -> Unit = {
         changes.values() handledBy store.update
     }
 ) {
@@ -220,9 +207,6 @@ fun RenderContext.formGroup(
     }
 }
 
-@ExperimentalStdlibApi
-@ExperimentalCoroutinesApi
-@FlowPreview
 fun main() {
     render("#target") {
         section {

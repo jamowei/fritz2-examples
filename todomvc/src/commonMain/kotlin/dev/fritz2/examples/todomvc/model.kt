@@ -1,9 +1,9 @@
 package dev.fritz2.examples.todomvc
 
-import dev.fritz2.identification.Id
-import dev.fritz2.lenses.IdProvider
-import dev.fritz2.lenses.Lenses
-import dev.fritz2.resource.Resource
+import dev.fritz2.core.Id
+import dev.fritz2.core.IdProvider
+import dev.fritz2.core.Lenses
+import dev.fritz2.repository.Resource
 
 @Lenses
 data class ToDo(

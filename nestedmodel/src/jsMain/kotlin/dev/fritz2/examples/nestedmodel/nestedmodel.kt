@@ -1,16 +1,10 @@
 package dev.fritz2.examples.nestedmodel
 
-import dev.fritz2.binding.RootStore
-import dev.fritz2.binding.SimpleHandler
-import dev.fritz2.binding.Store
-import dev.fritz2.dom.html.Div
-import dev.fritz2.dom.html.RenderContext
-import dev.fritz2.dom.html.render
-import dev.fritz2.dom.states
-import dev.fritz2.dom.values
+import dev.fritz2.core.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.map
+import org.w3c.dom.HTMLDivElement
 
 
 object PersonStore : RootStore<Person>(Person(), id = "person") {
@@ -146,7 +140,7 @@ fun RenderContext.formGroup(
 }
 
 // helper method for creating checkboxes for activities
-fun RenderContext.activityCheckbox(activity: Store<Activity>): Div {
+fun RenderContext.activityCheckbox(activity: Store<Activity>): HtmlTag<HTMLDivElement> {
     val activityName = activity.sub(Activity.name())
     val activityLike = activity.sub(Activity.like())
 

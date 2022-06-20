@@ -1,13 +1,7 @@
 package dev.fritz2.examples.todomvc
 
-import dev.fritz2.binding.*
-import dev.fritz2.dom.html.Keys
-import dev.fritz2.dom.html.RenderContext
-import dev.fritz2.dom.html.render
-import dev.fritz2.dom.key
-import dev.fritz2.dom.states
-import dev.fritz2.dom.values
-import dev.fritz2.repositories.localstorage.localStorageQuery
+import dev.fritz2.core.*
+import dev.fritz2.repository.localstorage.localStorageQueryOf
 import dev.fritz2.routing.routerOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -28,7 +22,7 @@ val router = routerOf("all")
 @ExperimentalStdlibApi
 object ToDoListStore : RootStore<List<ToDo>>(emptyList(), id = persistencePrefix) {
 
-    private val localStorage = localStorageQuery<ToDo, String, Unit>(ToDoResource, persistencePrefix)
+    private val localStorage = localStorageQueryOf<ToDo, String, Unit>(ToDoResource, persistencePrefix)
 
     private val query = handle { localStorage.query(Unit) }
 
@@ -112,7 +106,7 @@ fun main() {
                     filters[route]?.function?.invoke(all) ?: all
                 }.renderEach(ToDo::id){ toDo ->
                     val toDoStore = ToDoListStore.sub(toDo, ToDo::id)
-                    toDoStore.syncBy(ToDoListStore.save)
+                    toDoStore.data.drop(1) handledBy ToDoListStore.save
                     val textStore = toDoStore.sub(ToDo.text())
                     val completedStore = toDoStore.sub(ToDo.completed())
 
@@ -139,7 +133,7 @@ fun main() {
                                 dblclicks.map { true } handledBy editingStore.update
                             }
                             button("destroy") {
-                                clicks.events.map { toDo.id } handledBy ToDoListStore.remove
+                                clicks.map { toDo.id } handledBy ToDoListStore.remove
                             }
                         }
                         input("edit") {
@@ -154,7 +148,7 @@ fun main() {
                             }
                             merge(
                                 blurs.map { false },
-                                keyups.key().filter { it == Keys.Enter }.map { false }
+                                keyups.filter { shortcutOf(it) == Keys.Enter }.map { false }
                             ) handledBy editingStore.update
                         }
                     }

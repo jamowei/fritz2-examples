@@ -1,11 +1,7 @@
 package dev.fritz2.examples.performance
 
-import dev.fritz2.binding.RootStore
-import dev.fritz2.dom.html.keyOf
-import dev.fritz2.dom.html.render
-import dev.fritz2.dom.values
+import dev.fritz2.core.*
 import kotlinx.browser.window
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
@@ -13,7 +9,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.sample
 import kotlin.js.Date
 
-@ExperimentalCoroutinesApi
 @FlowPreview
 fun main() {
 
@@ -46,7 +41,7 @@ fun main() {
             max == current
         }
 
-    val key = keyOf<String>("key")
+    val key = Scope.keyOf<String>("key")
 
     render("#target") {
         div("form-group") {

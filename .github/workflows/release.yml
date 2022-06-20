@@ -37,12 +37,13 @@ jobs:
           **/build/js/**
           **/build/classes/**
           EOL
-      - name: Publish to Gitub Pages
-        uses: peaceiris/actions-gh-pages@v3.6.1
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
-          keep_files: true
-          allow_empty_commit: true
-          enable_jekyll: true
-          cname: examples.fritz2.dev
+          target_branch: gh-pages
+          jekyll: true
+          fqdn: examples.fritz2.dev
+          build_dir: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

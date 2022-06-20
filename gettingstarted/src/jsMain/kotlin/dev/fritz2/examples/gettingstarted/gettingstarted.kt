@@ -1,8 +1,6 @@
 package dev.fritz2.examples.gettingstarted
 
-import dev.fritz2.binding.storeOf
-import dev.fritz2.dom.html.render
-import dev.fritz2.dom.values
+import dev.fritz2.core.*
 
 fun main() {
     val store = storeOf("")

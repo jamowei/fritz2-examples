@@ -1,25 +1,24 @@
 package dev.fritz2.examples.tictactoe
 
-import dev.fritz2.components.validation.ComponentValidationMessage
-import dev.fritz2.components.validation.ComponentValidator
-import dev.fritz2.components.validation.infoMessage
-import dev.fritz2.components.validation.successMessage
-import dev.fritz2.identification.Inspector
+import dev.fritz2.validation.Validation
+import dev.fritz2.validation.ValidationMessage
+import dev.fritz2.validation.validation
 
-object EndingValidator : ComponentValidator<Field, GameState>() {
-    override fun validate(inspector: Inspector<Field>, metadata: GameState): List<ComponentValidationMessage> =
-        buildList {
-            if (inspector.data.any { it.isInWinningGroup }) {
-                add(successMessage("", "Player ${metadata.player} has won!"))
-            } else if (GameState.isFull(inspector.data)) {
-                add(infoMessage("", "This is a draw!"))
-            }
-        }
+class GameEndMessage(override val path: String, val text: String, val type: String) : ValidationMessage {
+    override val isError: Boolean = false
 }
 
-class Engine(private val endingValidator: ComponentValidator<Field, GameState> = EndingValidator) {
+class Engine {
 
     companion object {
+        private val endingValidator: Validation<Field, GameState, GameEndMessage> = validation { inspector, gameState ->
+            if (inspector.data.any { it.isInWinningGroup }) {
+                add(GameEndMessage(inspector.path, "Player ${gameState?.player} has won!", "alert-success"))
+            } else if (GameState.isFull(inspector.data)) {
+                add(GameEndMessage(inspector.path, "This is a draw!", "alert-info"))
+            }
+        }
+
         private val winningGroups = listOf(
             listOf(0, 1, 2),
             listOf(3, 4, 5),
@@ -47,7 +46,7 @@ class Engine(private val endingValidator: ComponentValidator<Field, GameState> =
     fun next(state: GameState, move: Cell) =
         if (!state.hasEnded() && state.field[move.id].isBlank) {
             val newField = markWinningCells(state, state.field.map { if (it.id == move.id) move else it })
-            val messages = endingValidator.validate(newField, state)
+            val messages = endingValidator(newField, state)
             state.copy(field = newField, player = state.nextPlayer(), messages = messages)
         } else {
             state
