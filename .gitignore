@@ -1,3 +1,12 @@
-**/build
 .gradle
 .idea
+build/*
+**/build/classes
+**/build/compileSync
+**/build/generated
+**/build/kotlin
+**/build/kspCaches
+**/build/libs
+**/build/processedResources
+**/build/reports
+**/build/tmp

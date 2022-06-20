@@ -18,25 +18,6 @@ jobs:
         run: chmod +x gradlew
       - name: Webpack with Gradle
         run: ./gradlew jsBrowserProductionWebpack
-      - name: Create .gitignore file
-        run: |
-          rm .gitignore
-          cat > .gitignore <<EOL
-          .idea
-          .github
-          .gradle
-          *gradle*
-          **/src
-          **/build.gradle.kts
-          **/build/kotlin/**
-          **/build/tmp/**
-          **/build/processedResources/**
-          **/build/generated/**
-          **/build/libs/**
-          **/build/reports/**
-          **/build/js/**
-          **/build/classes/**
-          EOL
       - name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
