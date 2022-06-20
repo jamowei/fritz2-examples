@@ -17,7 +17,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("dev.fritz2:core:1.0-SNAPSHOT")
+                implementation("dev.fritz2:core:${rootProject.ext["fritz2Version"]}")
             }
         }
         val jsMain by getting {
@@ -31,7 +31,7 @@ kotlin {
  * KSP support - start
  */
 dependencies {
-    add("kspMetadata", "dev.fritz2:lenses-annotation-processor:1.0-SNAPSHOT")
+    add("kspMetadata", "dev.fritz2:lenses-annotation-processor:${rootProject.ext["fritz2Version"]}")
 }
 
 kotlin.sourceSets.commonMain { kotlin.srcDir("build/generated/ksp/commonMain/kotlin") }
