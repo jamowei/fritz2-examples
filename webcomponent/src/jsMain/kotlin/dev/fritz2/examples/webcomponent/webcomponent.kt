@@ -24,7 +24,7 @@ fun RenderContext.m3Stars(content: M3Stars.() -> Unit): M3Stars = register(M3Sta
 
 object WeatherCard : WebComponent<HTMLDivElement>() {
 
-    private val city = attributeChanges("city")
+    private val city: Flow<String> = attributeChanges("city")
 
     override fun RenderContext.init(element: HTMLElement, shadowRoot: ShadowRoot): HtmlTag<HTMLDivElement> {
         linkStylesheet(shadowRoot, "./weathercard.css")
